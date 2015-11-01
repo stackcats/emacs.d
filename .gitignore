@@ -1,0 +1,11 @@
+.DS_Store
+ac-comphist.dat
+config/init*
+*~
+*.elc
+auto-save-list
+elpa
+eshell/history
+eshell/lastdir
+games
+recentf
