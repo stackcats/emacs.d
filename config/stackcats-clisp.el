@@ -4,8 +4,6 @@
 (require 'slime)
 (require 'slime-autoloads)
 (slime-setup '(slime-fancy))
-(add-hook 'lisp-mode-hook 'smartparens-mode)
-(add-hook 'lisp-mode-hook 'show-smartparens-mode)
 ;;打开lisp文件时自动启动slime
 (add-hook 'slime-mode-hook
           (lambda ()
