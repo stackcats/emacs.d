@@ -10,6 +10,7 @@
 	magit
 	smartparens
 	auto-complete
+	web-mode
 	ace-jump-mode))
 
 ;;源地址设置

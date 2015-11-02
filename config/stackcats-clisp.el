@@ -9,4 +9,10 @@
           (lambda ()
             (unless (slime-connected-p)
               (save-excursion (slime)))))
+;;repl中历史命令快捷键 
+(add-hook 'lisp-mode-hook
+		  '(lambda ()
+			 (local-set-key (kbd "<up>") 'slime-repl-previous-input)
+			 (local-set-key (kbd "<down>") 'slime-repl-next-inpu)))
+
 (provide 'stackcats-clisp)
