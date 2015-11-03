@@ -4,15 +4,15 @@
 (require 'slime)
 (require 'slime-autoloads)
 (slime-setup '(slime-fancy))
-;;打开lisp文件时自动启动slime
+
 (add-hook 'slime-mode-hook
           (lambda ()
+			;;打开lisp文件时自动启动slime
             (unless (slime-connected-p)
-              (save-excursion (slime)))))
-;;repl中历史命令快捷键 
-(add-hook 'lisp-mode-hook
-		  '(lambda ()
-			 (local-set-key (kbd "<up>") 'slime-repl-previous-input)
-			 (local-set-key (kbd "<down>") 'slime-repl-next-inpu)))
+              (save-excursion (slime)))
+
+			(local-set-key (kbd "<up>") 'slime-repl-previous-input)
+			(local-set-key (kbd "<down>") 'slime-repl-next-inpu)
+			(local-set-key (kbd "C-<return>") 'slime-close-all-parens-in-sexp)))
 
 (provide 'stackcats-clisp)
