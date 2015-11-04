@@ -14,7 +14,7 @@
          (lambda (output)
            (replace-regexp-in-string "\033\\[[0-9]+[A-Z]" "" output)))))
 
-(setq inferior-js-program-command "node --interactive")
+(setq inferior-js-program-command "/usr/local/bin/node --interactive")
 
 (setq-default js2-global-externs
 			  '("module"

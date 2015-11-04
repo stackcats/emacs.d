@@ -11,6 +11,7 @@
 	smartparens
 	auto-complete
 	web-mode
+	js-comint
 	ace-jump-mode))
 
 ;;源地址设置

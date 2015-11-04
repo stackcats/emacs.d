@@ -12,7 +12,7 @@
               (save-excursion (slime)))
 
 			(local-set-key (kbd "<up>") 'slime-repl-previous-input)
-			(local-set-key (kbd "<down>") 'slime-repl-next-inpu)
+			(local-set-key (kbd "<down>") 'slime-repl-next-input)
 			(local-set-key (kbd "C-<return>") 'slime-close-all-parens-in-sexp)))
 
 (provide 'stackcats-clisp)
