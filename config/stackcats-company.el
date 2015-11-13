@@ -2,12 +2,7 @@
 (add-hook 'after-init-hook 'global-company-mode)
 (add-to-list 'company-backends 'company-c-headers)
 (setq company-backends (delete 'company-semantic company-backends))
-(require 'company-c-headers)
-(add-to-list 'company-c-headers-path-system "/usr/local/include/SDL2/")
-(add-to-list 'company-backends 'company-c-headers)
 
-;(define-key c-mode-map  [(tab)] 'company-complete)
-;(define-key c++-mode-map  [(tab)] 'company-complete)
 (require 'color)
 
 (let ((bg (face-attribute 'default :background)))
