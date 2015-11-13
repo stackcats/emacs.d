@@ -1,10 +1,12 @@
 ;;环境变量
+;;; Code:
 (setenv "PATH" (concat (getenv "PATH") ":/usr/local/bin"))
 (setq exec-path (append exec-path '("/usr/local/bin")))
 ;;;显示设置
 ;;英文字体
 (set-face-attribute
  'default nil :font "Monaco 16")
+
 ;;启动GUI时配置
 (when window-system
   ;;中文字体
@@ -25,6 +27,11 @@
 (setq default-tab-width 4)
 ;;括号匹配
 (show-paren-mode 1)
+
+;;彩虹猫
+(add-to-list 'load-path "~/.emacs.d/vendor/")
+(require 'nyan-mode)
+(nyan-mode 1)
 ;;显示文件名
 (setq frame-title-format "%b")
 ;;显示行号
@@ -36,10 +43,7 @@
 (global-font-lock-mode t)
 (setq indent-tabs-mode nil)
 ;;(setq tab-width 4)
-;;彩虹猫
-(add-to-list 'load-path "~/.emacs.d/vendor/")
-(require 'nyan-mode)
-(nyan-mode 1)
+
 ;;;行为设置
 ;;关闭提示音
 (setq ring-bell-function 'ignore)
@@ -56,3 +60,4 @@
 (setq default-directory "~/")
 
 (provide 'stackcats-custom)
+;;; stackcats-custom.el ends here
