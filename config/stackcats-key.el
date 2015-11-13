@@ -29,15 +29,30 @@
 (global-set-key [f1] 'indent-whole)
 (global-set-key [f2] 'hs-toggle-hiding)
 (global-set-key [f3] 'open-shell)
-(global-set-key (kbd "C-c C-k") 'kill-this-buffer)
+(global-set-key (kbd "C-c k") 'kill-this-buffer)
 (global-set-key [f8] 'open-slime)
 (global-set-key [f9] 'run-js)
 (global-set-key (kbd "C-q") 'set-mark-command)
 (global-set-key (kbd "RET") 'newline-and-indent)
-(global-set-key (kbd "C-c C-g") 'magit-status)
+(global-set-key (kbd "C-c g") 'magit-status)
 (global-set-key (kbd "C-x b") 'helm-mini)
 (global-set-key (kbd "C-x C-f") 'helm-find-files)
+(global-set-key (kbd "C-c h") 'helm-command-prefix)
 (global-set-key (kbd "M-x") 'helm-M-x)
+;; rebind tab to run persistent action
+(define-key helm-map (kbd "<tab>") 'helm-execute-persistent-action)
+;; make TAB works in terminal
+(define-key helm-map (kbd "C-i") 'helm-execute-persistent-action)
+(define-key helm-map (kbd "C-z")  'helm-select-action)
+(global-set-key (kbd "M-y") 'helm-show-kill-ring)
+
+(define-key helm-gtags-mode-map (kbd "C-c g a") 'helm-gtags-tags-in-this-function)
+(define-key helm-gtags-mode-map (kbd "C-j") 'helm-gtags-select)
+(define-key helm-gtags-mode-map (kbd "M-.") 'helm-gtags-dwim)
+(define-key helm-gtags-mode-map (kbd "M-,") 'helm-gtags-pop-stack)
+(define-key helm-gtags-mode-map (kbd "C-c <") 'helm-gtags-previous-history)
+(define-key helm-gtags-mode-map (kbd "C-c >") 'helm-gtags-next-history)
+
 (global-set-key (kbd "s-e") 'er/expand-region)
 (global-set-key (kbd "C-c SPC") 'ace-jump-mode)
 

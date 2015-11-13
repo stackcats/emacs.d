@@ -14,6 +14,7 @@
 	js-comint
 	mode-compile
 	helm-gtags
+	company
 	ace-jump-mode))
 
 ;;源地址设置

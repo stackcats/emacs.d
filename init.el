@@ -9,7 +9,7 @@
 (require 'stackcats-ac)
 (require 'stackcats-web)
 (require 'stackcats-c)
-
+(require 'stackcats-company)
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.

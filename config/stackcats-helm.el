@@ -17,5 +17,17 @@
 (helm-autoresize-mode t)
 (helm-mode 1)
 
+(require 'helm-gtags)
 
+(setq
+ helm-gtags-ignore-case t
+ helm-gtags-auto-update t
+ helm-gtags-use-input-at-cursor t
+ helm-gtags-pulse-at-cursor t
+ helm-gtags-prefix-key "\C-cg"
+ helm-gtags-suggested-key-mapping t
+ )
+(add-hook 'c++-mode-hook 'helm-gtags-mode)
+(add-hook 'c-mode-hook 'helm-gtags-mode)
+(setq-local imenu-create-index-function #'ggtags-build-imenu-index)
 (provide 'stackcats-helm)
