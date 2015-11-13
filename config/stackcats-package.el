@@ -1,4 +1,5 @@
 ;;;包管理
+;;; Code:
 (require 'cl)
 (require 'package)
 
@@ -16,11 +17,14 @@
 	mode-compile
 	helm-gtags
 	company
+	spaceline
+	flycheck
 	ace-jump-mode))
 
 ;;源地址设置
 (setq package-archives
       '(("marmalade" . "http://marmalade-repo.org/packages/")
+		("gnu" . "http://elpa.gnu.org/packages/")
 		("melpa" . "http://melpa.milkbox.net/packages/")))
 
 
@@ -57,3 +61,4 @@
   (stackcats-install-packages))
 
 (provide 'stackcats-package)
+;;; stackcats-package.el ends here
