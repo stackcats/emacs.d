@@ -12,11 +12,14 @@
 	auto-complete
 	web-mode
 	js-comint
+	mode-compile
+	helm-gtags
 	ace-jump-mode))
 
 ;;源地址设置
 (setq package-archives
-      '(("marmalade" . "http://marmalade-repo.org/packages/")))
+      '(("marmalade" . "http://marmalade-repo.org/packages/")
+		("melpa" . "http://melpa.milkbox.net/packages/")))
 
 
 ;;("ELPA" . "http://tromey.com/elpa/")
