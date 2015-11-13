@@ -6,6 +6,7 @@
   '(js2-mode
 	rainbow-delimiters
 	color-theme-sanityinc-solarized
+	yasnippet
 	expand-region
 	magit
 	smartparens

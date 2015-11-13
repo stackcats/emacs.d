@@ -1,5 +1,5 @@
 ;;;helm-mode
-;(add-to-list 'load-path "~/.emacs.d/vendor/helm/")
+
 (require 'helm)
 (require 'helm-config)
 (setq helm-split-window-in-side-p           t
@@ -9,11 +9,7 @@
       helm-ff-file-name-history-use-recentf t)
 (setq helm-buffers-fuzzy-matching t
       helm-recentf-fuzzy-match    t)
-(when (executable-find "ack-grep")
-  (setq helm-grep-default-command
-		"ack-grep -Hn --no-group --no-color %e %p %f"
-        helm-grep-default-recurse-command
-		"ack-grep -H --no-group --no-color %e %p %f"))
+
 (helm-autoresize-mode t)
 (helm-mode 1)
 
@@ -29,5 +25,26 @@
  )
 (add-hook 'c++-mode-hook 'helm-gtags-mode)
 (add-hook 'c-mode-hook 'helm-gtags-mode)
+(eval-after-load "helm-gtags"
+  '(progn
+	 (define-key helm-gtags-mode-map (kbd "C-c h t")
+	   'helm-gtags-find-tag)
+	 (define-key helm-gtags-mode-map (kbd "C-c h r")
+	   'helm-gtags-find-rtag)
+	 (define-key helm-gtags-mode-map (kbd "C-c h s")
+	   'helm-gtags-find-symbol)
+	 (define-key helm-gtags-mode-map (kbd "C-c ,")
+	   'helm-gtags-previous-history)
+	 (define-key helm-gtags-mode-map (kbd "C-c .")
+	   'helm-gtags-next-history)
+	 (define-key helm-gtags-mode-map (kbd "M-,")
+	   'helm-gtags-pop-stack)
+	 (define-key helm-gtags-mode-map (kbd "C-c h j")
+	   'helm-gtags-select)
+	 (define-key helm-gtags-mode-map (kbd "M-.")
+	   'helm-gtags-dwim)
+	 (define-key helm-gtags-mode-map (kbd "C-c h a")
+	   'helm-gtags-tags-in-this-function)))
+
 (setq-local imenu-create-index-function #'ggtags-build-imenu-index)
 (provide 'stackcats-helm)
