@@ -1,10 +1,5 @@
 ;;;key-binding
-;;格式化
 ;;; Code:
-(defun indent-whole ()
-  (interactive)
-  (indent-region (point-min) (point-max))
-  (message "format successfully"))
 ;;mac按键设置
 (when (eq system-type 'darwin)
   (setq mac-option-modifier 'meta)
@@ -15,9 +10,8 @@
   (interactive)
   (eshell))
 
-(global-set-key [f1] 'indent-whole)
-(global-set-key [f2] 'hs-toggle-hiding)
-(global-set-key [f3] 'open-shell)
+(global-set-key (kbd "s-1") 'hs-toggle-hiding)
+(global-set-key (kbd "s-2") 'open-shell)
 (global-set-key (kbd "C-c k") 'kill-this-buffer)
 (global-set-key [f9] 'run-js)
 (global-set-key (kbd "C-q") 'set-mark-command)

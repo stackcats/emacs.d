@@ -29,6 +29,13 @@
 
 (add-hook 'after-save-hook 'byte-compile-current-buffer)
 
+(defun indent-whole ()
+  (interactive)
+  (indent-region (point-min) (point-max))
+  (message "format successfully"))
+
+(add-hook 'after-save-hook 'indent-whole)
+
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -72,11 +79,7 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(company-scrollbar-bg ((t (:background "brown3"))))
- '(company-scrollbar-fg ((t (:background "#ffffff"))))
- '(company-tooltip ((t (:inherit nil :background "dark cyan" :foreground "gray100"))))
- '(company-tooltip-common ((t (:inherit font-lock-constant-face))))
- '(company-tooltip-selection ((t (:inherit font-lock-function-name-face))))
+ 
  '(show-paren-match ((t (:background "dark cyan")))))
 
 ;;; init.el ends here
