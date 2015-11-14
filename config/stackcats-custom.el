@@ -24,7 +24,7 @@
 (setq line-number-mode t)
 (setq column-number-mode t)
 ;;TAB宽度
-(setq default-tab-width 4)
+(setq tab-width 4)
 ;;括号匹配
 (show-paren-mode 1)
 
@@ -58,6 +58,15 @@
 ;;外部应用剪切板
 (setq x-select-enable-clipboard t)
 (setq default-directory "~/")
+
+(require 'rainbow-delimiters)
+(add-hook 'c-mode-hook #'rainbow-delimiters-mode)
+(add-hook 'slime-mode-hook #'rainbow-delimiters-mode)
+(add-hook 'js2-mode-hook #'rainbow-delimiters-mode)
+
+(require 'git-gutter-fringe+)
+(global-git-gutter+-mode)
+(setq git-gutter-fr+-side 'right-fringe)
 
 (provide 'stackcats-custom)
 ;;; stackcats-custom.el ends here

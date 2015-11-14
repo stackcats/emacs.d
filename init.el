@@ -2,22 +2,32 @@
 
 (add-to-list 'load-path "~/.emacs.d/config/")
 
-
 (require 'stackcats-package)
 (require 'spaceline-config)
-(spaceline-spacemacs-theme)
+(setq powerline-default-separator 'bar)
+(setq spaceline-workspace-numbers-unicode t)
+(spaceline-emacs-theme)
 (require 'stackcats-custom)
 (require 'stackcats-helm)
 (require 'stackcats-clisp)
 (require 'stackcats-js)
 (require 'stackcats-key)
-(require 'stackcats-ac)
+;;(require 'stackcats-ac)
 (require 'stackcats-web)
 (require 'stackcats-c)
 (require 'stackcats-company)
 (require 'stackcats-yas)
 (require 'stackcats-flycheck)
+(require 'stackcats-minor)
 
+(defun byte-compile-current-buffer ()
+  "`byte-compile' current buffer if it's emacs-lisp-mode and compiled file exists."
+  (interactive)
+  (when (and (eq major-mode 'emacs-lisp-mode)
+             (file-exists-p (byte-compile-dest-file buffer-file-name)))
+    (byte-compile-file buffer-file-name)))
+
+(add-hook 'after-save-hook 'byte-compile-current-buffer)
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
