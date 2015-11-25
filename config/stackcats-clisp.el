@@ -7,12 +7,12 @@
 
 (add-hook 'slime-mode-hook
           (lambda ()
-			;;打开lisp文件时自动启动slime
+	    ;;打开lisp文件时自动启动slime
             (unless (slime-connected-p)
               (save-excursion (slime)))
 
-			(local-set-key (kbd "<up>") 'slime-repl-previous-input)
-			(local-set-key (kbd "<down>") 'slime-repl-next-input)
-			(local-set-key (kbd "C-<return>") 'slime-close-all-parens-in-sexp)))
+	    (local-set-key (kbd "<up>") 'slime-repl-previous-input)
+	    (local-set-key (kbd "<down>") 'slime-repl-next-input)
+	    (local-set-key (kbd "C-<return>") 'slime-close-all-parens-in-sexp)))
 
 (provide 'stackcats-clisp)

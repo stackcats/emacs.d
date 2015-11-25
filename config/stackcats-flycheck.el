@@ -38,7 +38,7 @@
 
 (with-eval-after-load 'flycheck
   (flycheck-pos-tip-mode)
-  (diminish 'flycheck-mode "ⓕ")
+  (diminish 'flycheck-mode "Ⓕ")
   )
 (provide 'stackcats-flycheck)
 ;;; stackcats-flycheck.el ends here
