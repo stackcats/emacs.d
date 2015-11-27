@@ -17,31 +17,33 @@
 (setq inferior-js-program-command "/usr/local/bin/node --interactive")
 
 (setq-default js2-global-externs
-			  '("module"
-				"require"
-				"buster"
-				"sinon"
-				"assert"
-				"refute"
-				"setTimeout"
-				"clearTimeout"
-				"setInterval"
-				"clearInterval"
-				"location"
-				"__dirname"
-				"exports"
-				"console"
-				"JSON"
-				"setImmediate"
-				"Buffer"
-				"process"))
+	      '("module"
+		"require"
+		"buster"
+		"sinon"
+		"assert"
+		"refute"
+		"setTimeout"
+		"clearTimeout"
+		"setInterval"
+		"clearInterval"
+		"location"
+		"__dirname"
+		"exports"
+		"console"
+		"JSON"
+		"setImmediate"
+		"Buffer"
+		"process"))
 
 (add-hook 'js2-mode-hook 
           '(lambda ()
-            (local-set-key (kbd "C-c C-c") 'js-send-last-sexp)
-            (local-set-key (kbd "C-x C-r") 'js-send-region)
-            (local-set-key (kbd "C-M-x") 'js-send-last-sexp-and-go)
-            (local-set-key (kbd "C-c b") 'js-send-buffer)
-            (local-set-key (kbd "C-c C-b") 'js-send-buffer-and-go)))
+	     (local-set-key (kbd "C-c C-c") 'js-send-last-sexp)
+	     (local-set-key (kbd "C-x C-r") 'js-send-region)
+	     (local-set-key (kbd "C-M-x") 'js-send-last-sexp-and-go)
+	     (local-set-key (kbd "C-c b") 'js-send-buffer)
+	     (local-set-key (kbd "C-c C-b") 'js-send-buffer-and-go)))
+
+(add-hook 'js2-mode-hook 'smartparens-mode)
 
 (provide 'stackcats-js)
