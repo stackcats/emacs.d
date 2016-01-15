@@ -5,27 +5,28 @@
 
 (defvar init-packages
   '(js2-mode
-	rainbow-delimiters
-	color-theme-sanityinc-solarized
-	yasnippet
-	expand-region
-	magit
-	smartparens
-	auto-complete
-	web-mode
-	js-comint
-	mode-compile
-	helm-gtags
-	company
-	spaceline
-	flycheck
-	ace-jump-mode))
+    rainbow-delimiters
+    color-theme-sanityinc-solarized
+    yasnippet
+    expand-region
+    magit
+    smartparens
+    auto-complete
+    web-mode
+    js-comint
+    mode-compile
+    helm-gtags
+    company
+    spaceline
+    flycheck
+    which-key
+    ace-jump-mode))
 
 ;;源地址设置
 (setq package-archives
       '(("marmalade" . "http://marmalade-repo.org/packages/")
-		("gnu" . "http://elpa.gnu.org/packages/")
-		("melpa" . "http://melpa.milkbox.net/packages/")))
+	("gnu" . "http://elpa.gnu.org/packages/")
+	("melpa" . "http://melpa.milkbox.net/packages/")))
 
 
 ;;("ELPA" . "http://tromey.com/elpa/")

@@ -10,7 +10,10 @@
 (add-to-list 'company-backends 'company-irony)
 (setq company-idle-delay 0)
 
-(require 'color)
+(add-to-list 'company-backends 'company-tern)
+(setq company-tern-property-marker "")
+
+
 
 (define-key company-active-map "\C-n" 'company-select-next)
 (define-key company-active-map "\C-p" 'company-select-previous)

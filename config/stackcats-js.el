@@ -14,7 +14,7 @@
          (lambda (output)
            (replace-regexp-in-string "\033\\[[0-9]+[A-Z]" "" output)))))
 
-(setq inferior-js-program-command "/usr/local/bin/node --interactive")
+(defvar inferior-js-program-command "node")
 
 (setq-default js2-global-externs
 	      '("module"
@@ -42,7 +42,9 @@
 	     (local-set-key (kbd "C-x C-r") 'js-send-region)
 	     (local-set-key (kbd "C-M-x") 'js-send-last-sexp-and-go)
 	     (local-set-key (kbd "C-c b") 'js-send-buffer)
-	     (local-set-key (kbd "C-c C-b") 'js-send-buffer-and-go)))
+	     (local-set-key (kbd "C-c C-b") 'js-send-buffer-and-go)
+	     (tern-mode t)
+	     (diminish 'tern-mode "Ⓣ")))
 
 (add-hook 'js2-mode-hook 'smartparens-mode)
 

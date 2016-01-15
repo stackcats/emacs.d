@@ -6,8 +6,8 @@
 	(concat (getenv "LIBRARY_PATH") ":/usr/local/lib/"))
 (defun my-c-mode-hook ()
   (setq c-basic-offset 4     
-        indent-tabs-mode t   
-        tab-width 4)
+	indent-tabs-mode t   
+	tab-width 4)
   (local-set-key (kbd "C-c c") 'mode-compile)
   (local-set-key (kbd "<tab>") 'company-complete-common))
 
@@ -20,7 +20,8 @@
    (lambda (proc change)
      (when (string-match "finished" change)
        (delete-windows-on (process-buffer proc))))))
-
 (add-hook 'compilation-start-hook 'kill-buffer-when-compile-success)
+
+(add-hook 'c-mode-hook 'smartparens-mode)
 (provide 'stackcats-c)
 ;;; stackcats-c.el ends here

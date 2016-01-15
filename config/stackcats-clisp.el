@@ -10,9 +10,13 @@
 	    ;;打开lisp文件时自动启动slime
             (unless (slime-connected-p)
               (save-excursion (slime)))
-
-	    (local-set-key (kbd "<up>") 'slime-repl-previous-input)
-	    (local-set-key (kbd "<down>") 'slime-repl-next-input)
+	    (turn-off-smartparens-mode)	    
 	    (local-set-key (kbd "C-<return>") 'slime-close-all-parens-in-sexp)))
+
+(add-hook 'slime-repl-mode-hook
+	  (lambda ()
+	    (turn-off-smartparens-mode)
+	    (local-set-key (kbd "<up>") 'slime-repl-previous-input)
+	    (local-set-key (kbd "<down>") 'slime-repl-next-input)))
 
 (provide 'stackcats-clisp)
