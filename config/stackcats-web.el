@@ -15,6 +15,7 @@
   "Hooks for Web mode."
   (local-set-key (kbd "C-c C-c") 'debug-html)
   (setq web-mode-markup-indent-offset 2)
+  (setq web-mode-code-indent-offset 4)
   (setq web-mode-style-padding 1))
 
 

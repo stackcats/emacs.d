@@ -20,7 +20,8 @@
     spaceline
     flycheck
     which-key
-    ace-jump-mode))
+    ace-jump-mode
+    ))
 
 ;;源地址设置
 (setq package-archives

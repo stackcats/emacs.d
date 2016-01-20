@@ -34,7 +34,8 @@
 		"JSON"
 		"setImmediate"
 		"Buffer"
-		"process"))
+		"process"
+		"define"))
 
 (add-hook 'js2-mode-hook 
           '(lambda ()
@@ -44,6 +45,7 @@
 	     (local-set-key (kbd "C-c b") 'js-send-buffer)
 	     (local-set-key (kbd "C-c C-b") 'js-send-buffer-and-go)
 	     (tern-mode t)
+	     (setq dash-at-point-docset "javascript")
 	     (diminish 'tern-mode "Ⓣ")))
 
 (add-hook 'js2-mode-hook 'smartparens-mode)
