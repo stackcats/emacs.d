@@ -90,7 +90,8 @@
 (add-hook 'after-save-hook
 	  #'(lambda ()
 	      (unless (or (string-match-p "makefile" mode-name)
-			  (string-match-p "bison" mode-name))
+			  (string-match-p "bison" mode-name)
+			  (string-match-p "jade" mode-name))
 		;;makefile自动格式化有问题
 		(indent-whole))))
 
@@ -109,7 +110,7 @@
 
 (global-anzu-mode 1)
 
-(load-theme 'spacemacs-light t)
+(load-theme 'atom-one-dark t)
 
 ;; display lambda as "λ"
 (global-prettify-symbols-mode 1)

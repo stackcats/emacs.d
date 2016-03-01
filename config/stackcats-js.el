@@ -17,25 +17,12 @@
 (defvar inferior-js-program-command "node")
 
 (setq-default js2-global-externs
-	      '("module"
-		"require"
-		"buster"
-		"sinon"
-		"assert"
-		"refute"
-		"setTimeout"
-		"clearTimeout"
-		"setInterval"
-		"clearInterval"
-		"location"
-		"__dirname"
-		"exports"
-		"console"
-		"JSON"
-		"setImmediate"
-		"Buffer"
-		"process"
-		"define"))
+	      '("module" "require" "buster" "sinon" "assert"
+		"refute" "setTimeout" "clearTimeout" "setInterval"
+		"clearInterval"	"location" "__dirname" "exports"
+		"console" "JSON" "setImmediate"	"Buffer" "$"
+		"process" "define" "angular" "$http" "window"
+		"Image"))
 
 (add-hook 'js2-mode-hook 
           '(lambda ()
@@ -45,9 +32,14 @@
 	     (local-set-key (kbd "C-c b") 'js-send-buffer)
 	     (local-set-key (kbd "C-c C-b") 'js-send-buffer-and-go)
 	     (tern-mode t)
+	     (setq js2-basic-offset 2)
 	     (setq dash-at-point-docset "javascript")
 	     (diminish 'tern-mode "Ⓣ")))
 
 (add-hook 'js2-mode-hook 'smartparens-mode)
 
+(add-hook 'json-mode-hook
+	  '(lambda ()
+	     (make-local-variable 'js-indent-level)
+	     (setq js-indent-level 2)))
 (provide 'stackcats-js)

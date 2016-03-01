@@ -1,0 +1,4 @@
+# -*- mode: snippet -*-
+#name : link
+# --
+<link rel="stylesheet" href="$1">

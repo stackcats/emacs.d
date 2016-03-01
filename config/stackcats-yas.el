@@ -5,12 +5,14 @@
 
 (auto-insert-mode)
 (setq-default auto-insert-directory "~/.emacs.d/template/")
-(setq auto-insert-query nil) 
+(setq auto-insert-query nil)
+
 (define-auto-insert "\\.el" "elisp")
 (define-auto-insert "\\.c" "c")
 (define-auto-insert "\\.l" "flex")
 (define-auto-insert "\\.y" "yacc")
 (define-auto-insert "\\.html" "html")
+(define-auto-insert "\\.ejs" "ejs")
 
 (defadvice auto-insert  (around yasnippet-expand-after-auto-insert activate)
   "使用yas扩展模板"

@@ -7,13 +7,18 @@
 (with-eval-after-load 'company
   (company-flx-mode +1))
 
-(add-to-list 'company-backends 'company-irony)
 (setq company-idle-delay 0)
 
+;;C
+(add-to-list 'company-backends 'company-irony)
+
+;;Javascript
 (add-to-list 'company-backends 'company-tern)
 (setq company-tern-property-marker "")
 
-
+;;web
+(add-to-list 'company-backends 'company-web-html)
+(add-to-list 'company-backends 'company-web-jade)
 
 (define-key company-active-map "\C-n" 'company-select-next)
 (define-key company-active-map "\C-p" 'company-select-previous)
