@@ -38,7 +38,10 @@
 
 (with-eval-after-load 'flycheck
   (flycheck-pos-tip-mode)
+  '(require 'flycheck-protobuf)
   (diminish 'flycheck-mode "Ⓕ")
   )
+
+(add-to-list 'flycheck-checkers 'protobuf-protoc-reporter t)
 (provide 'stackcats-flycheck)
 ;;; stackcats-flycheck.el ends here

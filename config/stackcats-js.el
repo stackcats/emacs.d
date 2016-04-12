@@ -22,6 +22,8 @@
 		"clearInterval"	"location" "__dirname" "exports"
 		"console" "JSON" "setImmediate"	"Buffer" "$"
 		"process" "define" "angular" "$http" "window"
+		"async" "await" "syntax" "package" "message"
+		"service" "rpc" "string"
 		"Image"))
 
 (add-hook 'js2-mode-hook 

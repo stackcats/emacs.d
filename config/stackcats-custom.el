@@ -91,6 +91,7 @@
 	  #'(lambda ()
 	      (unless (or (string-match-p "makefile" mode-name)
 			  (string-match-p "bison" mode-name)
+			  (string-match-p "fundamental" mode-name)
 			  (string-match-p "jade" mode-name))
 		;;makefile自动格式化有问题
 		(indent-whole))))

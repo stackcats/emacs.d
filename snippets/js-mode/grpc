@@ -1,0 +1,11 @@
+# -*- mode: snippet -*-
+#name : grpc
+# --
+async $1(call, cb) {
+  $0
+  try {
+    cb(null, { code: 1, result: res });
+  } catch(e) {
+    cb(e);
+  }
+}
