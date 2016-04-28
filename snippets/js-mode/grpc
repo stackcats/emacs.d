@@ -3,6 +3,7 @@
 # --
 async $1(call, cb) {
   let req = call.request;
+  let res;
   $0
   try {
     cb(null, { code: 1, result: res });

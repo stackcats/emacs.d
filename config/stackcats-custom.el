@@ -6,7 +6,7 @@
 (setenv "PATH" (concat (getenv "PATH") ":/usr/local/bin"))
 (setq exec-path (append exec-path '("/usr/local/bin")))
 ;;英中文字体
-(set-face-attribute 'default nil :font "Monaco 16")
+(set-face-attribute 'default nil :font "hack 14")
 (set-fontset-font "fontset-default" 'unicode '("苹方" . "unicode-ttf"))
 ;;启动GUI时配置
 (when window-system
@@ -111,7 +111,7 @@
 
 (global-anzu-mode 1)
 
-(load-theme 'atom-one-dark t)
+(load-theme 'tango t)
 
 ;; display lambda as "λ"
 (global-prettify-symbols-mode 1)

@@ -1,9 +1,9 @@
 ;;; Code:
-(setenv
- "C_INCLUDE_PATH"
- (concat (getenv "C_INCLUDE_PATH") ":/usr/local/include/"))
+(setenv "C_INCLUDE_PATH"
+	(concat (getenv "C_INCLUDE_PATH") ":/usr/local/include/"))
 (setenv "LIBRARY_PATH"
 	(concat (getenv "LIBRARY_PATH") ":/usr/local/lib/"))
+
 (defun my-c-mode-hook ()
   (setq c-basic-offset 4     
 	indent-tabs-mode t   
