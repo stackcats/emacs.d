@@ -5,8 +5,9 @@
 	(concat (getenv "LIBRARY_PATH") ":/usr/local/lib/"))
 
 (defun my-c-mode-hook ()
-  (setq c-basic-offset 4     
-	indent-tabs-mode t   
+  "My `c-mode hook."
+  (setq c-basic-offset 4
+	indent-tabs-mode t
 	tab-width 4)
   (local-set-key (kbd "C-c c") 'mode-compile)
   (local-set-key (kbd "<tab>") 'company-complete-common))
@@ -15,7 +16,7 @@
 
 (defun kill-buffer-when-compile-success (process)
   "Close current buffer when `shell-command' exit."
-  (set-process-sentinel 
+  (set-process-sentinel
    process
    (lambda (proc change)
      (when (string-match "finished" change)

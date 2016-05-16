@@ -5,6 +5,7 @@
 ;;环境变量
 (setenv "PATH" (concat (getenv "PATH") ":/usr/local/bin"))
 (setq exec-path (append exec-path '("/usr/local/bin")))
+(setq exec-path (append exec-path '("~/.nvm/versions/node/v4.2.6/bin")))
 ;;英中文字体
 (set-face-attribute 'default nil :font "hack 14")
 (set-fontset-font "fontset-default" 'unicode '("苹方" . "unicode-ttf"))
@@ -13,6 +14,11 @@
   (tool-bar-mode 0)
   (menu-bar-mode 1)
   (scroll-bar-mode 0))
+
+(when (memq window-system '(mac ns))
+  (exec-path-from-shell-initialize)
+  (exec-path-from-shell-copy-env "GOPATH"))
+
 ;;高亮当前行
 (setq hl-line-range-function
       #'(lambda ()
@@ -24,7 +30,7 @@
 (defvar display-time-format "%Y/%m/%d %H:%M")
 (display-time-mode t)
 ;;TAB宽度
-(setq tab-width 4)
+(setq tab-width 2)
 ;;括号匹配
 (show-paren-mode 1)
 ;;显示文件名
@@ -47,7 +53,7 @@
 ;;utf8
 (prefer-coding-system 'utf-8)
 ;;外部应用剪切板
-(setq x-select-enable-clipboard t)
+(setq select-enable-clipboard t)
 ;;默认目录
 (setq default-directory "~/")
 
@@ -111,11 +117,13 @@
 
 (global-anzu-mode 1)
 
-(load-theme 'tango t)
+(load-theme 'tango-dark t)
 
 ;; display lambda as "λ"
 (global-prettify-symbols-mode 1)
 
+;; nyancat
+(nyan-mode 1)
 (provide 'stackcats-custom)
 
 ;;; stackcats-custom.el ends here

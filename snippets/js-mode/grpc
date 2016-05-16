@@ -2,12 +2,11 @@
 #name : grpc
 # --
 async $1(call, cb) {
-  let req = call.request;
-  let res;
+  const req = call.request;
   $0
   try {
-    cb(null, { code: 1, result: res });
-  } catch(e) {
+    cb(null, { code: 1, result: {} });
+  } catch (e) {
     cb(e);
   }
 }

@@ -42,6 +42,15 @@
   (diminish 'flycheck-mode "Ⓕ")
   )
 
+;; js2-mode
+(setq-default flycheck-temp-prefix ".")
+(defvar flycheck-eslintrc "~/.eslintrc")
+(defvar flycheck-javascript-eslint-executable "~/.nvm/versions/node/v4.2.6/bin/eslint")
+(setq-default flycheck-disabled-checkers
+              (append flycheck-disabled-checkers
+                      '(javascript-jshint)))
+(flycheck-add-mode 'javascript-eslint 'js2-mode)
+
 (add-to-list 'flycheck-checkers 'protobuf-protoc-reporter t)
 (provide 'stackcats-flycheck)
 ;;; stackcats-flycheck.el ends here

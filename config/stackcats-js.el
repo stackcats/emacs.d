@@ -23,7 +23,7 @@
 		"console" "JSON" "setImmediate"	"Buffer" "$"
 		"process" "define" "angular" "$http" "window"
 		"async" "await" "syntax" "package" "message"
-		"service" "rpc" "string"
+		"service" "rpc" "string" "logger"
 		"Image"))
 
 (add-hook 'js2-mode-hook 
@@ -35,6 +35,7 @@
 	     (local-set-key (kbd "C-c C-b") 'js-send-buffer-and-go)
 	     (tern-mode t)
 	     (setq js2-basic-offset 2)
+             (setq js-switch-indent-offset 2)
 	     (setq dash-at-point-docset "javascript")
 	     (diminish 'tern-mode "Ⓣ")))
 

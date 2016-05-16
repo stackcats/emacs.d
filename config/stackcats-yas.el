@@ -23,7 +23,7 @@
     (let ((old-point-max (point-max)))
       (when is-new-file
         (goto-char old-point-max)
-        (yas/expand-snippet
+        (yas-expand-snippet
 	 (buffer-substring-no-properties (point-min) (point-max)))
         (delete-region (point-min) old-point-max)))))
 
