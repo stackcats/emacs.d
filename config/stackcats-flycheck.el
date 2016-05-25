@@ -40,7 +40,9 @@
   (flycheck-pos-tip-mode)
   '(require 'flycheck-protobuf)
   (diminish 'flycheck-mode "Ⓕ")
+  (define-key flycheck-mode-map (kbd "C-c f") 'helm-flycheck)
   )
+
 
 ;; js2-mode
 (setq-default flycheck-temp-prefix ".")

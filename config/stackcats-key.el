@@ -30,7 +30,6 @@
 (global-set-key (kbd "C-c m") 'comment-or-uncomment-region)
 (global-set-key (kbd "s-e") 'er/expand-region)
 (global-set-key (kbd "C-c SPC") 'ace-jump-mode)
-(global-set-key (kbd "C-c f") 'flycheck-list-errors)
 (global-set-key (kbd "C-c o") 'other-frame)
 (provide 'stackcats-key)
 ;;; stackcats-key.el ends here

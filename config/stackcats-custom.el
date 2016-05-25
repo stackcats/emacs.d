@@ -17,7 +17,9 @@
 
 (when (memq window-system '(mac ns))
   (exec-path-from-shell-initialize)
-  (exec-path-from-shell-copy-env "GOPATH"))
+  (exec-path-from-shell-copy-env "GOPATH")
+  (exec-path-from-shell-copy-env "C_INCLUDE_PATH")
+  (exec-path-from-shell-copy-env "LIBRARY_PATH"))
 
 ;;高亮当前行
 (setq hl-line-range-function
@@ -103,11 +105,6 @@
 		(indent-whole))))
 
 
-(require 'spaceline-config)
-(setq powerline-default-separator 'box)
-(setq spaceline-workspace-numbers-unicode t)
-(spaceline-emacs-theme)
-
 (define-globalized-minor-mode global-rainbow-mode rainbow-mode
   (lambda ()
     (rainbow-mode 1)))
@@ -117,8 +114,12 @@
 
 (global-anzu-mode 1)
 
-(load-theme 'tango-dark t)
-
+(load-theme 'spacemacs-dark t)
+(setq ns-use-srgb-colorspace nil) ;fix powerline-default-separator
+(require 'spaceline-config)
+(setq powerline-default-separator 'slant)
+(setq spaceline-workspace-numbers-unicode t)
+(spaceline-emacs-theme)
 ;; display lambda as "λ"
 (global-prettify-symbols-mode 1)
 
