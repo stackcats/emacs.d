@@ -1,6 +1,5 @@
 .DS_Store
 ac-comphist.dat
-config/init*
 *~
 *.elc
 auto-save-list
