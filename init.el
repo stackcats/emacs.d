@@ -17,6 +17,7 @@
 (require 'stackcats-js)
 (require 'stackcats-key)
 (require 'stackcats-go)
+(require 'stackcats-python)
 (require 'stackcats-web)
 (require 'stackcats-c)
 (require 'stackcats-company)
@@ -36,7 +37,7 @@
     ("bffa9739ce0752a37d9b1eee78fc00ba159748f50dc328af4be661484848e476" default)))
  '(package-selected-packages
    (quote
-    (helm-flycheck yasnippet xelb which-key web-mode web spacemacs-theme spaceline smartparens slime rainbow-mode rainbow-delimiters python-mode osx-pseudo-daemon nyan-mode mode-compile markdown-mode magit js2-mode js-comint jade-mode htmlize helm-gtags helm-dash helm-ag gnu-apl-mode git-gutter-fringe+ flycheck-tip flycheck-protobuf flycheck-pos-tip flycheck-clojure expand-region exec-path-from-shell dired-rainbow diminish company-web company-tern company-irony company-go company-flx company-c-headers color-theme-sanityinc-solarized bison-mode better-defaults auto-complete atom-one-dark-theme anzu ace-jump-mode ac-html-bootstrap))))
+    (anaconda-mode company-jedi helm-flycheck yasnippet xelb which-key web-mode web spacemacs-theme spaceline smartparens slime rainbow-mode rainbow-delimiters osx-pseudo-daemon nyan-mode mode-compile markdown-mode magit js2-mode js-comint jade-mode htmlize helm-gtags helm-dash helm-ag gnu-apl-mode git-gutter-fringe+ flycheck-tip flycheck-protobuf flycheck-pos-tip flycheck-clojure expand-region exec-path-from-shell dired-rainbow diminish company-web company-tern company-irony company-go company-flx company-c-headers color-theme-sanityinc-solarized bison-mode better-defaults auto-complete atom-one-dark-theme anzu ace-jump-mode ac-html-bootstrap))))
 
 (custom-set-faces
  ;; custom-set-faces was added by Custom.

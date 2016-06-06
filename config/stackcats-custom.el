@@ -16,6 +16,7 @@
   (scroll-bar-mode 0))
 
 (when (memq window-system '(mac ns))
+  (setq exec-path-from-shell-check-startup-files nil)
   (exec-path-from-shell-initialize)
   (exec-path-from-shell-copy-env "GOPATH")
   (exec-path-from-shell-copy-env "C_INCLUDE_PATH")
