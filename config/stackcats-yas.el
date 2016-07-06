@@ -15,7 +15,7 @@
 (define-auto-insert "\\.ejs" "ejs")
 
 (defadvice auto-insert  (around yasnippet-expand-after-auto-insert activate)
-  "使用yas扩展模板"
+  "使用yas扩展模板."
   (let ((is-new-file (and (not buffer-read-only)
                           (or (eq this-command 'auto-insert)
                               (and auto-insert (bobp) (eobp))))))

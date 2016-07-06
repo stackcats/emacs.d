@@ -23,7 +23,7 @@
 		"console" "JSON" "setImmediate"	"Buffer" "$"
 		"process" "define" "angular" "$http" "window"
 		"async" "await" "syntax" "package" "message"
-		"service" "rpc" "string" "logger"
+		"service" "rpc" "string" "logger" "statsd"
 		"Image"))
 
 (add-hook 'js2-mode-hook 

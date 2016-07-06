@@ -34,10 +34,10 @@
  ;; If there is more than one, they won't work right.
  '(custom-safe-themes
    (quote
-    ("bffa9739ce0752a37d9b1eee78fc00ba159748f50dc328af4be661484848e476" default)))
+    ("4f0f2f5ec60a4c6881ba36ffbfef31b2eea1c63aad9fe3a4a0e89452346de278" "bffa9739ce0752a37d9b1eee78fc00ba159748f50dc328af4be661484848e476" default)))
  '(package-selected-packages
    (quote
-    (anaconda-mode company-jedi helm-flycheck yasnippet xelb which-key web-mode web spacemacs-theme spaceline smartparens slime rainbow-mode rainbow-delimiters osx-pseudo-daemon nyan-mode mode-compile markdown-mode magit js2-mode js-comint jade-mode htmlize helm-gtags helm-dash helm-ag gnu-apl-mode git-gutter-fringe+ flycheck-tip flycheck-protobuf flycheck-pos-tip flycheck-clojure expand-region exec-path-from-shell dired-rainbow diminish company-web company-tern company-irony company-go company-flx company-c-headers color-theme-sanityinc-solarized bison-mode better-defaults auto-complete atom-one-dark-theme anzu ace-jump-mode ac-html-bootstrap))))
+    (inf-groovy malabar-mode sql-indent anaconda-mode company-jedi helm-flycheck yasnippet xelb which-key web-mode web spacemacs-theme spaceline smartparens slime rainbow-mode rainbow-delimiters osx-pseudo-daemon nyan-mode mode-compile markdown-mode magit js2-mode js-comint jade-mode htmlize helm-gtags helm-dash helm-ag gnu-apl-mode git-gutter-fringe+ flycheck-tip flycheck-protobuf flycheck-pos-tip flycheck-clojure expand-region exec-path-from-shell dired-rainbow diminish company-web company-tern company-irony company-go company-flx company-c-headers color-theme-sanityinc-solarized bison-mode better-defaults auto-complete atom-one-dark-theme anzu ace-jump-mode ac-html-bootstrap))))
 
 (custom-set-faces
  ;; custom-set-faces was added by Custom.

@@ -126,6 +126,10 @@
 
 ;; nyancat
 (nyan-mode 1)
+
+(eval-after-load "sql"
+  '(load-library "sql-indent"))
+
 (provide 'stackcats-custom)
 
 ;;; stackcats-custom.el ends here
