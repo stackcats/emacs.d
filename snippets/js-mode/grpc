@@ -3,10 +3,12 @@
 # --
 async $1(call, cb) {
   const req = call.request;
+  logger.info('$1.req', req);
   $0
   try {
     cb(null, { code: 1, result: {} });
   } catch (e) {
+    logger.error('$1', e, e.stack);
     cb(e);
   }
 }

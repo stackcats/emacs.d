@@ -64,6 +64,7 @@
 (add-hook 'c-mode-hook #'rainbow-delimiters-mode)
 (add-hook 'slime-mode-hook #'rainbow-delimiters-mode)
 (add-hook 'js2-mode-hook #'rainbow-delimiters-mode)
+(add-hook 'python-mode-hook #'rainbow-delimiters-mode)
 
 (require 'git-gutter-fringe+)
 (global-git-gutter+-mode)
@@ -111,7 +112,7 @@
     (rainbow-mode 1)))
 (global-rainbow-mode 1)
 
-(smartparens-global-mode t)
+;; (smartparens-global-mode t)
 
 (global-anzu-mode 1)
 
@@ -129,6 +130,11 @@
 
 (eval-after-load "sql"
   '(load-library "sql-indent"))
+
+(projectile-global-mode)
+(setq projectile-enable-caching t)
+(setq projectile-completion-system 'helm)
+(helm-projectile-on)
 
 (provide 'stackcats-custom)
 

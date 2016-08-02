@@ -28,7 +28,7 @@
 (define-key helm-map (kbd "C-z")  'helm-select-action)
 (global-set-key (kbd "M-y") 'helm-show-kill-ring)
 (global-set-key (kbd "C-c m") 'comment-or-uncomment-region)
-(global-set-key (kbd "s-e") 'er/expand-region)
+(global-set-key (kbd "C-c e") 'er/expand-region)
 (global-set-key (kbd "C-c SPC") 'ace-jump-mode)
 (global-set-key (kbd "C-c o") 'other-frame)
 (provide 'stackcats-key)

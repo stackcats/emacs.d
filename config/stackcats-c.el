@@ -1,9 +1,9 @@
 ;;; Code:
 (defun my-c-mode-hook ()
   "My `c-mode hook."
-  (setq c-basic-offset 4
+  (setq c-basic-offset 2
 	indent-tabs-mode t
-	tab-width 4)
+	tab-width 2)
   (local-set-key (kbd "C-c c") 'mode-compile)
   (local-set-key (kbd "<tab>") 'company-complete-common))
 
@@ -16,6 +16,7 @@
    (lambda (proc change)
      (when (string-match "finished" change)
        (delete-windows-on (process-buffer proc))))))
+
 (add-hook 'compilation-start-hook 'kill-buffer-when-compile-success)
 
 (add-hook 'c-mode-hook 'smartparens-mode)
