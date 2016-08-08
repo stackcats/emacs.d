@@ -5,10 +5,12 @@
 ;;环境变量
 (setenv "PATH" (concat (getenv "PATH") ":/usr/local/bin"))
 (setq exec-path (append exec-path '("/usr/local/bin")))
-(setq exec-path (append exec-path '("~/.nvm/versions/node/v4.2.6/bin")))
+;;(setq exec-path (append exec-path '("~/.nvm/versions/node/v4.2.6/bin")))
+
 ;;英中文字体
 (set-face-attribute 'default nil :font "hack 14")
 (set-fontset-font "fontset-default" 'unicode '("苹方" . "unicode-ttf"))
+
 ;;启动GUI时配置
 (when window-system
   (tool-bar-mode 0)
@@ -20,7 +22,9 @@
   (exec-path-from-shell-initialize)
   (exec-path-from-shell-copy-env "GOPATH")
   (exec-path-from-shell-copy-env "C_INCLUDE_PATH")
-  (exec-path-from-shell-copy-env "LIBRARY_PATH"))
+  (exec-path-from-shell-copy-env "LIBRARY_PATH")
+  (exec-path-from-shell-copy-env "LISP")
+  (exec-path-from-shell-copy-env "ESLINT"))
 
 ;;高亮当前行
 (setq hl-line-range-function
@@ -32,56 +36,89 @@
 ;;mode-line显示时间及格式
 (defvar display-time-format "%Y/%m/%d %H:%M")
 (display-time-mode t)
+
 ;;TAB宽度
 (setq tab-width 2)
+
 ;;括号匹配
 (show-paren-mode 1)
+
 ;;显示文件名
 (setq frame-title-format "%b")
+
 ;;显示行号
 (global-linum-mode t)
+
 (setq inhibit-startup-message t)
+
 (setq message-log-max nil)
+
 (kill-buffer "*Messages*")
+
 (defvar stack-trace-on-error nil)
+
 (global-font-lock-mode t)
+
 (setq indent-tabs-mode nil)
+
 ;;关闭提示音
 (setq ring-bell-function 'ignore)
+
 ;;覆盖当前选中region
 (pending-delete-mode t)
+
 ;;关闭文件备份
 (setq-default make-backup-files nil)
 (setq auto-save-default nil)
+
 ;;utf8
 (prefer-coding-system 'utf-8)
+
 ;;外部应用剪切板
 (setq select-enable-clipboard t)
+
 ;;默认目录
 (setq default-directory "~/")
 
-(require 'rainbow-delimiters)
-(add-hook 'c-mode-hook #'rainbow-delimiters-mode)
-(add-hook 'slime-mode-hook #'rainbow-delimiters-mode)
-(add-hook 'js2-mode-hook #'rainbow-delimiters-mode)
-(add-hook 'python-mode-hook #'rainbow-delimiters-mode)
+(use-package diminish
+  :ensure t
+  :config
+  (diminish 'abbrev-mode "ab")
+  (diminish 'eldoc-mode "档"))
 
-(require 'git-gutter-fringe+)
-(global-git-gutter+-mode)
-(setq git-gutter-fr+-side 'right-fringe)
+(use-package rainbow-delimiters
+  :ensure t
+  :config
+  (add-hook 'c-mode-hook #'rainbow-delimiters-mode)
+  (add-hook 'slime-mode-hook #'rainbow-delimiters-mode)
+  (add-hook 'js2-mode-hook #'rainbow-delimiters-mode)
+  (add-hook 'python-mode-hook #'rainbow-delimiters-mode)
+  (add-hook 'emacs-lisp-mode-hook #'rainbow-delimiters-mode))
+
+(use-package git-gutter-fringe+
+  :ensure t
+  :config
+  (diminish 'git-gutter+-mode "G")
+  (global-git-gutter+-mode 1)
+  (setq git-gutter-fr+-side 'right-fringe))
 
 ;;;hiddenshow
-(load-library "hideshow")
-(add-hook 'c-mode-hook 'hs-minor-mode)
-(add-hook 'c++-mode-hook 'hs-minor-mode)
-(add-hook 'python-mode-hook 'hs-minor-mode)
-(add-hook 'lisp-mode-hook 'hs-minor-mode)
-(add-hook 'emacs-lisp-mode-hook 'hs-minor-mode)
-(add-hook 'js2-mode 'hs-minor-mode)
+;; (use-package hs-minor-mode
+;;   (add-hook 'c-mode-hook 'hs-minor-mode)
+;;   (add-hook 'c++-mode-hook 'hs-minor-mode)
+;;   (add-hook 'python-mode-hook 'hs-minor-mode)
+;;   (add-hook 'lisp-mode-hook 'hs-minor-mode)
+;;   (add-hook 'emacs-lisp-mode-hook 'hs-minor-mode)
+;;   (diminish "HS"))
 
-(which-key-mode)
-(defvar which-key-idle-delay 0.1)
-(defvar which-key-special-keys '("SPC" "TAB" "RET" "ESC" "DEL"))
+(use-package which-key
+  :ensure t
+  :config
+  (which-key-mode)
+  (diminish 'which-key-mode "Key")
+  (setq which-key-idle-delay 0.1)
+  (setq which-key-special-keys '("SPC" "TAB" "RET" "ESC" "DEL")))
+
 
 (defun byte-compile-current-buffer ()
   "`byte-compile' current buffer if it's `emacs-lisp-mode' and compiled file exists."
@@ -107,34 +144,48 @@
 		(indent-whole))))
 
 
-(define-globalized-minor-mode global-rainbow-mode rainbow-mode
-  (lambda ()
-    (rainbow-mode 1)))
-(global-rainbow-mode 1)
+;; (define-globalized-minor-mode global-rainbow-mode rainbow-mode
+;;   (lambda ()
+;;     (rainbow-mode 1)))
+;; (global-rainbow-mode 1)
+;; (diminish 'rainbow-mode "Ⓡ")
 
-;; (smartparens-global-mode t)
+(use-package smartparens
+  :ensure t
+  :config
+  (smartparens-global-mode t)
+  (diminish 'smartparens-mode "S"))
 
-(global-anzu-mode 1)
+;;(load-theme 'spacemacs-dark t)
+(use-package spaceline
+  :ensure t
+  :config
+  (setq ns-use-srgb-colorspace nil) ;fix powerline-default-separator
+  (require 'spaceline-config)
+  (setq powerline-default-separator 'slant)
+  (setq spaceline-workspace-numbers-unicode t)
+  (spaceline-emacs-theme))
 
-(load-theme 'spacemacs-dark t)
-(setq ns-use-srgb-colorspace nil) ;fix powerline-default-separator
-(require 'spaceline-config)
-(setq powerline-default-separator 'slant)
-(setq spaceline-workspace-numbers-unicode t)
-(spaceline-emacs-theme)
+
 ;; display lambda as "λ"
 (global-prettify-symbols-mode 1)
 
 ;; nyancat
-(nyan-mode 1)
+(use-package nyan-mode
+  :ensure t
+  :config
+  (nyan-mode 1))
 
 (eval-after-load "sql"
   '(load-library "sql-indent"))
 
-(projectile-global-mode)
-(setq projectile-enable-caching t)
-(setq projectile-completion-system 'helm)
-(helm-projectile-on)
+(use-package helm-projectile
+  :ensure t
+  :config
+  (projectile-global-mode)
+  (setq projectile-enable-caching t)
+  (setq projectile-completion-system 'helm)
+  (helm-projectile-on))
 
 (provide 'stackcats-custom)
 

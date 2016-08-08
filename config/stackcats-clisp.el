@@ -1,22 +1,20 @@
 ;;;slime
-(setq inferior-lisp-program "/usr/local/bin/ccl")
 (add-to-list 'load-path "~/.emacs.d/vendor/slime-2.9/")
-(require 'slime)
-(require 'slime-autoloads)
-(slime-setup '(slime-fancy))
-
-(add-hook 'slime-mode-hook
-          (lambda ()
-	    ;;打开lisp文件时自动启动slime
-            (unless (slime-connected-p)
-              (save-excursion (slime)))
-	    (turn-off-smartparens-mode)	    
-	    (local-set-key (kbd "C-<return>") 'slime-close-all-parens-in-sexp)))
-
-(add-hook 'slime-repl-mode-hook
-	  (lambda ()
-	    (turn-off-smartparens-mode)
-	    (local-set-key (kbd "<up>") 'slime-repl-previous-input)
-	    (local-set-key (kbd "<down>") 'slime-repl-next-input)))
+(use-package slime
+  :mode ("\\.lisp" . slime-mode)
+  :config
+  (setq inferior-lisp-program (getenv "LISP"))
+  (require 'slime-autoloads)
+  (slime-setup '(slime-fancy))
+  (unless (slime-connected-p)
+    (save-excursion (slime)))
+  (turn-off-smartparens-mode)
+  (diminish 'slime-mode "λ")
+  :bind
+  (:map slime-mode-map
+	("C-<return>" . slime-close-all-parens-in-sexp)
+	:map slime-repl-mode-map
+	("<up>" . slime-repl-previous-input)
+	("<down>" . slime-repl-next-input)))
 
 (provide 'stackcats-clisp)

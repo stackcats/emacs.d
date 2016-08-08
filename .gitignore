@@ -15,3 +15,5 @@ ido.last
 places
 projectile.cache
 projectile-bookmarks.eld
+.python-environments/
+network-security.data
