@@ -10,13 +10,20 @@
   (diminish 'company-mode "C")
   ;; C
   (add-to-list 'company-backends 'company-c-headers)
-  (add-to-list 'company-backends 'company-irony)
   ;; web
   (add-to-list 'company-backends 'company-web-html)
   (add-to-list 'company-backends 'company-web-jade)
   ;; key
   (define-key company-active-map "\C-n" 'company-select-next)
   (define-key company-active-map "\C-p" 'company-select-previous))
+
+(use-package company-irony
+  ;; C
+  :ensure t
+  :config
+  (add-to-list 'company-backends 'company-irony)
+  (add-hook 'c++-mode-hook 'irony-mode)
+  (add-hook 'c-mode-hook 'irony-mode))
 
 (use-package company-tern
   ;; JavaScript

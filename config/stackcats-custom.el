@@ -98,8 +98,9 @@
   :ensure t
   :config
   (diminish 'git-gutter+-mode "G")
-  (global-git-gutter+-mode)
   (setq git-gutter-fr+-side 'right-fringe))
+
+(add-hook 'after-init-hook 'global-git-gutter+-mode)
 
 ;;;hiddenshow
 ;; (use-package hs-minor-mode
@@ -142,12 +143,15 @@
 		;;makefile自动格式化有问题
 		(indent-whole))))
 
+(use-package rainbow-mode
+  :ensure t
+  :config
+  (diminish 'rainbow-mode "R"))
 
-;; (define-globalized-minor-mode global-rainbow-mode rainbow-mode
-;;   (lambda ()
-;;     (rainbow-mode 1)))
-;; (global-rainbow-mode 1)
-;; (diminish 'rainbow-mode "Ⓡ")
+(define-globalized-minor-mode global-rainbow-mode rainbow-mode
+  (lambda ()
+    (rainbow-mode 1)))
+(global-rainbow-mode 1)
 
 (use-package smartparens
   :ensure t
