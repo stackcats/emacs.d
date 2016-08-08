@@ -1,5 +1,6 @@
+;;; package --- Summary
+;;; Commentary:
 ;;; Code:
-
 (add-to-list 'load-path "~/.emacs.d/config/")
 
 (setq package-archives
@@ -25,20 +26,14 @@
 (require 'stackcats-c)
 (require 'stackcats-company)
 (require 'stackcats-yas)
-;;(require 'stackcats-flycheck)
+(require 'stackcats-flycheck)
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(ansi-color-names-vector
-   ["#242424" "#e5786d" "#95e454" "#cae682" "#8ac6f2" "#333366" "#ccaa8f" "#f6f3e8"])
- '(custom-enabled-themes (quote (adwaita)))
- '(package-selected-packages
-   (quote
-    (helm-projectile go-dlv inf-groovy malabar-mode sql-indent anaconda-mode company-jedi helm-flycheck yasnippet xelb which-key web-mode web spacemacs-theme spaceline smartparens slime rainbow-mode rainbow-delimiters osx-pseudo-daemon nyan-mode mode-compile markdown-mode magit js2-mode js-comint jade-mode htmlize helm-gtags helm-dash helm-ag gnu-apl-mode git-gutter-fringe+ flycheck-tip flycheck-protobuf flycheck-pos-tip flycheck-clojure expand-region exec-path-from-shell dired-rainbow diminish company-web company-tern company-irony company-go company-flx company-c-headers color-theme-sanityinc-solarized bison-mode better-defaults auto-complete atom-one-dark-theme anzu ace-jump-mode ac-html-bootstrap))))
-
+ )
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
