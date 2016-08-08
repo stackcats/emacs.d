@@ -1,3 +1,6 @@
+;;; package --- Summary
+;;; Commentary:
+;;; Code:
 (use-package web-mode
   :ensure t
   :mode ("\\.html" . web-mode)
@@ -7,3 +10,4 @@
   (setq web-mode-style-padding 1))
 
 (provide 'stackcats-web)
+;;; stackcats-web ends here

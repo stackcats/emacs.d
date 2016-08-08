@@ -1,5 +1,7 @@
-;;;key-binding
+;;; package --- Summary
+;;; Commentary:
 ;;; Code:
+
 ;;mac按键设置
 (when (eq system-type 'darwin)
   (setq mac-option-modifier 'meta)

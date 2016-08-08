@@ -1,3 +1,5 @@
+;;; package --- Summary
+;;; Commentary:
 ;;; Code:
 (use-package yasnippet
   :init
@@ -20,7 +22,7 @@
   (yas-global-mode 1)
   (auto-insert-mode)
   (setq-default auto-insert-directory "~/.emacs.d/template/")
-  (setq auto-insert-query nil)
+  (defvar auto-insert-query nil)
   (define-auto-insert "\\.el" "elisp")
   (define-auto-insert "\\.c" "c")
   (define-auto-insert "\\.l" "flex")
@@ -30,4 +32,3 @@
 
 (provide 'stackcats-yas)
 ;;; stackcats-yas.el ends here
-

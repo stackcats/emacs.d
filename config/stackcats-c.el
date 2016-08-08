@@ -1,7 +1,8 @@
+;;; package --- Summary
+;;; Commentary:
 ;;; Code:
-
 (defun kill-buffer-when-compile-success (process)
-  "Close current buffer when `shell-command' exit."
+  "Close current PROCESS when `shell-command' exit."
   (set-process-sentinel
    process
    (lambda (proc change)
@@ -18,8 +19,5 @@
   (local-set-key (kbd "<tab>") 'company-complete-common))
 
 ;;(add-hook 'c-mode-hook 'my-c-mode-hook)
-
-
-
 (provide 'stackcats-c)
 ;;; stackcats-c.el ends here

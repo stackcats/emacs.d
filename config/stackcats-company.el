@@ -1,5 +1,6 @@
+;;; package --- Summary
+;;; Commentary:
 ;;; Code:
-
 (use-package company
   :ensure t
   :config

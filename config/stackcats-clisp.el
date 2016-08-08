@@ -1,4 +1,6 @@
-;;;slime
+;;; package --- Summary
+;;; Commentary:
+;;; Code:
 (add-to-list 'load-path "~/.emacs.d/vendor/slime-2.9/")
 (use-package slime
   :mode ("\\.lisp" . slime-mode)
@@ -18,3 +20,4 @@
 	("<down>" . slime-repl-next-input)))
 
 (provide 'stackcats-clisp)
+;;; stackcats-clisp.el ends here

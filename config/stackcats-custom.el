@@ -5,7 +5,6 @@
 ;;环境变量
 (setenv "PATH" (concat (getenv "PATH") ":/usr/local/bin"))
 (setq exec-path (append exec-path '("/usr/local/bin")))
-;;(setq exec-path (append exec-path '("~/.nvm/versions/node/v4.2.6/bin")))
 
 ;;英中文字体
 (set-face-attribute 'default nil :font "hack 14")
@@ -18,7 +17,7 @@
   (scroll-bar-mode 0))
 
 (when (memq window-system '(mac ns))
-  (setq exec-path-from-shell-check-startup-files nil)
+  (defvar exec-path-from-shell-check-startup-files nil)
   (exec-path-from-shell-initialize)
   (exec-path-from-shell-copy-env "GOPATH")
   (exec-path-from-shell-copy-env "C_INCLUDE_PATH")
@@ -27,9 +26,9 @@
   (exec-path-from-shell-copy-env "ESLINT"))
 
 ;;高亮当前行
-(setq hl-line-range-function
-      #'(lambda ()
-	  (cons (line-end-position) (line-beginning-position 2))))
+(defvar hl-line-range-function
+  #'(lambda ()
+      (cons (line-end-position) (line-beginning-position 2))))
 (defvar global-hl-line-sticky-flag t)
 (global-hl-line-mode 1)
 
@@ -99,7 +98,7 @@
   :ensure t
   :config
   (diminish 'git-gutter+-mode "G")
-  (global-git-gutter+-mode 1)
+  (global-git-gutter+-mode)
   (setq git-gutter-fr+-side 'right-fringe))
 
 ;;;hiddenshow
@@ -158,14 +157,12 @@
 
 ;;(load-theme 'spacemacs-dark t)
 (use-package spaceline
-  :ensure t
-  :config
-  (setq ns-use-srgb-colorspace nil) ;fix powerline-default-separator
-  (require 'spaceline-config)
-  (setq powerline-default-separator 'slant)
-  (setq spaceline-workspace-numbers-unicode t)
-  (spaceline-emacs-theme))
-
+  :ensure t)
+(setq ns-use-srgb-colorspace nil) ;fix powerline-default-separator
+(require 'spaceline-config)
+(setq powerline-default-separator 'arrow)
+(defvar spaceline-workspace-numbers-unicode t)
+(spaceline-emacs-theme)
 
 ;; display lambda as "λ"
 (global-prettify-symbols-mode 1)
@@ -179,14 +176,5 @@
 (eval-after-load "sql"
   '(load-library "sql-indent"))
 
-(use-package helm-projectile
-  :ensure t
-  :config
-  (projectile-global-mode)
-  (setq projectile-enable-caching t)
-  (setq projectile-completion-system 'helm)
-  (helm-projectile-on))
-
 (provide 'stackcats-custom)
-
 ;;; stackcats-custom.el ends here
