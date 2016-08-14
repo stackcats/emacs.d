@@ -88,11 +88,11 @@
 (use-package rainbow-delimiters
   :ensure t
   :config
-  (add-hook 'c-mode-hook #'rainbow-delimiters-mode)
-  (add-hook 'slime-mode-hook #'rainbow-delimiters-mode)
-  (add-hook 'js2-mode-hook #'rainbow-delimiters-mode)
-  (add-hook 'python-mode-hook #'rainbow-delimiters-mode)
-  (add-hook 'emacs-lisp-mode-hook #'rainbow-delimiters-mode))
+  (add-hook 'c-mode-hook 'rainbow-delimiters-mode)
+  (add-hook 'slime-mode-hook 'rainbow-delimiters-mode)
+  (add-hook 'js2-mode-hook 'rainbow-delimiters-mode)
+  (add-hook 'python-mode-hook 'rainbow-delimiters-mode)
+  (add-hook 'emacs-lisp-mode-hook 'rainbow-delimiters-mode))
 
 (use-package git-gutter-fringe+
   :ensure t

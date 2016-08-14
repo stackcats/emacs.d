@@ -10,7 +10,7 @@
        (delete-windows-on (process-buffer proc))))))
 
 (use-package c-mode
-  :mode ("\\.c" . c-mode)
+  :mode ("\\.c\\'" . c-mode)
   :config
   (defvar c-basic-offset 2)
   (setq	indent-tabs-mode t)
