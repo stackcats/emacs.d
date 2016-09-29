@@ -50,7 +50,7 @@
   :ensure t
   :config
   (setq company-ghc-show-info t)
-  (add-to-list 'company-backends 'company-ghc))
+  (add-to-list 'company-backends '(company-ghc :with company-dabbrev-code)))
 
 (add-hook 'after-init-hook 'global-company-mode)
 (provide 'stackcats-company)
