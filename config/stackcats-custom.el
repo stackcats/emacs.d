@@ -92,6 +92,8 @@
   (add-hook 'slime-mode-hook 'rainbow-delimiters-mode)
   (add-hook 'js2-mode-hook 'rainbow-delimiters-mode)
   (add-hook 'python-mode-hook 'rainbow-delimiters-mode)
+  (add-hook 'go-mode-hook 'rainbow-delimiters-mode)
+  (add-hook 'haskell-mode-hook 'rainbow-delimiters-mode)
   (add-hook 'emacs-lisp-mode-hook 'rainbow-delimiters-mode))
 
 (use-package git-gutter-fringe+

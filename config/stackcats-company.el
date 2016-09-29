@@ -45,6 +45,13 @@
   :config
   (add-to-list 'company-backends 'company-go))
 
+(use-package company-ghc
+  ;; haskell
+  :ensure t
+  :config
+  (setq company-ghc-show-info t)
+  (add-to-list 'company-backends 'company-ghc))
+
 (add-hook 'after-init-hook 'global-company-mode)
 (provide 'stackcats-company)
 ;;; stackcats-company.el ends here
