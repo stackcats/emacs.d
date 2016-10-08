@@ -13,6 +13,7 @@
   (setq haskell-process-auto-import-loaded-modules t)
   (setq haskell-process-log t)
   (setq haskell-process-type 'cabal-repl)
+  (setq haskell-tags-on-save t)
   :bind
   (:map haskell-mode-map
         ("C-c c" . haskell-process-load-or-reload)
@@ -32,7 +33,7 @@
 (use-package hindent
   :ensure t
   :config
-  (add-hook 'haskell-mode-hook #'hindent-mode))
+  (add-hook 'haskell-mode-hook 'hindent-mode))
 
 (use-package ghc
   :ensure t
@@ -45,5 +46,7 @@
   :ensure t
   :config
   (add-hook 'haskell-mode-hook 'structured-haskell-mode))
+;; (set-face-background 'shm-current-face "#eee8d5")
+;; (set-face-background 'shm-quarantine-face "lemonchiffon")
 (provide 'stackcats-haskell)
 ;;; stackcats-haskell.el ends here

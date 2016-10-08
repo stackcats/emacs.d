@@ -161,7 +161,7 @@
   (smartparens-global-mode t)
   (diminish 'smartparens-mode "S"))
 
-;;(load-theme 'spacemacs-dark t)
+(load-theme 'wombat t)
 (use-package spaceline
   :ensure t)
 (setq ns-use-srgb-colorspace nil) ;fix powerline-default-separator
@@ -178,9 +178,6 @@
   :ensure t
   :config
   (nyan-mode 1))
-
-(eval-after-load "sql"
-  '(load-library "sql-indent"))
 
 (provide 'stackcats-custom)
 ;;; stackcats-custom.el ends here
