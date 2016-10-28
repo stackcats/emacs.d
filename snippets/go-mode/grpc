@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+#name : grpc
+# --
+func (${1:s} ${2:*server}) $3(ctx context.Context, in *pb.${4:Request}) (*pb.${5:Reply}, error) {
+    $0
+}

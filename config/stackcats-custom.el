@@ -88,11 +88,13 @@
 (use-package rainbow-delimiters
   :ensure t
   :config
-  (add-hook 'c-mode-hook #'rainbow-delimiters-mode)
-  (add-hook 'slime-mode-hook #'rainbow-delimiters-mode)
-  (add-hook 'js2-mode-hook #'rainbow-delimiters-mode)
-  (add-hook 'python-mode-hook #'rainbow-delimiters-mode)
-  (add-hook 'emacs-lisp-mode-hook #'rainbow-delimiters-mode))
+  (add-hook 'c-mode-hook 'rainbow-delimiters-mode)
+  (add-hook 'slime-mode-hook 'rainbow-delimiters-mode)
+  (add-hook 'js2-mode-hook 'rainbow-delimiters-mode)
+  (add-hook 'python-mode-hook 'rainbow-delimiters-mode)
+  (add-hook 'go-mode-hook 'rainbow-delimiters-mode)
+  (add-hook 'haskell-mode-hook 'rainbow-delimiters-mode)
+  (add-hook 'emacs-lisp-mode-hook 'rainbow-delimiters-mode))
 
 (use-package git-gutter-fringe+
   :ensure t
@@ -135,13 +137,14 @@
   (message "format successfully"))
 
 (add-hook 'after-save-hook
-	  #'(lambda ()
-	      (unless (or (string-match-p "makefile" mode-name)
-			  (string-match-p "bison" mode-name)
-			  (string-match-p "fundamental" mode-name)
-			  (string-match-p "jade" mode-name))
-		;;makefile自动格式化有问题
-		(indent-whole))))
+          #'(lambda ()
+              (unless (or (string-match-p "makefile" mode-name)
+                          (string-match-p "bison" mode-name)
+                          (string-match-p "fundamental" mode-name)
+                          (string-match-p "BSDmakefile" mode-name)
+                          (string-match-p "jade" mode-name))
+                ;;makefile自动格式化有问题
+                (indent-whole))))
 
 (use-package rainbow-mode
   :ensure t
@@ -159,7 +162,7 @@
   (smartparens-global-mode t)
   (diminish 'smartparens-mode "S"))
 
-;;(load-theme 'spacemacs-dark t)
+(load-theme 'wombat t)
 (use-package spaceline
   :ensure t)
 (defvar ns-use-srgb-colorspace nil) ;fix powerline-default-separator
@@ -177,9 +180,6 @@
   :config
   (when window-system
     (nyan-mode 1)))
-
-(eval-after-load "sql"
-  '(load-library "sql-indent"))
 
 (provide 'stackcats-custom)
 ;;; stackcats-custom.el ends here
