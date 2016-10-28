@@ -59,5 +59,11 @@
         ("C-c h j" . helm-gtags-select)
         ("M-." . helm-gtags-dwim)
         ("C-c h a" . helm-gtags-tags-in-this-function)))
+
+(use-package helm-flycheck
+  :ensure t
+  :bind
+  (("C-c f". helm-flycheck)))
+
 (provide 'stackcats-helm)
 ;;; stackcats-helm.el ends here

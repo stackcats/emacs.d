@@ -26,11 +26,11 @@
   (exec-path-from-shell-copy-env "ESLINT"))
 
 ;;高亮当前行
-(defvar hl-line-range-function
-  #'(lambda ()
-      (cons (line-end-position) (line-beginning-position 2))))
-(defvar global-hl-line-sticky-flag t)
-(global-hl-line-mode 1)
+;; (defvar hl-line-range-function
+;;   #'(lambda ()
+;;       (cons (line-end-position) (line-beginning-position 2))))
+;; (defvar global-hl-line-sticky-flag t)
+;; (global-hl-line-mode 1)
 
 ;;mode-line显示时间及格式
 (defvar display-time-format "%Y/%m/%d %H:%M")
@@ -162,7 +162,7 @@
 ;;(load-theme 'spacemacs-dark t)
 (use-package spaceline
   :ensure t)
-(setq ns-use-srgb-colorspace nil) ;fix powerline-default-separator
+(defvar ns-use-srgb-colorspace nil) ;fix powerline-default-separator
 (require 'spaceline-config)
 (setq powerline-default-separator 'arrow)
 (defvar spaceline-workspace-numbers-unicode t)
@@ -175,7 +175,8 @@
 (use-package nyan-mode
   :ensure t
   :config
-  (nyan-mode 1))
+  (when window-system
+    (nyan-mode 1)))
 
 (eval-after-load "sql"
   '(load-library "sql-indent"))

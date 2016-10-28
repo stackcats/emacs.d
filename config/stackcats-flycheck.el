@@ -39,7 +39,6 @@
     :fringe-bitmap 'my-flycheck-fringe-indicator
     :fringe-face 'flycheck-fringe-info)
   
-  (flycheck-pos-tip-mode)
   (diminish 'flycheck-mode "F")
   (setq-default flycheck-temp-prefix ".")
   (defvar flycheck-eslintrc "~/.eslintrc")
@@ -48,9 +47,10 @@
                 (append flycheck-disabled-checkers
                         '(javascript-jshint)))
   (flycheck-add-mode 'javascript-eslint 'js2-mode)
-  :bind
-  (:map flycheck-mode-map
-        ("C-c f" . helm-flycheck)))
+  (use-package flycheck-pos-tip
+    :ensure t
+    :config
+    (flycheck-pos-tip-mode)))
 
 (add-hook 'after-init-hook #'global-flycheck-mode)
 (provide 'stackcats-flycheck)
