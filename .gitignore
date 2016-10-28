@@ -2,6 +2,7 @@
 ac-comphist.dat
 *~
 *.elc
+._*
 auto-save-list
 elpa
 eshell/history
