@@ -25,5 +25,10 @@
 (use-package ace-jump-mode
   :ensure t
   :bind (("C-c SPC" . ace-jump-mode)))
+
+(use-package ace-window
+  :ensure t
+  :bind (("M-p" . ace-window)))
+
 (provide 'stackcats-key)
 ;;; stackcats-key.el ends here

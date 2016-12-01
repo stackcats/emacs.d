@@ -79,6 +79,11 @@
 ;;默认目录
 (setq default-directory "~/")
 
+;;平滑滚动
+(setq mouse-wheel-scroll-amount '(1 ((shift) . 2))
+      mouse-wheel-progressive-speed nil
+      mouse-wheel-follow-mouse 't)
+
 (use-package diminish
   :ensure t
   :config
@@ -162,7 +167,7 @@
   (smartparens-global-mode t)
   (diminish 'smartparens-mode "S"))
 
-(load-theme 'wombat t)
+(load-theme 'sanityinc-solarized-light t)
 (use-package spaceline
   :ensure t)
 (setq ns-use-srgb-colorspace nil) ;fix powerline-default-separator

@@ -5,7 +5,7 @@
 ;;; npm install -g tern
 (use-package js2-mode
   :ensure t
-  :mode ("\\.js" . js2-mode)
+  :mode ("\\.js\\'" . js2-mode)
   :config
   (autoload 'js2-mode "js2-mode" nil t)
   (setq-default js2-global-externs
@@ -16,7 +16,7 @@
                   "process" "define" "angular" "$http" "window"
                   "async" "await" "syntax" "package" "message"
                   "service" "rpc" "string" "logger" "statsd"
-                  "Image"))
+                  "Image", "document"))
   (add-hook 'js2-mode-hook (lambda () (tern-mode t)))
   (setq js2-idle-timer-delay 2)
   (setq js2-basic-offset 2)
