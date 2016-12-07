@@ -24,7 +24,7 @@
 (require 'stackcats-python)
 (require 'stackcats-web)
 (require 'stackcats-c)
-(require 'stackcats-java)
+(require 'stackcats-clojure)
 (require 'stackcats-scala)
 (require 'stackcats-yas)
 (require 'stackcats-flycheck)
@@ -40,7 +40,7 @@
  '(fci-rule-color "#14151E")
  '(package-selected-packages
    (quote
-    (ace-window afternoon-theme ensime meghanada sqlup-mode json-mode color-theme-modern yasnippet xelb which-key web-mode web use-package sql-indent spacemacs-theme spaceline smartparens slime rainbow-mode rainbow-delimiters osx-pseudo-daemon nyan-mode mode-compile markdown-mode malabar-mode magit js2-mode js-comint jade-mode inf-groovy htmlize helm-projectile helm-gtags helm-flycheck helm-dash helm-ag go-dlv gnu-apl-mode git-gutter-fringe+ flycheck-tip flycheck-protobuf flycheck-pos-tip flycheck-clojure expand-region exec-path-from-shell dired-rainbow company-web company-tern company-jedi company-irony company-go company-flx company-c-headers color-theme-sanityinc-solarized bison-mode better-defaults auto-complete atom-one-dark-theme anzu anaconda-mode ace-jump-mode ac-html-bootstrap)))
+    (paredit ace-window afternoon-theme ensime meghanada sqlup-mode json-mode color-theme-modern yasnippet xelb which-key web-mode web use-package sql-indent spacemacs-theme spaceline smartparens slime rainbow-mode rainbow-delimiters osx-pseudo-daemon nyan-mode mode-compile markdown-mode malabar-mode magit js2-mode js-comint jade-mode inf-groovy htmlize helm-projectile helm-gtags helm-flycheck helm-dash helm-ag go-dlv gnu-apl-mode git-gutter-fringe+ flycheck-tip flycheck-protobuf flycheck-pos-tip flycheck-clojure expand-region exec-path-from-shell dired-rainbow company-web company-tern company-jedi company-irony company-go company-flx company-c-headers color-theme-sanityinc-solarized bison-mode better-defaults auto-complete atom-one-dark-theme anzu anaconda-mode ace-jump-mode ac-html-bootstrap)))
  '(vc-annotate-background nil)
  '(vc-annotate-color-map
    (quote

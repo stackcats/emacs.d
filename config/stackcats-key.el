@@ -28,7 +28,7 @@
 
 (use-package ace-window
   :ensure t
-  :bind (("M-p" . ace-window)))
+  :bind (("C-c w" . ace-window)))
 
 (provide 'stackcats-key)
 ;;; stackcats-key.el ends here
