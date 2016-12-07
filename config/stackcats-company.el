@@ -1,3 +1,4 @@
+(add-hook 'after-init-hook 'global-company-mode)
 ;;; package --- Summary
 ;;; Commentary:
 ;;; Code:
