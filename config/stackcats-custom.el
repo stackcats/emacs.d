@@ -179,6 +179,7 @@
 
 (use-package spaceline
   :ensure t)
+
 (defvar ns-use-srgb-colorspace nil) ;fix powerline-default-separator
 (require 'spaceline-config)
 (setq powerline-default-separator 'arrow)
