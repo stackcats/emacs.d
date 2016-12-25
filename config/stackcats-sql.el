@@ -3,8 +3,8 @@
 ;;; Commentary:
 
 ;;; Code:
-(eval-after-load "sql"
-  '(load-library "sql-indent"))
+;;(eval-after-load "sql"
+;;  '(load-library "sql-indent"))
 
 (use-package sqlup-mode
   :ensure t

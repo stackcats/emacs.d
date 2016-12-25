@@ -7,6 +7,7 @@
   :ensure t
   :config
   (setq cider-repl-display-help-banner nil)
+  
   )
 (provide 'stackcats-clojure)
 ;;; stackcats-clojure.el ends here

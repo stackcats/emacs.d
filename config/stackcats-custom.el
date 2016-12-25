@@ -99,6 +99,7 @@
   (add-hook 'python-mode-hook 'rainbow-delimiters-mode)
   (add-hook 'go-mode-hook 'rainbow-delimiters-mode)
   (add-hook 'haskell-mode-hook 'rainbow-delimiters-mode)
+  (add-hook 'clojure-mode-hook 'rainbow-delimiters-mode)
   (add-hook 'emacs-lisp-mode-hook 'rainbow-delimiters-mode))
 
 (use-package git-gutter-fringe+
@@ -167,7 +168,7 @@
   (smartparens-global-mode t)
   (diminish 'smartparens-mode "S"))
 
-(load-theme 'sanityinc-solarized-light t)
+(load-theme 'solarized-light t)
 (use-package spaceline
   :ensure t)
 (defvar ns-use-srgb-colorspace nil) ;fix powerline-default-separator
