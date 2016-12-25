@@ -5,7 +5,7 @@
 (use-package slime
   :mode ("\\.lisp" . slime-mode)
   :config
-  (setq inferior-lisp-program (getenv "LISP"))
+  (defvar inferior-lisp-program (getenv "LISP"))
   (require 'slime-autoloads)
   (slime-setup '(slime-fancy))
   (unless (slime-connected-p)

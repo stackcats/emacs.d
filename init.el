@@ -1,8 +1,6 @@
 ;;; package --- Summary
 ;;; Commentary:
 ;;; Code:
-(add-to-list 'load-path "~/.emacs.d/config/")
-
 (setq package-archives
       '(("gnu" . "http://elpa.gnu.org/packages/")
 	("melpa" . "http://melpa.milkbox.net/packages/")))
@@ -14,6 +12,11 @@
 (unless (package-installed-p 'use-package)
   (package-refresh-contents)
   (package-install 'use-package))
+
+(defvar local-dir (file-name-directory load-file-name))
+(defvar config-dir (expand-file-name  "config" local-dir))
+
+(add-to-list 'load-path config-dir)
 
 (require 'stackcats-custom)
 (require 'stackcats-helm)

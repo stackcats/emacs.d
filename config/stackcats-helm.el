@@ -28,7 +28,7 @@
 (use-package helm-projectile
   :ensure t
   :config
-  (projectile-global-mode)
+  (projectile-mode)
   (setq projectile-enable-caching t)
   (setq projectile-completion-system 'helm)
   (helm-projectile-on))

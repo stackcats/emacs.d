@@ -1,11 +1,10 @@
-(add-hook 'after-init-hook 'global-company-mode)
 ;;; package --- Summary
 ;;; Commentary:
 ;;; Code:
 (use-package company
   :ensure t
   :config
-  (setq company-flx-mode +1)
+  (defvar company-flx-mode +1)
   (setq company-idle-delay 0)
   (setq company-backends (delete 'company-semantic company-backends))
   (diminish 'company-mode "C")
