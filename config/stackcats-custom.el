@@ -165,10 +165,18 @@
 (use-package smartparens
   :ensure t
   :config
-  (smartparens-global-mode t)
+  (add-hook 'js2-mode-hook 'smartparens-mode)
+  (add-hook 'python-mode-hook 'smartparens-mode)
+  (add-hook 'c-mode-hook 'smartparens-mode)
+  (add-hook 'java-mode-hook 'smartparens-mode)
+  (add-hook 'scala-mode-hook 'smartparens-mode)
+  (add-hook 'go-mode-hook 'smartparens-mode)
+  ;;(smartparens-global-mode t)
   (diminish 'smartparens-mode "S"))
 
-(load-theme 'solarized-light t)
+
+(load-theme 'misterioso t)
+
 (use-package spaceline
   :ensure t)
 (defvar ns-use-srgb-colorspace nil) ;fix powerline-default-separator

@@ -31,6 +31,7 @@
 (require 'stackcats-haskell)
 (require 'stackcats-company)
 (require 'stackcats-sql)
+(require 'stackcats-java)
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
