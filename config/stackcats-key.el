@@ -30,5 +30,9 @@
   :ensure t
   :bind (("C-c w" . ace-window)))
 
+(use-package smerge-mode
+  :config
+  (setq smerge-command-prefix "\C-cs"))
+
 (provide 'stackcats-key)
 ;;; stackcats-key.el ends here
