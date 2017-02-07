@@ -20,6 +20,7 @@
   (defvar exec-path-from-shell-check-startup-files nil)
   (exec-path-from-shell-initialize)
   (exec-path-from-shell-copy-env "GOPATH")
+  (exec-path-from-shell-copy-env "GOROOT")
   (exec-path-from-shell-copy-env "C_INCLUDE_PATH")
   (exec-path-from-shell-copy-env "LIBRARY_PATH")
   (exec-path-from-shell-copy-env "LISP")
@@ -58,7 +59,7 @@
 
 (global-font-lock-mode t)
 
-(setq indent-tabs-mode nil)
+(setq-default indent-tabs-mode nil)
 
 ;;关闭提示音
 (setq ring-bell-function 'ignore)
@@ -147,6 +148,7 @@
               (unless (or (string-match-p "makefile" mode-name)
                           (string-match-p "bison" mode-name)
                           (string-match-p "fundamental" mode-name)
+			  (string-match-p "Go" mode-name)
                           (string-match-p "BSDmakefile" mode-name)
                           (string-match-p "jade" mode-name))
                 ;;makefile自动格式化有问题
