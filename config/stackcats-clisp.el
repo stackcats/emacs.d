@@ -5,7 +5,7 @@
 (use-package slime
   :mode ("\\.lisp" . slime-mode)
   :config
-  (defvar inferior-lisp-program (getenv "LISP"))
+  (setq inferior-lisp-program "/usr/local/bin/ccl64 -K utf-8")
   (require 'slime-autoloads)
   (slime-setup '(slime-fancy))
   (unless (slime-connected-p)

@@ -7,7 +7,7 @@
 (setq exec-path (append exec-path '("/usr/local/bin")))
 
 ;;英中文字体
-(set-face-attribute 'default nil :font "hack 14")
+(set-face-attribute 'default nil :font "hack 16")
 (set-fontset-font "fontset-default" 'unicode '("苹方" . "unicode-ttf"))
 
 ;;启动GUI时配置
@@ -197,6 +197,17 @@
   :config
   (when window-system
     (nyan-mode 1)))
+
+;; all-the-icons
+(use-package all-the-icons
+  :ensure t)
+
+;; neotree
+(use-package neotree
+  :ensure t
+  :config
+  (setq neo-theme (if (display-graphic-p) 'icons 'arrow))
+  (global-set-key (kbd "C-c d") 'neotree-toggle))
 
 (provide 'stackcats-custom)
 ;;; stackcats-custom.el ends here

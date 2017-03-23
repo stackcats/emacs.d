@@ -86,7 +86,7 @@
     ("#dc322f" "#cb4b16" "#b58900" "#546E00" "#B4C342" "#00629D" "#2aa198" "#d33682" "#6c71c4")))
  '(package-selected-packages
    (quote
-    (flycheck-clojure grandshell-theme which-key web-mode use-package sqlup-mode spaceline solarized-theme smartparens shm rainbow-mode rainbow-delimiters nyan-mode magit js2-mode hindent helm-projectile helm-gtags helm-flycheck git-gutter-fringe+ flycheck-pos-tip expand-region exec-path-from-shell ensime company-tern company-jedi company-irony company-go company-ghc cider anaconda-mode ace-window ace-jump-mode)))
+    (all-the-icons racket-mode neotree flycheck-clojure grandshell-theme which-key web-mode use-package sqlup-mode spaceline solarized-theme smartparens shm rainbow-mode rainbow-delimiters nyan-mode magit js2-mode hindent helm-projectile helm-gtags helm-flycheck git-gutter-fringe+ flycheck-pos-tip expand-region exec-path-from-shell ensime company-tern company-jedi company-irony company-go company-ghc cider anaconda-mode ace-window ace-jump-mode)))
  '(pos-tip-background-color "#eee8d5")
  '(pos-tip-foreground-color "#586e75")
  '(smartrep-mode-line-active-bg (solarized-color-blend "#859900" "#eee8d5" 0.2))

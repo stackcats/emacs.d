@@ -1,7 +1,6 @@
 ;;; package --- Summary
 ;;; Commentary:
 ;;; Code:
-(require 'helm)
 (use-package helm
   :ensure t
   :config
