@@ -78,7 +78,7 @@
 (setq select-enable-clipboard t)
 
 ;;默认目录
-(setq default-directory "~/")
+(setq default-directory "~/project/src/github.com")
 
 ;;平滑滚动
 (setq mouse-wheel-scroll-amount '(1 ((shift) . 2))
@@ -176,31 +176,40 @@
   ;;(smartparens-global-mode t)
   (diminish 'smartparens-mode "S"))
 
-
-(load-theme 'misterioso t)
+(use-package yahoo-weather
+  :ensure t
+  :config
+  (setq-default yahoo-weather-location "Beijing"))
 
 (use-package spaceline
   :ensure t)
 
-(defvar ns-use-srgb-colorspace nil) ;fix powerline-default-separator
-(require 'spaceline-config)
-(setq powerline-default-separator 'arrow)
-(defvar spaceline-workspace-numbers-unicode t)
-(spaceline-emacs-theme)
+(use-package spaceline-all-the-icons :after spaceline
+  :load-path "~/.emacs.d/vendor/")
+
+(use-package spaceline :after powerline
+  :config (setq-default mode-line-format '("%e" (:eval (spaceline-ml-ati)))))
+
+(load-theme 'grandshell t)
 
 ;; display lambda as "λ"
 (global-prettify-symbols-mode 1)
 
 ;; nyancat
-(use-package nyan-mode
-  :ensure t
-  :config
-  (when window-system
-    (nyan-mode 1)))
+;; (use-package nyan-mode
+;;   :ensure t
+;;   :config
+;;   (when window-system
+;;     (nyan-mode 1)))
 
 ;; all-the-icons
 (use-package all-the-icons
   :ensure t)
+
+(use-package all-the-icons-dired
+  :ensure t
+  :config
+  (add-hook 'dired-mode-hook 'all-the-icons-dired-mode))
 
 ;; neotree
 (use-package neotree
