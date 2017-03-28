@@ -53,7 +53,7 @@
 
 (setq message-log-max nil)
 
-(kill-buffer "*Messages*")
+;;(kill-buffer "*Messages*")
 
 (defvar stack-trace-on-error nil)
 
@@ -178,8 +178,9 @@
 
 (use-package yahoo-weather
   :ensure t
-  :config
-  (setq-default yahoo-weather-location "Beijing"))
+  :init
+  (setq-default yahoo-weather-location "Beijing")
+  (yahoo-weather-mode))
 
 (use-package spaceline
   :ensure t)

@@ -8,11 +8,6 @@
   (setq company-idle-delay 0)
   (setq company-backends (delete 'company-semantic company-backends))
   (diminish 'company-mode "C")
-  ;; C
-  (add-to-list 'company-backends 'company-c-headers)
-  ;; web
-  (add-to-list 'company-backends 'company-web-html)
-  (add-to-list 'company-backends 'company-web-jade)
   ;; key
   (define-key company-active-map "\C-n" 'company-select-next)
   (define-key company-active-map "\C-p" 'company-select-previous))
@@ -24,6 +19,18 @@
   (add-to-list 'company-backends 'company-irony)
   (add-hook 'c++-mode-hook 'irony-mode)
   (add-hook 'c-mode-hook 'irony-mode))
+
+(use-package company-c-headers
+  ;; C
+  :ensure t
+  :config
+  (add-to-list 'company-backends 'company-c-headers))
+
+(use-package company-web
+  ;; web
+  :ensure t
+  :config
+  (add-to-list 'company-backends 'company-web))
 
 (use-package company-tern
   ;; JavaScript
