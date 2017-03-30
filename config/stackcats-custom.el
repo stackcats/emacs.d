@@ -30,11 +30,11 @@
     (exec-path-from-shell-copy-env "ESLINT")))
 
 ;;高亮当前行
-;; (defvar hl-line-range-function
-;;   #'(lambda ()
-;;       (cons (line-end-position) (line-beginning-position 2))))
-;; (defvar global-hl-line-sticky-flag t)
-;; (global-hl-line-mode 1)
+(defvar hl-line-range-function
+  #'(lambda ()
+      (cons (line-end-position) (line-beginning-position 2))))
+(defvar global-hl-line-sticky-flag t)
+(global-hl-line-mode 1)
 
 ;;mode-line显示时间及格式
 (defvar display-time-format "%Y/%m/%d %H:%M")
@@ -170,13 +170,14 @@
 (use-package smartparens
   :ensure t
   :config
+  (require 'smartparens-config)
   (add-hook 'js2-mode-hook 'smartparens-mode)
   (add-hook 'python-mode-hook 'smartparens-mode)
   (add-hook 'c-mode-hook 'smartparens-mode)
   (add-hook 'java-mode-hook 'smartparens-mode)
   (add-hook 'scala-mode-hook 'smartparens-mode)
   (add-hook 'go-mode-hook 'smartparens-mode)
-  (add-hook 'cperl-mode-hook 'smartparens-mode)
+  ;;(add-hook 'cperl-mode-hook 'smartparens-mode)
   ;;(smartparens-global-mode t)
   (diminish 'smartparens-mode "S"))
 
