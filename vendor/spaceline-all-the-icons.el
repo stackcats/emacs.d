@@ -368,7 +368,7 @@ the directions of the separator."
    ((ati-suntime ati-weather) :separator " · " :face other-face)
    ati-right-2-separator
    ati-right-inactive-separator
-   ((ati-weather ati-time) :separator " | " :face other-face)
+   ((ati-battery-status ati-time) :separator " | " :face other-face)
    ))
 
 

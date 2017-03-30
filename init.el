@@ -22,19 +22,20 @@
 
 (use-package stackcats-custom)
 (use-package stackcats-helm)
-(use-package stackcats-clisp)
-(use-package stackcats-js)
 (use-package stackcats-key)
-(use-package stackcats-go)
-(use-package stackcats-python)
-(use-package stackcats-web)
 (use-package stackcats-c)
+(use-package stackcats-clisp)
 (use-package stackcats-clojure)
-(use-package stackcats-racket)
 (use-package stackcats-ensime)
+(use-package stackcats-go)
+(use-package stackcats-haskell)
+(use-package stackcats-js)
+(use-package stackcats-perl)
+(use-package stackcats-python)
+(use-package stackcats-racket)
+(use-package stackcats-web)
 (use-package stackcats-yas)
 (use-package stackcats-flycheck)
-(use-package stackcats-haskell)
 (use-package stackcats-company)
 (use-package stackcats-sql)
 
@@ -45,7 +46,7 @@
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
    (quote
-    (company-web company-web-html company-c-headers yahoo-weather which-key web-mode use-package sqlup-mode spaceline solarized-theme smartparens shm rainbow-mode rainbow-delimiters racket-mode nyan-mode neotree mode-icons memoize magit js2-mode hindent helm-projectile helm-gtags helm-flycheck grandshell-theme git-gutter-fringe+ flycheck-pos-tip flycheck-clojure expand-region exec-path-from-shell ensime company-tern company-jedi company-irony company-go company-ghc anaconda-mode all-the-icons-dired ace-window ace-jump-mode))))
+    (multi-term anzu company-web company-web-html company-c-headers yahoo-weather which-key web-mode use-package sqlup-mode spaceline solarized-theme smartparens shm rainbow-mode rainbow-delimiters racket-mode nyan-mode neotree mode-icons memoize magit js2-mode hindent helm-projectile helm-gtags helm-flycheck grandshell-theme git-gutter-fringe+ flycheck-pos-tip flycheck-clojure expand-region exec-path-from-shell ensime company-tern company-jedi company-irony company-go company-ghc anaconda-mode all-the-icons-dired ace-window ace-jump-mode))))
 
 (custom-set-faces
  ;; custom-set-faces was added by Custom.

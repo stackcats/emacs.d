@@ -17,14 +17,17 @@
   (scroll-bar-mode 0))
 
 (when (memq window-system '(mac ns))
-  (defvar exec-path-from-shell-check-startup-files nil)
-  (exec-path-from-shell-initialize)
-  (exec-path-from-shell-copy-env "GOPATH")
-  (exec-path-from-shell-copy-env "GOROOT")
-  (exec-path-from-shell-copy-env "C_INCLUDE_PATH")
-  (exec-path-from-shell-copy-env "LIBRARY_PATH")
-  (exec-path-from-shell-copy-env "LISP")
-  (exec-path-from-shell-copy-env "ESLINT"))
+  (use-package exec-path-from-shell
+    :ensure t
+    :config
+    (defvar exec-path-from-shell-check-startup-files nil)
+    (exec-path-from-shell-initialize)
+    (exec-path-from-shell-copy-env "GOPATH")
+    (exec-path-from-shell-copy-env "GOROOT")
+    (exec-path-from-shell-copy-env "C_INCLUDE_PATH")
+    (exec-path-from-shell-copy-env "LIBRARY_PATH")
+    (exec-path-from-shell-copy-env "LISP")
+    (exec-path-from-shell-copy-env "ESLINT")))
 
 ;;高亮当前行
 ;; (defvar hl-line-range-function
@@ -173,17 +176,17 @@
   (add-hook 'java-mode-hook 'smartparens-mode)
   (add-hook 'scala-mode-hook 'smartparens-mode)
   (add-hook 'go-mode-hook 'smartparens-mode)
+  (add-hook 'cperl-mode-hook 'smartparens-mode)
   ;;(smartparens-global-mode t)
   (diminish 'smartparens-mode "S"))
 
-(use-package yahoo-weather
-  :ensure t
-  :init
-  (setq-default yahoo-weather-location "Beijing")
-  (yahoo-weather-mode))
-
 (use-package spaceline
-  :ensure t)
+  :ensure t
+  :config
+  (require 'spaceline-config)
+  (spaceline-helm-mode))
+
+(setq-default ns-use-srgb-colorspace nil)
 
 (use-package spaceline-all-the-icons :after spaceline
   :load-path "~/.emacs.d/vendor/")
@@ -191,7 +194,20 @@
 (use-package spaceline :after powerline
   :config (setq-default mode-line-format '("%e" (:eval (spaceline-ml-ati)))))
 
-(load-theme 'grandshell t)
+(use-package yahoo-weather
+  :ensure t
+  :init
+  (setq-default yahoo-weather-location "Beijing")
+  (yahoo-weather-mode)
+  :config
+  (spaceline-toggle-ati-weather-on))
+
+(use-package grandshell-theme
+  :ensure t
+  :init
+  (load-theme 'grandshell t))
+
+;;(setq powerline-default-separator 'box)
 
 ;; display lambda as "λ"
 (global-prettify-symbols-mode 1)
@@ -217,7 +233,7 @@
   :ensure t
   :config
   (setq neo-theme (if (display-graphic-p) 'icons 'arrow))
-  (global-set-key (kbd "C-c d") 'neotree-toggle))
+  (global-set-key (kbd "C-c d") 'neotree-projectile-action))
 
 (provide 'stackcats-custom)
 ;;; stackcats-custom.el ends here
