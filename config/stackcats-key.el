@@ -16,20 +16,23 @@
 
 (use-package magit
   :ensure t
-  :bind
-  (("C-c g" . magit-status)))
+  :config
+  (global-set-key (kbd "C-c g") 'magit-status))
 
 (use-package expand-region
   :ensure t
-  :bind (("C-=" . er/expand-region)))
+  :config
+  (global-set-key (kbd "C-=") 'er/expand-region))
 
 (use-package ace-jump-mode
   :ensure t
-  :bind (("C-c SPC" . ace-jump-mode)))
+  :config
+  (global-set-key (kbd "C-c SPC") 'ace-jump-mode))
 
 (use-package ace-window
   :ensure t
-  :bind (("C-c w" . ace-window)))
+  :config
+  (global-set-key (kbd "C-c w") 'ace-window))
 
 (use-package smerge-mode
   :config

@@ -25,4 +25,8 @@
       (directory-files config-dir nil "\\.el$"))
 
 (setq custom-file "/dev/null")
+
+(when (eq system-type 'darwin)
+  (use-package osx-pseudo-daemon
+    :ensure t))
 ;;; init.el ends here

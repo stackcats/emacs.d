@@ -30,7 +30,7 @@
   ;; web
   :ensure t
   :config
-  (add-to-list 'company-backends 'company-web))
+  (add-to-list 'company-backends 'company-web-html))
 
 (use-package company-tern
   ;; JavaScript

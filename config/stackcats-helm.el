@@ -15,14 +15,14 @@
   (setq helm-autoresize-mode t)
   (setq helm-mode 1)
   (diminish 'helm-mode "H")
-  :bind
-  (("C-x b" . helm-mini)
-   ("C-x C-f" . helm-find-files)
-   ("C-s" . helm-occur)
-   ("M-x" . helm-M-x)
-   ("C-i" . helm-execute-persistent-action)
-   ("C-z" . helm-select-action)
-   ("M-y" . helm-show-kill-ring)))
+  :config
+  (global-set-key (kbd "C-x b") 'helm-mini)
+  (global-set-key (kbd "C-x C-f") 'helm-find-files)
+  (global-set-key (kbd "C-s") 'helm-occur)
+  (global-set-key (kbd "M-x") 'helm-M-x)
+  (global-set-key (kbd "C-i") 'helm-execute-persistent-action)
+  (global-set-key (kbd "C-z") 'helm-select-action)
+  (global-set-key (kbd "M-y") 'helm-show-kill-ring))
 
 (use-package helm-projectile
   :ensure t
@@ -62,8 +62,8 @@
 
 (use-package helm-flycheck
   :ensure t
-  :bind
-  (("C-c f". helm-flycheck)))
+  :config
+  (global-set-key (kbd "C-c f") 'helm-flycheck))
 
 (provide 'stackcats-helm)
 ;;; stackcats-helm.el ends here
