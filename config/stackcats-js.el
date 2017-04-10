@@ -3,6 +3,10 @@
 ;;; Code:
 ;;; deps
 ;;; npm install -g tern
+(use-package json-mode
+  :ensure t
+  :mode ("\\.json\\'" . json-mode))
+
 (use-package js2-mode
   :ensure t
   :mode ("\\.js\\'" . js2-mode)
