@@ -16,18 +16,17 @@
   (menu-bar-mode 1)
   (scroll-bar-mode 0))
 
-(when (memq window-system '(mac ns))
-  (use-package exec-path-from-shell
-    :ensure t
-    :config
-    (defvar exec-path-from-shell-check-startup-files nil)
-    (exec-path-from-shell-initialize)
-    (exec-path-from-shell-copy-env "GOPATH")
-    (exec-path-from-shell-copy-env "GOROOT")
-    (exec-path-from-shell-copy-env "C_INCLUDE_PATH")
-    (exec-path-from-shell-copy-env "LIBRARY_PATH")
-    (exec-path-from-shell-copy-env "LISP")
-    (exec-path-from-shell-copy-env "ESLINT")))
+(use-package exec-path-from-shell
+  :ensure t
+  :config
+  (defvar exec-path-from-shell-check-startup-files nil)
+  (exec-path-from-shell-initialize)
+  (exec-path-from-shell-copy-env "GOPATH")
+  (exec-path-from-shell-copy-env "GOROOT")
+  (exec-path-from-shell-copy-env "C_INCLUDE_PATH")
+  (exec-path-from-shell-copy-env "LIBRARY_PATH")
+  (exec-path-from-shell-copy-env "LISP")
+  (exec-path-from-shell-copy-env "ESLINT"))
 
 ;;高亮当前行
 (defvar hl-line-range-function
