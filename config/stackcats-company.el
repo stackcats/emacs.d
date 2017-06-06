@@ -59,6 +59,11 @@
   (setq company-ghc-show-info t)
   (add-to-list 'company-backends '(company-ghc :with company-dabbrev-code)))
 
+;; (use-package company-elm
+;;   ;; Eml
+;;   :config
+;;   (add-to-list 'company-backends 'company-elm))
+
 (add-hook 'after-init-hook 'global-company-mode)
 (provide 'stackcats-company)
 ;;; stackcats-company.el ends here

@@ -145,16 +145,16 @@
   (indent-region (point-min) (point-max))
   (message "format successfully"))
 
-(add-hook 'after-save-hook
-          #'(lambda ()
-              (unless (or (string-match-p "makefile" mode-name)
-                          (string-match-p "bison" mode-name)
-                          (string-match-p "fundamental" mode-name)
-			  (string-match-p "Go" mode-name)
-                          (string-match-p "BSDmakefile" mode-name)
-                          (string-match-p "jade" mode-name))
-                ;;makefile自动格式化有问题
-                (indent-whole))))
+;; (add-hook 'after-save-hook
+;;           #'(lambda ()
+;;               (unless (or (string-match-p "makefile" mode-name)
+;;                           (string-match-p "bison" mode-name)
+;;                           (string-match-p "fundamental" mode-name)
+;; 			  (string-match-p "Go" mode-name)
+;;                           (string-match-p "BSDmakefile" mode-name)
+;;                           (string-match-p "jade" mode-name))
+;;                 ;;makefile自动格式化有问题
+;;                 (indent-whole))))
 
 (use-package rainbow-mode
   :ensure t
@@ -176,6 +176,7 @@
   (add-hook 'java-mode-hook 'smartparens-mode)
   (add-hook 'scala-mode-hook 'smartparens-mode)
   (add-hook 'go-mode-hook 'smartparens-mode)
+  (add-hook 'elm-mode-hook 'smartparens-mode)
   ;;(add-hook 'cperl-mode-hook 'smartparens-mode)
   ;;(smartparens-global-mode t)
   (diminish 'smartparens-mode "S"))
