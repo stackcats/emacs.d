@@ -28,10 +28,10 @@
         ("C-c c" . haskell-process-cabal)
         ("C-c o" . haskell-compile)))
 
-;; (use-package hindent
-;;   :ensure t
-;;   :config
-;;   (add-hook 'haskell-mode-hook 'hindent-mode))
+(use-package hindent
+  :ensure t
+  :config
+  (add-hook 'haskell-mode-hook 'hindent-mode))
 
 (use-package ghc
   :ensure t

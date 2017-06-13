@@ -181,6 +181,11 @@
   ;;(smartparens-global-mode t)
   (diminish 'smartparens-mode "S"))
 
+(use-package dracula-theme
+  :ensure t
+  :init
+  (load-theme 'dracula t))
+
 (use-package spaceline
   :ensure t
   :config
@@ -189,29 +194,25 @@
 
 (setq-default ns-use-srgb-colorspace nil)
 
-(use-package spaceline-all-the-icons :after spaceline
-  :load-path "~/.emacs.d/vendor/")
-
-(use-package spaceline :after powerline
-  :config (setq-default mode-line-format '("%e" (:eval (spaceline-ml-ati)))))
-
-(use-package yahoo-weather
+(use-package spaceline-all-the-icons
   :ensure t
-  :init
-  (setq-default yahoo-weather-location "Beijing")
-  (yahoo-weather-mode)
+  :after spaceline
   :config
-  (spaceline-toggle-ati-weather-on))
+  (spaceline-all-the-icons-theme)
+  (setq spaceline-all-the-icons-separator-type 'cup))
 
-(use-package grandshell-theme
-  :ensure t
-  :init
-  (load-theme 'grandshell t))
-
-;;(setq powerline-default-separator 'box)
+;; (use-package grandshell-theme
+;;   :ensure t
+;;   :init
+;;   (load-theme 'grandshell t))
 
 ;; display lambda as "λ"
 (global-prettify-symbols-mode 1)
+
+(use-package page-break-lines
+  :ensure t
+  :config
+  (global-page-break-lines-mode))
 
 ;; nyancat
 ;; (use-package nyan-mode
@@ -221,8 +222,7 @@
 ;;     (nyan-mode 1)))
 
 ;; all-the-icons
-(use-package all-the-icons
-  :ensure t)
+(use-package all-the-icons :ensure t)
 
 (use-package all-the-icons-dired
   :ensure t

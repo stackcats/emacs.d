@@ -61,10 +61,16 @@
         ("M-." . helm-gtags-dwim)
         ("C-c h a" . helm-gtags-tags-in-this-function)))
 
+(defun my/helm-flycheck ()
+  (interactive)
+  (let ((helm-candidate-separator " "))
+    (call-interactively 'helm-flycheck)))
+
 (use-package helm-flycheck
   :ensure t
   :config
-  (global-set-key (kbd "C-c f") 'helm-flycheck))
+  (global-set-key (kbd "C-c f") 'my/helm-flycheck))
 
+(setq helm-truncate-lines t)
 (provide 'stackcats-helm)
 ;;; stackcats-helm.el ends here

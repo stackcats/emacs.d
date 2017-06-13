@@ -46,8 +46,7 @@
   (setq-default flycheck-disabled-checkers
                 (append flycheck-disabled-checkers
                         '(javascript-jshint)))
-  (flycheck-add-mode 'javascript-eslint 'js2-mode)
-  )
+  (flycheck-add-mode 'javascript-eslint 'js2-mode))
 
 (add-hook 'after-init-hook #'global-flycheck-mode)
 
@@ -56,11 +55,10 @@
   :config
   (flycheck-pos-tip-mode))
 
-(use-package flycheck-clojure
-  :ensure t
-  )
+(use-package flycheck-clojure :ensure t)
 
-(eval-after-load 'flycheck '(flycheck-clojure-setup))
+(eval-after-load 'flycheck #'flycheck-clojure-setup)
+(eval-after-load 'flycheck #'flycheck-haskell-setup)
 
 (provide 'stackcats-flycheck)
 ;;; stackcats-flycheck.el ends here
