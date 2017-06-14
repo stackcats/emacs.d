@@ -56,8 +56,9 @@
   (flycheck-pos-tip-mode))
 
 (use-package flycheck-clojure :ensure t)
-
 (eval-after-load 'flycheck #'flycheck-clojure-setup)
+
+(use-package flycheck-haskell :ensure t)
 (eval-after-load 'flycheck #'flycheck-haskell-setup)
 
 (provide 'stackcats-flycheck)

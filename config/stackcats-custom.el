@@ -34,7 +34,7 @@
 
 (custom-set-faces
  '(spaceline-highlight-face
-   ((t (:foreground "#3E3D31" :background "#e7608d")))))
+   ((t (:foreground "#3E3D31" :background "##6272a4")))))
 
 (provide 'stackcats-custom)
 ;;; stackcats-custom.el ends here
