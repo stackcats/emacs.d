@@ -2,6 +2,8 @@
 ;;; Commentary:
 ;;; Code:
 (use-package yasnippet
+  :ensure t
+  :defer t
   :init
   (defadvice auto-insert  (around yasnippet-expand-after-auto-insert activate)
     "使用yas扩展模板."
@@ -15,8 +17,6 @@
 	  (yas-expand-snippet
 	   (buffer-substring-no-properties (point-min) (point-max)))
 	  (delete-region (point-min) old-point-max)))))
-  
-  :ensure t
   :config
   (add-to-list 'yas-snippet-dirs "~/.emacs.d/snippets")
   (yas-global-mode 1)

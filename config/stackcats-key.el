@@ -3,6 +3,14 @@
 ;;; Code:
 
 ;;mac按键设置
+(use-package which-key
+  :ensure t
+  :config
+  (which-key-mode)
+  (diminish 'which-key-mode "Key")
+  (setq which-key-idle-delay 0.1)
+  (setq which-key-special-keys '("SPC" "TAB" "RET" "ESC" "DEL")))
+
 (when (eq system-type 'darwin)
   (setq mac-option-modifier 'meta)
   (setq mac-command-modifier 'super))
@@ -37,6 +45,13 @@
 (use-package smerge-mode
   :config
   (setq smerge-command-prefix "\C-cs"))
+
+;; neotree
+(use-package neotree
+  :ensure t
+  :config
+  (setq neo-theme (if (display-graphic-p) 'icons 'arrow))
+  (global-set-key (kbd "C-c d") 'neotree-projectile-action))
 
 (provide 'stackcats-key)
 ;;; stackcats-key.el ends here
