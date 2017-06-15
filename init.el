@@ -1,11 +1,14 @@
 ;;; package --- Summary
 ;;; Commentary:
 ;;; Code:
+(load "~/.emacs.d/elpa/benchmark-init-20150905.238/benchmark-init.el")
+(benchmark-init/activate)
+
 (setq gc-cons-threshold 100000000)
 
 (setq package-archives
       '(("gnu" . "http://elpa.gnu.org/packages/")
-	("melpa" . "http://melpa.milkbox.net/packages/")))
+        ("melpa" . "http://melpa.milkbox.net/packages/")))
 
 (when (>= emacs-major-version 24)
   (require 'package)
@@ -16,8 +19,11 @@
   (package-install 'use-package))
 
 ;;英中文字体
-(set-face-attribute 'default nil :font "hack 16")
-(set-fontset-font "fontset-default" 'unicode '("苹方" . "unicode-ttf"))
+(when (display-graphic-p)
+  (set-face-attribute 'default nil :font "hack 16"))
+
+(when (eq system-type 'darwin)
+  (set-fontset-font "fontset-default" 'unicode '("苹方" . "unicode-ttf")))
 
 (defun byte-compile-current-buffer ()
   "`byte-compile' current buffer if it's `emacs-lisp-mode' and compiled file exists."
@@ -39,8 +45,8 @@
 
 (add-to-list 'load-path config-dir)
 
- (mapc (lambda (name) (require (intern (file-name-sans-extension name))))
-       (directory-files config-dir nil "\\.el$"))
+(mapc (lambda (name) (require (intern (file-name-sans-extension name))))
+      (directory-files config-dir nil "\\.el$"))
 
 (setq custom-file "/dev/null")
 

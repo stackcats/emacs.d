@@ -1,26 +1,28 @@
 ;;; package --- Summary
 ;;; Commentary:
 ;;; Code:
-(use-package dracula-theme
-  :ensure t
-  :defer t
-  :init
-  (load-theme 'dracula t))
+(when (display-graphic-p)
+  (progn
+    (use-package dracula-theme
+      :ensure t
+      :defer t
+      :init
+      (load-theme 'dracula t))
+    
+    (use-package spaceline
+      :ensure t
+      :init
+      (require 'spaceline-config)
+      (spaceline-helm-mode))
 
-(use-package spaceline
-  :ensure t
-  :init
-  (require 'spaceline-config)
-  (spaceline-helm-mode))
+    (setq-default ns-use-srgb-colorspace nil)
 
-(setq-default ns-use-srgb-colorspace nil)
-
-(use-package spaceline-all-the-icons
-  :ensure t
-  :after spaceline
-  :config
-  (spaceline-all-the-icons-theme)
-  (setq spaceline-all-the-icons-separator-type 'cup))
+    (use-package spaceline-all-the-icons
+      :ensure t
+      :after spaceline
+      :config
+      (spaceline-all-the-icons-theme)
+      (setq spaceline-all-the-icons-separator-type 'cup))))
 
 (use-package page-break-lines
   :ensure t
