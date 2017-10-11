@@ -33,10 +33,6 @@
   (setq projectile-completion-system 'helm)
   (helm-projectile-on))
 
-(when (executable-find "ack-grep")
-  (setq helm-grep-default-command "ack-grep -Hn --no-group --no-color %e %p %f"
-        helm-grep-default-recurse-command "ack-grep -H --no-group --no-color %e %p %f"))
-
 (use-package helm-gtags
   :ensure t
   :config
@@ -48,7 +44,6 @@
   (setq helm-gtags-suggested-key-mapping t)
   (add-hook 'c++-mode-hook 'helm-gtags-mode)
   (add-hook 'c-mode-hook 'helm-gtags-mode)
-  (diminish 'helm-gtags-mode "Hg")
   :bind
   (:map helm-gtags-mode-map
         ("C-c h t" . helm-gtags-find-tag)
@@ -61,15 +56,15 @@
         ("M-." . helm-gtags-dwim)
         ("C-c h a" . helm-gtags-tags-in-this-function)))
 
-(defun my/helm-flycheck ()
-  (interactive)
-  (let ((helm-candidate-separator " "))
-    (call-interactively 'helm-flycheck)))
+;; (defun my/helm-flycheck ()
+;;   (interactive)
+;;   (let ((helm-candidate-separator " "))
+;;     (call-interactively 'helm-flycheck)))
 
 (use-package helm-flycheck
   :ensure t
   :config
-  (global-set-key (kbd "C-c f") 'my/helm-flycheck))
+  (global-set-key (kbd "C-c f") 'helm-flycheck))
 
 (setq helm-truncate-lines t)
 (provide 'stackcats-helm)

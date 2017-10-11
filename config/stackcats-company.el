@@ -7,7 +7,6 @@
   (defvar company-flx-mode +1)
   (setq company-idle-delay 0)
   (setq company-backends (delete 'company-semantic company-backends))
-  (diminish 'company-mode "C")
   ;; key
   (define-key company-active-map "\C-n" 'company-select-next)
   (define-key company-active-map "\C-p" 'company-select-previous))
@@ -15,6 +14,7 @@
 (use-package company-irony
   ;; C
   :ensure t
+  :commands (irony-mode irony-install-server)
   :config
   (add-to-list 'company-backends 'company-irony)
   (add-hook 'c++-mode-hook 'irony-mode)
@@ -36,7 +36,6 @@
   ;; JavaScript
   :ensure t
   :config
-  (diminish 'tern-mode "T")
   (add-to-list 'company-backends 'company-tern)
   (setq company-tern-property-marker ""))
 

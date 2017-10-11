@@ -12,6 +12,7 @@
   (setq haskell-process-log t)
   (setq haskell-process-type 'cabal-repl)
   (setq haskell-tags-on-save t)
+  (defvar ghc-report-errors nil)
   :bind
   (:map haskell-mode-map
         ("C-c c" . haskell-process-load-file)
@@ -40,9 +41,9 @@
   (autoload 'ghc-debug "ghc" nil t)
   (add-hook 'haskell-mode-hook (lambda () (ghc-init))))
 
-(use-package shm
-  :ensure t
-  :config
-  (add-hook 'haskell-mode-hook 'structured-haskell-mode))
+;; (use-package shm
+;;   :ensure t
+;;   :config
+;;   (add-hook 'haskell-mode-hook 'structured-haskell-mode))
 (provide 'stackcats-haskell)
 ;;; stackcats-haskell.el ends here

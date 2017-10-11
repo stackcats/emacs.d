@@ -16,7 +16,7 @@
   (setq mac-command-modifier 'super))
 
 (global-set-key (kbd "C-c o") 'other-frame)
-(global-set-key (kbd "C-c s") 'hs-toggle-hiding)
+;;(global-set-key (kbd "C-c s") 'hs-toggle-hiding)
 (global-set-key (kbd "C-c k") 'kill-this-buffer)
 (global-set-key (kbd "C-q") 'set-mark-command)
 (global-set-key (kbd "RET") 'newline-and-indent)
@@ -40,7 +40,8 @@
 (use-package ace-window
   :ensure t
   :config
-  (global-set-key (kbd "C-c w") 'ace-window))
+  (global-set-key (kbd "C-c w") 'ace-window)
+  (global-set-key (kbd "C-c w") 'ace-swap-window))
 
 (use-package smerge-mode
   :config

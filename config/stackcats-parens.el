@@ -11,14 +11,13 @@
   (add-hook 'java-mode-hook 'smartparens-mode)
   (add-hook 'scala-mode-hook 'smartparens-mode)
   (add-hook 'go-mode-hook 'smartparens-mode)
+  (add-hook 'haskell-mode-hook 'smartparens-mode)
+  (add-hook 'css-mode-hook 'smartparens-mode)
   (add-hook 'elm-mode-hook 'smartparens-mode))
 
-(use-package rainbow-mode :ensure t)
-
-(define-globalized-minor-mode global-rainbow-mode rainbow-mode
-  (lambda () (rainbow-mode 1)))
-
-(global-rainbow-mode 1)
+;; (define-globalized-minor-mode global-rainbow-mode rainbow-mode
+;;   (lambda () (rainbow-mode 1)))
+;; (global-rainbow-mode 1)
 
 (use-package rainbow-delimiters
   :ensure t

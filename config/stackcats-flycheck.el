@@ -39,7 +39,6 @@
     :fringe-bitmap 'my-flycheck-fringe-indicator
     :fringe-face 'flycheck-fringe-info)
   
-  (diminish 'flycheck-mode "F")
   (setq-default flycheck-temp-prefix ".")
   (defvar flycheck-eslintrc "~/.eslintrc")
   (defvar flycheck-javascript-eslint-executable (getenv "ESLINT"))

@@ -37,5 +37,11 @@
   :defer t
   :config
   (add-hook 'dired-mode-hook 'all-the-icons-dired-mode))
+
+(use-package rainbow-mode
+  :ensure t
+  :config
+  (add-hook 'css-mode-hook 'rainbow-mode))
+
 (provide 'stackcats-prettify)
 ;;; stackcats-prettify.el ends here

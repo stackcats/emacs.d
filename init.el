@@ -23,7 +23,7 @@
   (set-face-attribute 'default nil :font "hack 16"))
 
 (when (eq system-type 'darwin)
-  (set-fontset-font "fontset-default" 'unicode '("苹方" . "unicode-ttf")))
+  (set-fontset-font "fontset-default" 'unicode '("hack" . "unicode-ttf")))
 
 (defun byte-compile-current-buffer ()
   "`byte-compile' current buffer if it's `emacs-lisp-mode' and compiled file exists."
@@ -53,4 +53,7 @@
 (use-package osx-pseudo-daemon
   :if (memq window-system '(mac ns))
   :ensure t)
+
+(eval-after-load "latex-mode" '(fset 'tex-font-lock-suscript 'ignore))
+
 ;;; init.el ends here
