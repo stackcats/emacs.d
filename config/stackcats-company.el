@@ -6,6 +6,7 @@
   :config
   (defvar company-flx-mode +1)
   (setq company-idle-delay 0)
+  (setq-local company-dabbrev-downcase nil)
   (setq company-backends (delete 'company-semantic company-backends))
   ;; key
   (define-key company-active-map "\C-n" 'company-select-next)

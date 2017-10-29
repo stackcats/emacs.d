@@ -20,7 +20,7 @@
 
 ;;英中文字体
 (when (display-graphic-p)
-  (set-face-attribute 'default nil :font "hack 16"))
+  (set-face-attribute 'default nil :font "fira code 16"))
 
 (when (eq system-type 'darwin)
   (set-fontset-font "fontset-default" 'unicode '("hack" . "unicode-ttf")))

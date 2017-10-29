@@ -40,8 +40,7 @@
 (use-package ace-window
   :ensure t
   :config
-  (global-set-key (kbd "C-c w") 'ace-window)
-  (global-set-key (kbd "C-c w") 'ace-swap-window))
+  (global-set-key (kbd "C-c w") 'ace-window))
 
 (use-package smerge-mode
   :config

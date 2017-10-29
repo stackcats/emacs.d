@@ -60,5 +60,8 @@
 (use-package flycheck-haskell :ensure t)
 (eval-after-load 'flycheck #'flycheck-haskell-setup)
 
+(use-package flycheck-kotlin :ensure t)
+(eval-after-load 'flycheck #'flycheck-kotlin-setup)
+
 (provide 'stackcats-flycheck)
 ;;; stackcats-flycheck.el ends here

@@ -13,6 +13,7 @@
   (add-hook 'go-mode-hook 'smartparens-mode)
   (add-hook 'haskell-mode-hook 'smartparens-mode)
   (add-hook 'css-mode-hook 'smartparens-mode)
+  (add-hook 'kotlin-mode-hook 'smartparens-mode)
   (add-hook 'elm-mode-hook 'smartparens-mode))
 
 ;; (define-globalized-minor-mode global-rainbow-mode rainbow-mode
