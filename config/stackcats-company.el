@@ -40,11 +40,11 @@
   (add-to-list 'company-backends 'company-tern)
   (setq company-tern-property-marker ""))
 
-(use-package company-jedi
+(use-package company-anaconda
   ;; Python
   :ensure t
   :config
-  (add-to-list 'company-backends 'company-jedi))
+  (add-to-list 'company-backends 'company-anaconda))
 
 (use-package company-go
   ;; Go
