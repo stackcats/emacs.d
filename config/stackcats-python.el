@@ -1,8 +1,6 @@
 ;;; package --- Summary
 ;;; Commentary:
 ;;; Code:
-;;; deps
-;;; pip install jedi
 (use-package anaconda-mode
   :ensure t
   :config
