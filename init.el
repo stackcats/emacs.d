@@ -18,6 +18,8 @@
   (package-refresh-contents)
   (package-install 'use-package))
 
+(require 'use-package)
+
 ;;英中文字体
 (when (display-graphic-p)
   (set-face-attribute 'default nil :font "fira code 16"))
