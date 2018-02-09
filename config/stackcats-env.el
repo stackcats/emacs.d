@@ -3,7 +3,7 @@
 ;;; Code:
 (setq exec-path (append exec-path '("/usr/local/bin")))
 
-(defconst shell-variables '("PATH" "GOROOT" "GOPATH" "C_INCLUDE_PATH" "LIBRARY_PATH" "LISP" "ESLINT" "RACKET" "RACO"))
+(defconst shell-variables '("PATH" "GOROOT" "GOPATH" "C_INCLUDE_PATH" "LIBRARY_PATH" "LISP" "ESLINT" "RACKET" "RACO" "RUST_SRC_PATH"))
 
 (use-package exec-path-from-shell
   :if (memq window-system '(mac ns))

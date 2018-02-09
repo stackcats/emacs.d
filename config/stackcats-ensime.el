@@ -16,7 +16,7 @@
   :ensure t
   :config
   (setq ensime-auto-connect 'always)
-  (setq ensime-startup-snapshot-notification 0)
+  (setq-default ensime-startup-snapshot-notification nil)
   (add-hook 'java-mode-hook 'ensime-mode)
   (add-hook 'scala-mode-hook 'ensime-mode))
 

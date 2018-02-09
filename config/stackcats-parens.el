@@ -13,7 +13,7 @@
   (add-hook 'go-mode-hook 'smartparens-mode)
   (add-hook 'haskell-mode-hook 'smartparens-mode)
   (add-hook 'css-mode-hook 'smartparens-mode)
-  (add-hook 'kotlin-mode-hook 'smartparens-mode)
+  (add-hook 'rust-mode-hook 'smartparens-mode)
   (add-hook 'elm-mode-hook 'smartparens-mode))
 
 ;; (define-globalized-minor-mode global-rainbow-mode rainbow-mode
@@ -28,6 +28,7 @@
   (add-hook 'js2-mode-hook 'rainbow-delimiters-mode)
   (add-hook 'python-mode-hook 'rainbow-delimiters-mode)
   (add-hook 'go-mode-hook 'rainbow-delimiters-mode)
+  (add-hook 'rust-mode-hook 'rainbow-delimiters-mode)
   (add-hook 'haskell-mode-hook 'rainbow-delimiters-mode)
   (add-hook 'clojure-mode-hook 'rainbow-delimiters-mode)
   (add-hook 'emacs-lisp-mode-hook 'rainbow-delimiters-mode))

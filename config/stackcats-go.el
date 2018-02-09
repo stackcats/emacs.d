@@ -1,8 +1,8 @@
 ;;; package --- Summary
 ;;; Commentary:
+;;; Command:
+;;; go get -u github.com/nsf/gocode
 ;;; Code:
-;;; deps
-;;; go get gocode
 (use-package go-mode
   :ensure t
   :mode ("\\.go" . go-mode)

@@ -40,7 +40,7 @@
     :fringe-face 'flycheck-fringe-info)
   
   (setq-default flycheck-temp-prefix ".")
-  (defvar flycheck-eslintrc "~/.eslintrc")
+  ;;(defvar flycheck-eslintrc "/Users/stackcats/.eslintrc")
   (defvar flycheck-javascript-eslint-executable (getenv "ESLINT"))
   (setq-default flycheck-disabled-checkers
                 (append flycheck-disabled-checkers
@@ -59,9 +59,6 @@
 
 (use-package flycheck-haskell :ensure t)
 (eval-after-load 'flycheck #'flycheck-haskell-setup)
-
-(use-package flycheck-kotlin :ensure t)
-(eval-after-load 'flycheck #'flycheck-kotlin-setup)
 
 (provide 'stackcats-flycheck)
 ;;; stackcats-flycheck.el ends here

@@ -59,6 +59,11 @@
   (setq company-ghc-show-info t)
   (add-to-list 'company-backends '(company-ghc :with company-dabbrev-code)))
 
+(use-package company-racer
+  :ensure t
+  :config
+  (add-to-list 'company-backends 'company-racer))
+
 ;; (use-package company-elm
 ;;   ;; Eml
 ;;   :config

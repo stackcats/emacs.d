@@ -26,7 +26,7 @@
   (define-auto-insert "\\.el" "elisp")
   (define-auto-insert "\\.c" "c")
   (define-auto-insert "\\.l" "flex")
-  (define-auto-insert "\\.y" "yacc")
+  (define-auto-insert "\\.y\\'" "yacc")
   (define-auto-insert "\\.html" "html")
   (define-auto-insert "\\.ejs" "ejs"))
 

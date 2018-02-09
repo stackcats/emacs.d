@@ -1,8 +1,8 @@
 ;;; package --- Summary
 ;;; Commentary:
 ;;; Code:
-(load "~/.emacs.d/elpa/benchmark-init-20150905.238/benchmark-init.el")
-(benchmark-init/activate)
+;;(load "~/.emacs.d/elpa/benchmark-init-20150905.238/benchmark-init.el")
+;;(benchmark-init/activate)
 
 (setq gc-cons-threshold 100000000)
 
