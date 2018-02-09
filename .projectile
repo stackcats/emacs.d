@@ -1,1 +1,4 @@
 .#*
+-/elpa
+-/vendor
+-*.elc
