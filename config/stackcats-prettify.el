@@ -1,13 +1,15 @@
 ;;; package --- Summary
 ;;; Commentary:
 ;;; Code:
+(setq-default mode-line-format nil)
+
 (when (display-graphic-p)
   (progn
     (use-package dracula-theme
       :ensure t
       :defer t
       :init
-      (load-theme 'dracula t))
+      (load-theme 'dracula t)))
     
     (use-package spaceline
       :ensure t
@@ -22,7 +24,8 @@
       :after spaceline
       :config
       (spaceline-all-the-icons-theme)
-      (setq spaceline-all-the-icons-separator-type 'cup))))
+      (setq spaceline-all-the-icons-separator-type 'cup)))
+    
 
 (use-package page-break-lines
   :ensure t
@@ -30,13 +33,13 @@
   (global-page-break-lines-mode))
 
 ;; all-the-icons
-(use-package all-the-icons :ensure t :defer t)
+;; (use-package all-the-icons :ensure t :defer t)
 
-(use-package all-the-icons-dired
-  :ensure t
-  :defer t
-  :config
-  (add-hook 'dired-mode-hook 'all-the-icons-dired-mode))
+;; (use-package all-the-icons-dired
+;;   :ensure t
+;;   :defer t
+;;   :config
+;;   (add-hook 'dired-mode-hook 'all-the-icons-dired-mode))
 
 (use-package rainbow-mode
   :ensure t

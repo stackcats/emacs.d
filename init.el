@@ -1,8 +1,8 @@
 ;;; package --- Summary
 ;;; Commentary:
 ;;; Code:
-;;(load "~/.emacs.d/elpa/benchmark-init-20150905.238/benchmark-init.el")
-;;(benchmark-init/activate)
+(load "~/.emacs.d/elpa/benchmark-init-20150905.238/benchmark-init.el")
+(benchmark-init/activate)
 
 (setq gc-cons-threshold 100000000)
 
@@ -19,6 +19,7 @@
   (package-install 'use-package))
 
 (require 'use-package)
+(setq use-package-always-ensure t)
 
 ;;英中文字体
 (when (display-graphic-p)
@@ -35,6 +36,8 @@
     (byte-compile-file buffer-file-name)))
 (add-hook 'after-save-hook 'byte-compile-current-buffer)
 
+(use-package use-package-ensure-system-package :ensure t)
+
 (defun indent-whole ()
   "Indent the whole buffer."
   (interactive)
@@ -50,11 +53,8 @@
 (mapc (lambda (name) (require (intern (file-name-sans-extension name))))
       (directory-files config-dir nil "\\.el$"))
 
-(setq custom-file "/dev/null")
-
-(use-package osx-pseudo-daemon
-  :if (memq window-system '(mac ns))
-  :ensure t)
+(setq custom-file "~/.custom-file.el")
+(load custom-file :no-error :no-message)
 
 (eval-after-load "latex-mode" '(fset 'tex-font-lock-suscript 'ignore))
 

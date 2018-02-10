@@ -1,7 +1,7 @@
 ;;; package --- Summary
 ;;; Commentary:
 ;;; Code:
-(setq exec-path (append exec-path '("/usr/local/bin")))
+(setq exec-path (append exec-path '("/usr/local/bin" "~/.cargo/bin")))
 
 (defconst shell-variables '("PATH" "GOROOT" "GOPATH" "C_INCLUDE_PATH" "LIBRARY_PATH" "LISP" "ESLINT" "RACKET" "RACO" "RUST_SRC_PATH"))
 

@@ -1,26 +1,29 @@
 ;;; package --- Summary
 ;;; Commentary:
-;;; Command:
-;;; go get -u github.com/nsf/gocode
 ;;; Code:
 (use-package go-mode
-  :ensure t
-  :mode ("\\.go" . go-mode)
+  :ensure-system-package
+  (goimports . "go get golang.org/x/tools/cmd/goimports")
+  :hook
+  ((before-save . gofmt-before-save)
+   (go-mode . (lambda () (setq tab-width 4 indent-tabs-mode 1)))
+   (go-mode . flycheck-mode))
   :config
   (setq gofmt-command "goimports")
-  (add-hook 'go-mode-hook
-	    (lambda ()
-	      (add-hook 'before-save-hook 'gofmt-before-save)
-	      (setq tab-width 4)
-	      (setq indent-tabs-mode 1)))
   :bind
   (:map go-mode-map
         ("C-c j" . godef-jump)))
 
 (use-package go-guru
-  :ensure t
+  :hook 
+  (go-mode-hook . go-guru-hl-identifier-mode))
+
+(use-package company-go
+  :ensure-system-package
+  (gocode . "go get github.com/nsf/gocode")
+  :after company
   :config
-  (add-hook 'go-mode-hook #'go-guru-hl-identifier-mode))
-  
+  (add-to-list 'company-backends 'company-go))
+
 (provide 'stackcats-go)
 ;;; stackcats-go.el ends here

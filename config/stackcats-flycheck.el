@@ -47,7 +47,7 @@
                         '(javascript-jshint)))
   (flycheck-add-mode 'javascript-eslint 'js2-mode))
 
-(add-hook 'after-init-hook #'global-flycheck-mode)
+;; (add-hook 'after-init-hook #'global-flycheck-mode)
 
 (use-package flycheck-pos-tip
   :ensure t

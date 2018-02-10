@@ -46,23 +46,12 @@
   :config
   (add-to-list 'company-backends 'company-anaconda))
 
-(use-package company-go
-  ;; Go
-  :ensure t
-  :config
-  (add-to-list 'company-backends 'company-go))
-
 (use-package company-ghc
   ;; haskell
   :ensure t
   :config
   (setq company-ghc-show-info t)
   (add-to-list 'company-backends '(company-ghc :with company-dabbrev-code)))
-
-(use-package company-racer
-  :ensure t
-  :config
-  (add-to-list 'company-backends 'company-racer))
 
 ;; (use-package company-elm
 ;;   ;; Eml
