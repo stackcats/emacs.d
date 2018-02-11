@@ -1,12 +1,14 @@
 ;;; package --- Summary
 ;;; Commentary:
 ;;; Code:
-;;; deps
-;;; pip install jedi
 (use-package cider
-  :ensure t
   :config
   (setq cider-repl-display-help-banner nil))
+
+(use-package flycheck-clojure
+  :after (cider flycheck)
+  :hook ((flycheck-mode . flycheck-clojure-setup)
+         (cider-mode . flycheck-mode)))
 
 (provide 'stackcats-clojure)
 ;;; stackcats-clojure.el ends here

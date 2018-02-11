@@ -46,6 +46,12 @@
   (setq company-ghc-show-info t)
   (add-to-list 'company-backends '(company-ghc :with company-dabbrev-code)))
 
+(use-package flycheck-haskell
+  :after (haskell-mode flycheck)
+  :hook ((flycheck-mode . flycheck-haskell-setup)
+         (haskell-mode . flycheck-mode)))
+
+
 ;; (use-package shm
 ;;   :ensure t
 ;;   :config
