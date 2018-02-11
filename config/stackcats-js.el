@@ -1,8 +1,6 @@
 ;;; package --- Summary
 ;;; Commentary:
 ;;; Code:
-;;; deps
-;;; npm install -g tern
 (use-package json-mode
   :ensure t
   :mode ("\\.json\\'" . json-mode))
@@ -35,6 +33,14 @@
 	  '(lambda ()
 	     (make-local-variable 'js-indent-level)
 	     (setq js-indent-level 2)))
+
+(use-package company-tern
+  :ensure-system-package
+  (tern . "npm install -g tern")
+  :after company
+  :config
+  (add-to-list 'company-backends 'company-tern)
+  (setq company-tern-property-marker ""))
 
 (provide 'stackcats-js)
 ;;; stackcats-js.el ends here

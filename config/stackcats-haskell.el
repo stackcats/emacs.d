@@ -31,8 +31,7 @@
 
 (use-package hindent
   :ensure t
-  :config
-  (add-hook 'haskell-mode-hook 'hindent-mode))
+  :hook (haskell-mode . hindent-mode))
 
 (use-package ghc
   :ensure t
@@ -40,6 +39,12 @@
   (autoload 'ghc-init "ghc" nil t)
   (autoload 'ghc-debug "ghc" nil t)
   (add-hook 'haskell-mode-hook (lambda () (ghc-init))))
+
+(use-package company-ghc
+  :after company
+  :config
+  (setq company-ghc-show-info t)
+  (add-to-list 'company-backends '(company-ghc :with company-dabbrev-code)))
 
 ;; (use-package shm
 ;;   :ensure t
