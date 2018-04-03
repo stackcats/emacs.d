@@ -9,7 +9,7 @@
      (when (string-match "finished" change)
        (delete-windows-on (process-buffer proc))))))
 
-(use-package c-mode
+(use-package cc-mode
   :mode ("\\.c\\'" . c-mode)
   :config
   (setq	indent-tabs-mode t)

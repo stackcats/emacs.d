@@ -14,7 +14,6 @@
   (defvar helm-recentf-fuzzy-match t)
   (setq helm-autoresize-mode t)
   (setq helm-mode 1)
-  (diminish 'helm-mode "H")
   :config
   (global-set-key (kbd "C-x b") 'helm-mini)
   (global-set-key (kbd "C-x C-f") 'helm-find-files)

@@ -7,7 +7,6 @@
   :ensure t
   :config
   (which-key-mode)
-  (diminish 'which-key-mode "Key")
   (setq which-key-idle-delay 0.1)
   (setq which-key-special-keys '("SPC" "TAB" "RET" "ESC" "DEL")))
 
