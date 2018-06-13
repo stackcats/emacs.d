@@ -19,7 +19,7 @@
 (global-set-key (kbd "C-c k") 'kill-this-buffer)
 (global-set-key (kbd "C-q") 'set-mark-command)
 (global-set-key (kbd "RET") 'newline-and-indent)
-(global-set-key (kbd "C-c m") 'comment-or-uncomment-region)
+(global-set-key (kbd "C-;") 'comment-or-uncomment-region)
 
 (use-package magit
   :ensure t

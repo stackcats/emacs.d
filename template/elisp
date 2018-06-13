@@ -1,7 +1,6 @@
 ;;; package --- Summary
-
 ;;; Commentary:
-
 ;;; Code:
 
+(provide '`(buffer-name)`)
 ;;; `(buffer-name)` ends here

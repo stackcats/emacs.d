@@ -2,7 +2,6 @@
 ;;; Commentary:
 ;;; Code:
 (use-package smartparens
-  :ensure t
   :config
   (require 'smartparens-config)
   (add-hook 'js2-mode-hook 'smartparens-mode)
@@ -14,6 +13,7 @@
   (add-hook 'haskell-mode-hook 'smartparens-mode)
   (add-hook 'css-mode-hook 'smartparens-mode)
   (add-hook 'rust-mode-hook 'smartparens-mode)
+  (add-hook 'protobuf-mode-hook 'smartparens-mode)
   (add-hook 'elm-mode-hook 'smartparens-mode))
 
 ;; (define-globalized-minor-mode global-rainbow-mode rainbow-mode
@@ -21,7 +21,6 @@
 ;; (global-rainbow-mode 1)
 
 (use-package rainbow-delimiters
-  :ensure t
   :config
   (add-hook 'c-mode-hook 'rainbow-delimiters-mode)
   (add-hook 'slime-mode-hook 'rainbow-delimiters-mode)

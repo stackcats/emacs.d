@@ -22,7 +22,7 @@
   (global-set-key (kbd "C-i") 'helm-execute-persistent-action)
   (global-set-key (kbd "C-z") 'helm-select-action)
   (global-set-key (kbd "M-y") 'helm-show-kill-ring)
-  (global-unset-key (kbd "\t")))
+  (global-unset-key (kbd "TAB")))
 
 (use-package helm-projectile
   :ensure t
