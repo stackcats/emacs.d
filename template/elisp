@@ -2,5 +2,5 @@
 ;;; Commentary:
 ;;; Code:
 
-(provide '`(buffer-name)`)
+(provide '`(file-name-base (buffer-name))`)
 ;;; `(buffer-name)` ends here

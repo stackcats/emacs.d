@@ -23,12 +23,12 @@
   (auto-insert-mode)
   (setq-default auto-insert-directory "~/.emacs.d/template/")
   (defvar auto-insert-query nil)
-  (define-auto-insert "\\.el" "elisp")
-  (define-auto-insert "\\.c" "c")
-  (define-auto-insert "\\.l" "flex")
+  (define-auto-insert "\\.el\\'" "elisp")
+  (define-auto-insert "\\.c\\'" "c")
+  (define-auto-insert "\\.l\\'" "flex")
   (define-auto-insert "\\.y\\'" "yacc")
-  (define-auto-insert "\\.html" "html")
-  (define-auto-insert "\\.ejs" "ejs"))
+  (define-auto-insert "\\.html\\'" "html")
+  (define-auto-insert "\\.ejs\\'" "ejs"))
 
 (provide 'stackcats-yas)
 ;;; stackcats-yas.el ends here

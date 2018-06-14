@@ -14,6 +14,7 @@
   (add-hook 'css-mode-hook 'smartparens-mode)
   (add-hook 'rust-mode-hook 'smartparens-mode)
   (add-hook 'protobuf-mode-hook 'smartparens-mode)
+  (add-hook 'lua-mode-hook 'smartparens-mode)
   (add-hook 'elm-mode-hook 'smartparens-mode))
 
 ;; (define-globalized-minor-mode global-rainbow-mode rainbow-mode
@@ -29,6 +30,7 @@
   (add-hook 'go-mode-hook 'rainbow-delimiters-mode)
   (add-hook 'rust-mode-hook 'rainbow-delimiters-mode)
   (add-hook 'haskell-mode-hook 'rainbow-delimiters-mode)
+  (add-hook 'lua-mode-hook 'rainbow-delimiters-mode)
   (add-hook 'clojure-mode-hook 'rainbow-delimiters-mode)
   (add-hook 'emacs-lisp-mode-hook 'rainbow-delimiters-mode))
 
