@@ -2,7 +2,6 @@
 ;;; Commentary:
 ;;; Code:
 (use-package helm
-  :ensure t
   :config
   (require 'helm-config)
   (setq helm-split-window-in-side-p t)
@@ -19,13 +18,10 @@
   (global-set-key (kbd "C-x C-f") 'helm-find-files)
   (global-set-key (kbd "C-s") 'helm-occur)
   (global-set-key (kbd "M-x") 'helm-M-x)
-  (global-set-key (kbd "C-i") 'helm-execute-persistent-action)
   (global-set-key (kbd "C-z") 'helm-select-action)
-  (global-set-key (kbd "M-y") 'helm-show-kill-ring)
-  (global-unset-key (kbd "TAB")))
+  (global-set-key (kbd "M-y") 'helm-show-kill-ring))
 
 (use-package helm-projectile
-  :ensure t
   :config
   (projectile-mode)
   (setq projectile-enable-caching t)
@@ -55,16 +51,12 @@
         ("M-." . helm-gtags-dwim)
         ("C-c h a" . helm-gtags-tags-in-this-function)))
 
-;; (defun my/helm-flycheck ()
-;;   (interactive)
-;;   (let ((helm-candidate-separator " "))
-;;     (call-interactively 'helm-flycheck)))
-
 (use-package helm-flycheck
   :ensure t
   :config
   (global-set-key (kbd "C-c f") 'helm-flycheck))
 
 (setq helm-truncate-lines t)
+
 (provide 'stackcats-helm)
 ;;; stackcats-helm.el ends here

@@ -4,7 +4,6 @@
 
 ;;mac按键设置
 (use-package which-key
-  :ensure t
   :config
   (which-key-mode)
   (setq which-key-idle-delay 0.1)
@@ -22,22 +21,18 @@
 (global-set-key (kbd "C-;") 'comment-or-uncomment-region)
 
 (use-package magit
-  :ensure t
   :config
   (global-set-key (kbd "C-c g") 'magit-status))
 
 (use-package expand-region
-  :ensure t
   :config
   (global-set-key (kbd "C-=") 'er/expand-region))
 
 (use-package ace-jump-mode
-  :ensure t
   :config
   (global-set-key (kbd "C-c SPC") 'ace-jump-mode))
 
 (use-package ace-window
-  :ensure t
   :config
   (global-set-key (kbd "C-c w") 'ace-window))
 
@@ -47,7 +42,6 @@
 
 ;; neotree
 (use-package neotree
-  :ensure t
   :config
   (setq neo-theme (if (display-graphic-p) 'icons 'arrow))
   (global-set-key (kbd "C-c d") 'neotree-projectile-action))

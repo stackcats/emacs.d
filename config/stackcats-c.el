@@ -32,6 +32,15 @@
   :config
   (add-to-list 'company-backends 'company-c-headers))
 
+(defface extra-whitespace-face
+   '((t (:background "dark cyan")))
+   "Used for tabs and such.")
+
+(defvar my-extra-keywords
+   '(("\t" . 'extra-whitespace-face)))
+
+(add-hook 'makefile-bsdmake-mode-hook
+          (lambda () (font-lock-add-keywords nil my-extra-keywords)))
 
 (provide 'stackcats-c)
 ;;; stackcats-c.el ends here
