@@ -24,19 +24,10 @@
       :config
       (spaceline-all-the-icons-theme)
       (setq spaceline-all-the-icons-separator-type 'cup))))
-    
 
 (use-package page-break-lines
   :config
   (global-page-break-lines-mode))
-
-;; all-the-icons
-;; (use-package all-the-icons :ensure t :defer t)
-
-;; (use-package all-the-icons-dired
-;;   :defer t
-;;   :config
-;;   (add-hook 'dired-mode-hook 'all-the-icons-dired-mode))
 
 (use-package rainbow-mode
   :config

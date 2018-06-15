@@ -24,7 +24,7 @@
 (use-package rainbow-delimiters
   :config
   (add-hook 'c-mode-hook 'rainbow-delimiters-mode)
-  (add-hook 'slime-mode-hook 'rainbow-delimiters-mode)
+  (add-hook 'sly-mode-hook 'rainbow-delimiters-mode)
   (add-hook 'js2-mode-hook 'rainbow-delimiters-mode)
   (add-hook 'python-mode-hook 'rainbow-delimiters-mode)
   (add-hook 'go-mode-hook 'rainbow-delimiters-mode)
