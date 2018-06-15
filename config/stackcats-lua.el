@@ -5,7 +5,10 @@
   :mode "\\.lua\\'"
   :interpreter "lua"
   :hook
-  (lua-mode . flycheck-mode))
+  (lua-mode . flycheck-mode)
+  :bind
+  (:map lua-mode-map
+  ("C-c c" . lua-send-buffer)))
 
 (use-package company-lua
   :after company

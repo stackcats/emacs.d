@@ -2,16 +2,13 @@
 ;;; Commentary:
 ;;; Code:
 (use-package json-mode
-  :ensure t
-  :mode ("\\.json\\'" . json-mode))
+  :mode "\\.json\\'")
 
 (use-package rjsx-mode
-  :ensure t
-  :mode ("\\.jsx\\'" . rjsx-mode))
+  :mode "\\.jsx\\'")
 
 (use-package js2-mode
-  :ensure t
-  :mode ("\\.js\\'" . js2-mode)
+  :mode "\\.js\\'"
   :config
   (autoload 'js2-mode "js2-mode" nil t)
   (setq-default js2-global-externs

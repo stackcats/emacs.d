@@ -2,7 +2,6 @@
 ;;; Commentary:
 ;;; Code:
 (use-package git-gutter-fringe+
-  :ensure t
   :config
   (setq git-gutter-fr+-side 'right-fringe))
 

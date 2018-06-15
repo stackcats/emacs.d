@@ -2,7 +2,6 @@
 ;;; Commentary:
 ;;; Code:
 (use-package yasnippet
-  :ensure t
   :defer t
   :init
   (defadvice auto-insert  (around yasnippet-expand-after-auto-insert activate)

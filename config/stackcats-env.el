@@ -7,7 +7,6 @@
 
 (use-package exec-path-from-shell
   :if (memq window-system '(mac ns))
-  :ensure t
   :defer t
   :init
   (defvar exec-path-from-shell-check-startup-files nil)
