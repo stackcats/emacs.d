@@ -10,7 +10,10 @@
     ;;   :init
     ;;   (load-theme 'dracula t))
 
-    (load-theme 'deeper-blue t)
+    (use-package creamsody-theme
+      :defer t
+      :init
+      (load-theme 'creamsody t))
     
     (use-package spaceline
       :init
@@ -21,9 +24,9 @@
 
     (use-package spaceline-all-the-icons
       :after spaceline
-      :config
+      :config      
       (spaceline-all-the-icons-theme)
-      (setq spaceline-all-the-icons-separator-type 'cup))))
+      (setq spaceline-all-the-icons-separator-type 'none))))
 
 (use-package page-break-lines
   :config

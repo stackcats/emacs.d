@@ -18,6 +18,8 @@
 (require 'use-package)
 (setq use-package-always-ensure t)
 
+(setq inhibit-compacting-font-caches t)
+
 ;;英中文字体
 (when (display-graphic-p)
   (set-face-attribute 'default nil :font "fira code 16"))
