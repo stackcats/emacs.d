@@ -56,7 +56,4 @@
 
 (setq custom-file "~/.custom-file.el")
 (load custom-file :no-error :no-message)
-
-(eval-after-load "latex-mode" '(fset 'tex-font-lock-suscript 'ignore))
-
 ;;; init.el ends here

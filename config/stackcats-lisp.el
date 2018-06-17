@@ -9,7 +9,8 @@
   :config
   (require 'sly-autoloads)
   (setq-default inferior-lisp-program "/usr/local/bin/ccl64 -K utf-8")
-  (unless (sly-connected-p)
+  (if (and (fboundp 'sly-connected-p)
+           (not (sly-connected-p)))
     (save-excursion (sly))))
 
 ;;; Racket
