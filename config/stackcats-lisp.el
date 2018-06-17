@@ -15,8 +15,7 @@
 ;;; Racket
 (use-package racket-mode
   :config
-  (setq racket-racket-program (getenv "RACKET"))
-  (setq racket-raco-program (getenv "RACO")))
+  (setq racket-program (getenv "RACKET")))
 
 ;;; Clojure
 (use-package cider
@@ -28,6 +27,10 @@
   :hook ((flycheck-mode . flycheck-clojure-setup)
          (cider-mode . flycheck-mode)))
 
+;;; Emacs Lisp
+(use-package emacs-lisp-mode
+  :ensure nil
+  :hook (emacs-lisp-mode . flycheck-mode))
 
 (provide 'stackcats-lisp)
 ;;; stackcats-lisp.el ends here

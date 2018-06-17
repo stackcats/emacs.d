@@ -4,7 +4,7 @@
 (use-package helm
   :config
   (require 'helm-config)
-  (setq helm-split-window-in-side-p t)
+  (setq helm-split-window-inside-p t)
   (setq helm-move-to-line-cycle-in-source t)
   (defvar helm-ff-search-library-in-sexp t)
   (setq helm-scroll-amount 8)
@@ -13,7 +13,6 @@
   (defvar helm-recentf-fuzzy-match t)
   (setq helm-autoresize-mode t)
   (setq helm-mode 1)
-  :config
   (global-set-key (kbd "C-x b") 'helm-mini)
   (global-set-key (kbd "C-x C-f") 'helm-find-files)
   (global-set-key (kbd "C-s") 'helm-occur)
@@ -29,7 +28,6 @@
   (helm-projectile-on))
 
 (use-package helm-gtags
-  :ensure t
   :config
   (setq helm-gtags-ignore-case t)
   (setq helm-gtags-auto-update t)
@@ -52,7 +50,6 @@
         ("C-c h a" . helm-gtags-tags-in-this-function)))
 
 (use-package helm-flycheck
-  :ensure t
   :config
   (global-set-key (kbd "C-c f") 'helm-flycheck))
 

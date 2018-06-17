@@ -4,7 +4,7 @@
 (use-package smartparens
   :config
   (setq-default sp-escape-quotes-after-insert nil)
-  (require 'smartparens-config)  
+  (require 'smartparens-config)
   (add-hook 'js2-mode-hook 'smartparens-mode)
   (add-hook 'python-mode-hook 'smartparens-mode)
   (add-hook 'c-mode-hook 'smartparens-mode)

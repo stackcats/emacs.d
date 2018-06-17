@@ -8,4 +8,4 @@
 (add-hook 'after-init-hook 'global-git-gutter+-mode)
 
 (provide 'stackcats-vcs)
-;;; stackscats-vcs.el ends here
+;;; stackcats-vcs.el ends here

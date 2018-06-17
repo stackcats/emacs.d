@@ -2,7 +2,7 @@
 ;;; Commentary:
 ;;; Code:
 (use-package flycheck
-  :config  
+  :config
   (setq-default flycheck-temp-prefix ".")
   ;;(defvar flycheck-eslintrc "/Users/stackcats/.eslintrc")
   (defvar flycheck-javascript-eslint-executable (getenv "ESLINT"))

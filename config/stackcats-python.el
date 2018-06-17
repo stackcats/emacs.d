@@ -12,6 +12,5 @@
   :config
   (add-to-list 'company-backends 'company-anaconda))
 
-
 (provide 'stackcats-python)
 ;;; stackcats-python.el ends here

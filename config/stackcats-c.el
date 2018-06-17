@@ -12,6 +12,7 @@
 (use-package c-mode
   :ensure nil
   :mode "\\.c\\'"
+  :hook (c-mode . flycheck-mode)
   :config
   (setq	indent-tabs-mode t)
   (setq tab-width 4)
@@ -35,7 +36,8 @@
 
 (defface extra-whitespace-face
    '((t (:background "dark cyan")))
-   "Used for tabs and such.")
+   "Used for tabs and such."
+   :group 'extra-whitespace-face)
 
 (defvar my-extra-keywords
    '(("\t" . 'extra-whitespace-face)))

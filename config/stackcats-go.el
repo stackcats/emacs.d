@@ -15,8 +15,7 @@
         ("C-c j" . godef-jump)))
 
 (use-package go-guru
-  :hook 
-  (go-mode-hook . go-guru-hl-identifier-mode))
+  :hook (go-mode-hook . go-guru-hl-identifier-mode))
 
 (use-package company-go
   :ensure-system-package

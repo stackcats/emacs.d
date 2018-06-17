@@ -24,7 +24,7 @@
 
     (use-package spaceline-all-the-icons
       :after spaceline
-      :config      
+      :config
       (spaceline-all-the-icons-theme)
       (setq spaceline-all-the-icons-separator-type 'none))))
 

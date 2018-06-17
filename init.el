@@ -18,6 +18,8 @@
 (require 'use-package)
 (setq use-package-always-ensure t)
 
+(toggle-debug-on-error)
+
 (setq inhibit-compacting-font-caches t)
 
 ;;英中文字体
