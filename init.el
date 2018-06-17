@@ -18,24 +18,13 @@
 (require 'use-package)
 (setq use-package-always-ensure t)
 
-(toggle-debug-on-error)
+;; (toggle-debug-on-error)
 
 (setq inhibit-compacting-font-caches t)
 
 ;;英中文字体
 (when (display-graphic-p)
   (set-face-attribute 'default nil :font "fira code 16"))
-
-(when (eq system-type 'darwin)
-  (set-fontset-font "fontset-default" 'unicode '("hack" . "unicode-ttf")))
-
-(defun byte-compile-current-buffer ()
-  "`byte-compile' current buffer if it's `emacs-lisp-mode' and compiled file exists."
-  (interactive)
-  (when (and (eq major-mode 'emacs-lisp-mode)
-             (file-exists-p (byte-compile-dest-file buffer-file-name)))
-    (byte-compile-file buffer-file-name)))
-(add-hook 'after-save-hook 'byte-compile-current-buffer)
 
 (use-package use-package-ensure-system-package :ensure t)
 

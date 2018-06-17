@@ -25,7 +25,8 @@
   (projectile-mode)
   (setq projectile-enable-caching t)
   (setq projectile-completion-system 'helm)
-  (helm-projectile-on))
+  (if (fboundp 'helm-projectile-on)
+    (helm-projectile-on)))
 
 (use-package helm-gtags
   :config

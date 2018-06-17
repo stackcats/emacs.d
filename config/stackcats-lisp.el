@@ -10,6 +10,7 @@
   (require 'sly-autoloads)
   (setq-default inferior-lisp-program "/usr/local/bin/ccl64 -K utf-8")
   (if (and (fboundp 'sly-connected-p)
+           (fboundp 'sly)
            (not (sly-connected-p)))
     (save-excursion (sly))))
 
@@ -29,8 +30,9 @@
          (cider-mode . flycheck-mode)))
 
 ;;; Emacs Lisp
-(use-package emacs-lisp-mode
+(use-package lisp-mode
   :ensure nil
+  :commands emacs-lisp-mode
   :hook (emacs-lisp-mode . flycheck-mode))
 
 (provide 'stackcats-lisp)

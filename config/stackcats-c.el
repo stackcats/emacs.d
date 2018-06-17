@@ -9,8 +9,9 @@
      (when (string-match "finished" change)
        (delete-windows-on (process-buffer proc))))))
 
-(use-package c-mode
+(use-package cc-mode
   :ensure nil
+  :commands c-mode
   :mode "\\.c\\'"
   :hook (c-mode . flycheck-mode)
   :config
