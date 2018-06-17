@@ -5,6 +5,7 @@
 ;;; Code:
 
 (use-package sbt-mode
+  :mode "\\.scala\\'"
   :commands sbt-start sbt-command
   :config
   (substitute-key-definition
@@ -13,7 +14,6 @@
    minibuffer-local-completion-map))
 
 (use-package ensime
-  :ensure t
   :config
   (setq ensime-auto-connect 'always)
   (setq-default ensime-startup-snapshot-notification nil)

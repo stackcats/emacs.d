@@ -3,7 +3,8 @@
 ;;; Code:
 (use-package smartparens
   :config
-  (require 'smartparens-config)
+  (setq-default sp-escape-quotes-after-insert nil)
+  (require 'smartparens-config)  
   (add-hook 'js2-mode-hook 'smartparens-mode)
   (add-hook 'python-mode-hook 'smartparens-mode)
   (add-hook 'c-mode-hook 'smartparens-mode)
@@ -16,10 +17,6 @@
   (add-hook 'protobuf-mode-hook 'smartparens-mode)
   (add-hook 'lua-mode-hook 'smartparens-mode)
   (add-hook 'elm-mode-hook 'smartparens-mode))
-
-;; (define-globalized-minor-mode global-rainbow-mode rainbow-mode
-;;   (lambda () (rainbow-mode 1)))
-;; (global-rainbow-mode 1)
 
 (use-package rainbow-delimiters
   :config
