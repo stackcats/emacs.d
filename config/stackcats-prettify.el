@@ -1,7 +1,7 @@
 ;;; package --- Summary
 ;;; Commentary:
 ;;; Code:
-(setq-default mode-line-format nil)
+;;(setq-default mode-line-format nil)
 
 (when (display-graphic-p)
   (progn
@@ -20,21 +20,14 @@
       (require 'spaceline-config)
       (spaceline-helm-mode))
 
-    (setq-default ns-use-srgb-colorspace nil)
+    ;; (setq-default ns-use-srgb-colorspace nil)
 
     (use-package spaceline-all-the-icons
       :after spaceline
       :config
-      (spaceline-all-the-icons-theme)
+      (if (fboundp 'spaceline-all-the-icons-theme)
+        (spaceline-all-the-icons-theme))
       (setq spaceline-all-the-icons-separator-type 'none))))
-
-(use-package page-break-lines
-  :config
-  (global-page-break-lines-mode))
-
-(use-package rainbow-mode
-  :config
-  (add-hook 'css-mode-hook 'rainbow-mode))
 
 (provide 'stackcats-prettify)
 ;;; stackcats-prettify.el ends here

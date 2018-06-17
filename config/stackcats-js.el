@@ -7,6 +7,9 @@
 (use-package rjsx-mode
   :mode "\\.jsx\\'")
 
+(use-package rainbow-mode
+  :hook css-mode-hook)
+
 (use-package js2-mode
   :mode "\\.js\\'"
   :config
