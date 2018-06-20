@@ -5,7 +5,8 @@
 ;;mac按键设置
 (use-package which-key
   :config
-  (which-key-mode)
+  (if (fboundp 'which-key-mode)
+    (which-key-mode))
   (setq which-key-idle-delay 0.1)
   (setq which-key-special-keys '("SPC" "TAB" "RET" "ESC" "DEL")))
 
@@ -14,7 +15,6 @@
   (setq mac-command-modifier 'super))
 
 (global-set-key (kbd "C-c o") 'other-frame)
-;;(global-set-key (kbd "C-c s") 'hs-toggle-hiding)
 (global-set-key (kbd "C-c k") 'kill-this-buffer)
 (global-set-key (kbd "C-q") 'set-mark-command)
 (global-set-key (kbd "RET") 'newline-and-indent)
