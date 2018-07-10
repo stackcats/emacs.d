@@ -23,7 +23,7 @@
 (setq inhibit-compacting-font-caches t)
 
 (when (display-graphic-p)
-  (set-face-attribute 'default nil :font "fira code 16"))
+  (set-face-attribute 'default nil :font "hack 16"))
 
 (use-package use-package-ensure-system-package :ensure t)
 
