@@ -9,7 +9,7 @@
      (when (string-match "finished" change)
        (delete-windows-on (process-buffer proc))))))
 
-(use-package cc-mode
+(use-package c-mode
   :ensure nil
   :commands c-mode
   :mode "\\.c\\'"
@@ -17,7 +17,8 @@
   :config
   (setq	indent-tabs-mode t)
   (setq tab-width 4)
-  (defvar c-basic-offset 4))
+  (defvar c-basic-offset 4)
+  (add-hook 'c-mode-hook (lambda () (c-toggle-comment-style 1))))
 
 (add-hook 'compilation-start-hook 'kill-buffer-when-compile-success)
 
