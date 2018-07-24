@@ -14,11 +14,13 @@
    minibuffer-local-completion-map))
 
 (use-package ensime
+  :hook ((java-mode . ensime-mode)
+         (java-mode . smartparens-mode)
+         (scala-mode . ensime-mode)
+         (scala-mode . smartparens-mode))
   :config
   (setq ensime-auto-connect 'always)
-  (setq-default ensime-startup-snapshot-notification nil)
-  (add-hook 'java-mode-hook 'ensime-mode)
-  (add-hook 'scala-mode-hook 'ensime-mode))
+  (setq-default ensime-startup-snapshot-notification nil))
 
 (provide 'stackcats-ensime)
 ;;; stackcats-ensime.el ends here

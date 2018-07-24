@@ -22,11 +22,15 @@
 
 (use-package helm-projectile
   :config
+  (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
   (projectile-mode)
   (setq projectile-enable-caching t)
   (setq projectile-completion-system 'helm)
   (if (fboundp 'helm-projectile-on)
-    (helm-projectile-on)))
+      (helm-projectile-on)))
+  ;; :bind
+  ;; (:map projectile-mode-map
+  ;;       ("C-c p" . projectile-command-map)))
 
 (use-package helm-gtags
   :config

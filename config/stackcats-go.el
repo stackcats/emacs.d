@@ -6,6 +6,7 @@
   (goimports . "go get golang.org/x/tools/cmd/goimports")
   :hook
   ((before-save . gofmt-before-save)
+   (go-mode . smartparens-mode)
    (go-mode . (lambda () (setq tab-width 4 indent-tabs-mode 1)))
    (go-mode . flycheck-mode))
   :config

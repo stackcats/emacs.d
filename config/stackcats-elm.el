@@ -7,6 +7,7 @@
    (elm-format . "npm i -g elm-format"))
   :hook
   ((elm-mode . elm-oracle-setup-completion)
+   (elm-mode . smartparens-mode)
    (elm-mode . turn-off-elm-indent))
   :config
   (setq elm-format-on-save t)

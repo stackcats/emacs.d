@@ -5,16 +5,23 @@
 ;;; Code:
 (use-package rust-mode
   :ensure-system-package
-   (rustfmt . "rustup component add rustfmt-preview")
+  (rustfmt . "rustup component add rustfmt-preview")
+  :hook (rust-mode . smartparens-mode)
   :config
   (setq rust-format-on-save t))
+
+(use-package cargo
+  :hook (rust-mode . cargo-minor-mode))
 
 (use-package racer
   :ensure-system-package
   (racer . "cargo install racer")
   :after rust-mode
   :hook ((rust-mode . racer-mode)
-         (racer-mode . eldoc-mode)))
+         (racer-mode . eldoc-mode))
+  :bind
+  (:map racer-mode-map
+        ("C-c j" . racer-find-definition)))
 
 (use-package flycheck-rust
   :after (rust-mode flycheck)

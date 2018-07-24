@@ -12,7 +12,7 @@
   (if (and (fboundp 'sly-connected-p)
            (fboundp 'sly)
            (not (sly-connected-p)))
-    (save-excursion (sly))))
+      (save-excursion (sly))))
 
 ;;; Racket
 (use-package racket-mode

@@ -25,6 +25,8 @@
 (when (display-graphic-p)
   (set-face-attribute 'default nil :font "hack 16"))
 
+(add-hook 'after-save-hook 'emacs-lisp-byte-compile t t)
+
 (use-package use-package-ensure-system-package :ensure t)
 
 (defun indent-whole ()

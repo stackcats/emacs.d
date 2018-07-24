@@ -2,9 +2,10 @@
 ;;; Commentary:
 ;;; Code:
 (use-package protobuf-mode
-  :mode "\\.proto$"
+  :mode "\\.proto\\'"
   :hook
-  (protobuf-mode . flycheck-mode))
+  ((protobuf-mode . flycheck-mode)
+   (protobuf-mode . smartparens-mode)))
 
 (provide 'stackcats-protobuf)
 ;;; stackcats-protobuf.el ends here
