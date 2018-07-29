@@ -4,7 +4,7 @@
 
 ;;; Common Lisp
 (use-package sly
-  :mode ("\\.lisp\\'" . sly-mode)
+  :mode "\\.lisp\\'"
   :hook (sly-mode . flycheck-mode)
   :config
   (require 'sly-autoloads)
@@ -16,6 +16,7 @@
 
 ;;; Racket
 (use-package racket-mode
+  :mode "\\.rkt\\'"
   :config
   (setq racket-program (getenv "RACKET")))
 
@@ -33,6 +34,7 @@
 (use-package lisp-mode
   :ensure nil
   :commands emacs-lisp-mode
+  :mode "\\.el\\'"
   :hook (emacs-lisp-mode . flycheck-mode))
 
 (provide 'stackcats-lisp)

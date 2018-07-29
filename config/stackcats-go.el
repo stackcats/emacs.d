@@ -4,6 +4,7 @@
 (use-package go-mode
   :ensure-system-package
   (goimports . "go get golang.org/x/tools/cmd/goimports")
+  :mode "\\.go\\'"
   :hook
   ((before-save . gofmt-before-save)
    (go-mode . smartparens-mode)
