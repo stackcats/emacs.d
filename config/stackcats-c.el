@@ -48,5 +48,10 @@
 (add-hook 'makefile-bsdmake-mode-hook
           (lambda () (font-lock-add-keywords nil my-extra-keywords)))
 
+;; (use-package rtags
+;;   :commands rtags-start-process-unless-running
+;;   :config (progn
+;; 	    (message "Rtags loaded")))
+
 (provide 'stackcats-c)
 ;;; stackcats-c.el ends here

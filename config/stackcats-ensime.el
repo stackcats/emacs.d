@@ -5,7 +5,6 @@
 ;;; Code:
 
 (use-package sbt-mode
-  :mode "\\.scala\\'"
   :commands sbt-start sbt-command
   :config
   (substitute-key-definition
@@ -15,12 +14,18 @@
 
 (use-package ensime
   :hook ((java-mode . ensime-mode)
-         (java-mode . smartparens-mode)
-         (scala-mode . ensime-mode)
-         (scala-mode . smartparens-mode))
+         (java-mode . smartparens-mode))
   :config
   (setq ensime-auto-connect 'always)
+  (setq ensime-startup-notification nil)
   (setq-default ensime-startup-snapshot-notification nil))
+
+(use-package scala-mode
+  :mode "\\.scala\\'"
+  :hook ((scala-mode . ensime-mode)
+         (scala-mode . smartparens-mode))
+  :interpreter
+  ("scala" . scala-mode))
 
 (provide 'stackcats-ensime)
 ;;; stackcats-ensime.el ends here

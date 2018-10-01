@@ -18,6 +18,8 @@
 (require 'use-package)
 (setq use-package-always-ensure t)
 
+(global-wakatime-mode)
+
 ;; (toggle-debug-on-error)
 
 (setq inhibit-compacting-font-caches t)

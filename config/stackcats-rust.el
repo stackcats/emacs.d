@@ -5,7 +5,8 @@
 ;;; Code:
 (use-package rust-mode
   :ensure-system-package
-  (rustfmt . "rustup component add rustfmt-preview")
+  ((rustfmt . "rustup component add rustfmt-preview")
+   (rusty-tags . "cargo install rusty-tags"))
   :hook (rust-mode . smartparens-mode)
   :config
   (setq rust-format-on-save t))
