@@ -2,6 +2,7 @@
 ;;; Commentary:
 ;;; Code:
 (use-package smartparens
+  :hook (prog-mode . smartparens-mode)
   :config
   (setq-default sp-escape-quotes-after-insert nil)
   (require 'smartparens-config)
@@ -9,16 +10,7 @@
 
 (use-package rainbow-delimiters
   :config
-  (add-hook 'c-mode-hook 'rainbow-delimiters-mode)
-  (add-hook 'sly-mode-hook 'rainbow-delimiters-mode)
-  (add-hook 'js2-mode-hook 'rainbow-delimiters-mode)
-  (add-hook 'python-mode-hook 'rainbow-delimiters-mode)
-  (add-hook 'go-mode-hook 'rainbow-delimiters-mode)
-  (add-hook 'rust-mode-hook 'rainbow-delimiters-mode)
-  (add-hook 'haskell-mode-hook 'rainbow-delimiters-mode)
-  (add-hook 'lua-mode-hook 'rainbow-delimiters-mode)
-  (add-hook 'clojure-mode-hook 'rainbow-delimiters-mode)
-  (add-hook 'emacs-lisp-mode-hook 'rainbow-delimiters-mode))
+  :hook (prog-mode . rainbow-delimiters-mode))
 
 (provide 'stackcats-parens)
 ;;; stackcats-parens.el ends here

@@ -4,7 +4,6 @@
 (use-package lua-mode
   :mode "\\.lua\\'"
   :interpreter "lua"
-  :hook (lua-mode . smartparens-mode)
   :bind
   (:map lua-mode-map
   ("C-c c" . lua-send-buffer)))

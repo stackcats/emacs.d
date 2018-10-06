@@ -13,8 +13,7 @@
    minibuffer-local-completion-map))
 
 (use-package ensime
-  :hook ((java-mode . ensime-mode)
-         (java-mode . smartparens-mode))
+  :hook (java-mode . ensime-mode)
   :config
   (setq ensime-auto-connect 'always)
   (setq ensime-startup-notification nil)
@@ -22,8 +21,7 @@
 
 (use-package scala-mode
   :mode "\\.scala\\'"
-  :hook ((scala-mode . ensime-mode)
-         (scala-mode . smartparens-mode))
+  :hook (scala-mode . ensime-mode)
   :interpreter
   ("scala" . scala-mode))
 

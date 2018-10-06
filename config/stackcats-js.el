@@ -12,7 +12,6 @@
 
 (use-package js2-mode
   :mode "\\.js\\'"
-  :hook (js2-mode . smartparens-mode)
   :config
   (autoload 'js2-mode "js2-mode" nil t)
   (setq-default js2-global-externs

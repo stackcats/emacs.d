@@ -5,7 +5,6 @@
 ;;; cabal update
 ;;; cabal install happy hasktags stylish-haskell present ghc-mod hlint hoogle structured-haskell-mode hindent
 (use-package haskell-mode
-  :hook (haskell-mode . smartparens-mode)
   :config
   (setq haskell-process-suggest-remove-import-lines t)
   (setq haskell-process-auto-import-loaded-modules t)

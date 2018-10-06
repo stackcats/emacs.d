@@ -3,8 +3,7 @@
 ;;; Code:
 (use-package anaconda-mode
   :hook ((python-mode . anaconda-mode)
-         (python-mode . anaconda-eldoc-mode)
-         (python-mode . smartparens-mode))
+         (python-mode . anaconda-eldoc-mode))
   :config
   (setq python-indent-offset 4))
 

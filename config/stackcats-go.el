@@ -7,7 +7,6 @@
   :mode "\\.go\\'"
   :hook
   ((before-save . gofmt-before-save)
-   (go-mode . smartparens-mode)
    (go-mode . (lambda () (setq tab-width 4 indent-tabs-mode 1))))
   :config
   (setq gofmt-command "goimports")

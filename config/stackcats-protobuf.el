@@ -2,8 +2,7 @@
 ;;; Commentary:
 ;;; Code:
 (use-package protobuf-mode
-  :mode "\\.proto\\'"
-  :hook (protobuf-mode . smartparens-mode))
+  :mode "\\.proto\\'")
 
 (provide 'stackcats-protobuf)
 ;;; stackcats-protobuf.el ends here

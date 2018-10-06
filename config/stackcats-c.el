@@ -13,8 +13,7 @@
   :ensure nil
   :commands c-mode
   :mode "\\.c\\'"
-  :hook ((c-mode . smartparens-mode)
-         (c-mode . (lambda () (c-toggle-comment-style -1))))
+  :hook (c-mode . (lambda () (c-toggle-comment-style -1)))
   :init
   (setq	indent-tabs-mode t))
 
