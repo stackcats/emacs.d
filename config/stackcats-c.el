@@ -43,11 +43,11 @@
    "Used for tabs and such."
    :group 'extra-whitespace-face)
 
-(defvar my-extra-keywords
+(defvar stackcats-extra-keywords
    '(("\t" . 'extra-whitespace-face)))
 
 (add-hook 'makefile-bsdmake-mode-hook
-          (lambda () (font-lock-add-keywords nil my-extra-keywords)))
+          (lambda () (font-lock-add-keywords nil stackcats-extra-keywords)))
 
 ;; (use-package rtags
 ;;   :commands rtags-start-process-unless-running
