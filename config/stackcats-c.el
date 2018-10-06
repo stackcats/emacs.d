@@ -1,6 +1,7 @@
 ;;; package --- Summary
 ;;; Commentary:
 ;;; Code:
+
 (defun kill-buffer-when-compile-success (process)
   "Close current PROCESS when `shell-command' exit."
   (set-process-sentinel
@@ -13,7 +14,8 @@
   :ensure nil
   :commands c-mode
   :mode "\\.c\\'"
-  :hook (c-mode . (lambda () (c-toggle-comment-style -1)))
+  :hook (c-mode . (lambda () (c-toggle-comment-style -1)
+                    (add-hook 'before-save-hook 'clang-format-buffer nil 'local)))
   :init
   (setq	indent-tabs-mode t))
 
