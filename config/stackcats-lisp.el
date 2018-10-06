@@ -13,8 +13,7 @@
   :ensure-system-package
   (ccl64 . "brew install clozure-cl")
   :mode ("\\.lisp\\'" . lisp-mode)
-  :hook ((lisp-mode . flycheck-mode)
-         (lisp-mode . sly-mode)
+  :hook ((lisp-mode . sly-mode)
         (sly-mode . prelude-start-sly))
   :config
   (require 'sly-autoloads)
@@ -40,8 +39,7 @@
 (use-package lisp-mode
   :ensure nil
   :commands emacs-lisp-mode
-  :mode ("\\.el\\'" . emacs-lisp-mode)
-  :hook (emacs-lisp-mode . flycheck-mode))
+  :mode ("\\.el\\'" . emacs-lisp-mode))
 
 (provide 'stackcats-lisp)
 ;;; stackcats-lisp.el ends here

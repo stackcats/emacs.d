@@ -46,8 +46,7 @@
 
 (use-package flycheck-haskell
   :after (haskell-mode flycheck)
-  :hook ((flycheck-mode . flycheck-haskell-setup)
-         (haskell-mode . flycheck-mode)))
+  :hook ((flycheck-mode . flycheck-haskell-setup)))
 
 
 ;; (use-package shm

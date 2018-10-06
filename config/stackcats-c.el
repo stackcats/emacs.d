@@ -13,13 +13,10 @@
   :ensure nil
   :commands c-mode
   :mode "\\.c\\'"
-  :hook ((c-mode . flycheck-mode)
-         (c-mode . smartparens-mode)
+  :hook ((c-mode . smartparens-mode)
          (c-mode . (lambda () (c-toggle-comment-style -1))))
   :init
-  (setq	indent-tabs-mode t)
-  (setq tab-width 2)
-  (defvar c-basic-offset 2))
+  (setq	indent-tabs-mode t))
 
 (add-hook 'compilation-start-hook 'kill-buffer-when-compile-success)
 

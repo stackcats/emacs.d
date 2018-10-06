@@ -26,8 +26,7 @@
 
 (use-package flycheck-rust
   :after (rust-mode flycheck)
-  :hook ((flycheck-mode . flycheck-rust-setup)
-         (rust-mode . flycheck-mode)))
+  :hook (flycheck-mode . flycheck-rust-setup))
 
 (use-package company-racer
   :after (racer company)

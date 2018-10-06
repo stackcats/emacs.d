@@ -11,7 +11,6 @@
 (use-package psc-ide
   :hook
   ((purescript-mode . psc-ide-mode)
-   (purescript-mode . flycheck-mode)
    (purescript-mode . turn-on-purescript-indentation))
   :config
   (setq psc-ide-host "127.0.0.1"))

@@ -3,6 +3,7 @@
 ;;; Code:
 (use-package flycheck
   :defer t
+  :hook (prog-mode . flycheck-mode)
   :config
   (setq-default flycheck-temp-prefix ".")
   ;;(defvar flycheck-eslintrc "/Users/stackcats/.eslintrc")
