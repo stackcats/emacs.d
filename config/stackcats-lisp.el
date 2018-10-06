@@ -2,17 +2,23 @@
 ;;; Commentary:
 ;;; Code:
 
-;;; Common Lisp
-(use-package sly
-  :mode "\\.lisp\\'"
-  :hook (sly-mode . flycheck-mode)
-  :config
-  (require 'sly-autoloads)
-  (setq-default inferior-lisp-program "/usr/local/bin/ccl64 -K utf-8")
+(defun prelude-start-sly ()
   (if (and (fboundp 'sly-connected-p)
            (fboundp 'sly)
            (not (sly-connected-p)))
-      (save-excursion (sly))))
+    (save-excursion (sly))))
+
+;;; Common Lisp
+(use-package sly
+  :ensure-system-package
+  (ccl64 . "brew install clozure-cl")
+  :mode ("\\.lisp\\'" . lisp-mode)
+  :hook ((lisp-mode . flycheck-mode)
+         (lisp-mode . sly-mode)
+        (sly-mode . prelude-start-sly))
+  :config
+  (require 'sly-autoloads)
+  (setq-default inferior-lisp-program "/usr/local/bin/clisp"))
 
 ;;; Racket
 (use-package racket-mode
@@ -34,7 +40,7 @@
 (use-package lisp-mode
   :ensure nil
   :commands emacs-lisp-mode
-  :mode "\\.el\\'"
+  :mode ("\\.el\\'" . emacs-lisp-mode)
   :hook (emacs-lisp-mode . flycheck-mode))
 
 (provide 'stackcats-lisp)
