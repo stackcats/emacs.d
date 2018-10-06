@@ -10,12 +10,15 @@
      (when (string-match "finished" change)
        (delete-windows-on (process-buffer proc))))))
 
+(defun stackcats-c-mode-hook ()
+  (c-toggle-comment-style -1)
+  (add-hook 'before-save-hook 'clang-format-buffer nil t))
+
 (use-package c-mode
   :ensure nil
   :commands c-mode
   :mode "\\.c\\'"
-  :hook (c-mode . (lambda () (c-toggle-comment-style -1)
-                    (add-hook 'before-save-hook 'clang-format-buffer nil 'local)))
+  :hook (c-mode . stackcats-c-mode-hook)
   :init
   (setq	indent-tabs-mode t))
 

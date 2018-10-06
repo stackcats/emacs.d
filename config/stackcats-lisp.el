@@ -11,7 +11,7 @@
 ;;; Common Lisp
 (use-package sly
   :ensure-system-package
-  (ccl64 . "brew install clozure-cl")
+  (clisp . "brew install clisp")
   :mode ("\\.lisp\\'" . lisp-mode)
   :hook ((lisp-mode . sly-mode)
         (sly-mode . prelude-start-sly))
@@ -36,10 +36,14 @@
          (cider-mode . flycheck-mode)))
 
 ;;; Emacs Lisp
+(defun stackcats-emacs-lisp-mode-hook ()
+  (add-hook 'after-save-hook 'emacs-lisp-byte-compile t t))
+
 (use-package lisp-mode
   :ensure nil
   :commands emacs-lisp-mode
-  :mode ("\\.el\\'" . emacs-lisp-mode))
+  :mode ("\\.el\\'" . emacs-lisp-mode)
+  :hook (emacs-lisp-mode . stackcats-emacs-lisp-mode-hook))
 
 (provide 'stackcats-lisp)
 ;;; stackcats-lisp.el ends here
