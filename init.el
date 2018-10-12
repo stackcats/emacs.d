@@ -20,7 +20,7 @@
 
 (global-wakatime-mode)
 
-;; (toggle-debug-on-error)
+(toggle-debug-on-error)
 
 (setq inhibit-compacting-font-caches t)
 

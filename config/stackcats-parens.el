@@ -8,9 +8,5 @@
   (require 'smartparens-config)
   (add-hook 'css-mode-hook 'smartparens-mode))
 
-(use-package rainbow-delimiters
-  :config
-  :hook (prog-mode . rainbow-delimiters-mode))
-
 (provide 'stackcats-parens)
 ;;; stackcats-parens.el ends here
