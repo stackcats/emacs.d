@@ -1,7 +1,5 @@
 ;;; package --- Summary
-
 ;;; Commentary:
-
 ;;; Code:
 
 (use-package sbt-mode
