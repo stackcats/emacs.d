@@ -58,6 +58,10 @@
   :config
   (global-set-key (kbd "C-c f") 'helm-flycheck))
 
+(use-package helm-xref
+  :config
+  (setq-default xref-show-xrefs-function 'helm-xref-show-xrefs))
+
 (setq helm-truncate-lines t)
 
 (provide 'stackcats-helm)
