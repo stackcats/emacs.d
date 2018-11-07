@@ -10,7 +10,7 @@
  '(show-paren-mode 1)
  '(global-linum-mode t)
  '(frame-title-format "%b")
- ;;; '(inhibit-startup-message t)
+ '(inhibit-startup-message t)
  '(message-log-max nil)
  '(stack-trace-on-error nil)
  '(global-font-lock-mode t)

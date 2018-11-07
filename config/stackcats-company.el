@@ -9,8 +9,10 @@
   (defvar company-dabbrev-downcase nil)
   (setq company-backends (delete 'company-semantic company-backends))
   ;; key
-  (define-key company-active-map "\C-n" 'company-select-next)
-  (define-key company-active-map "\C-p" 'company-select-previous))
+  :bind
+  (:map company-active-map
+        ("C-n" . company-select-next)
+        ("C-p" . company-select-previous)))
 
 (add-hook 'after-init-hook 'global-company-mode)
 

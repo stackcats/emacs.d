@@ -28,9 +28,6 @@
   (setq projectile-completion-system 'helm)
   (if (fboundp 'helm-projectile-on)
       (helm-projectile-on)))
-  ;; :bind
-  ;; (:map projectile-mode-map
-  ;;       ("C-c p" . projectile-command-map)))
 
 (use-package helm-gtags
   :config

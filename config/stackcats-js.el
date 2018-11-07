@@ -20,7 +20,6 @@
   (setq js-switch-indent-offset 2)
   :bind
   (:map js2-mode-map
-        ("M-." . nil)
         ("C-c j" . xref-find-definitions)
         ("C-c r" . xref-find-references)))
 
