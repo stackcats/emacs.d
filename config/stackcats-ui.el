@@ -28,16 +28,19 @@
     (use-package spaceline
       :init
       (require 'spaceline-config)
-      (spaceline-helm-mode))
+      (spaceline-emacs-theme)
+      (setq powerline-default-separator 'bar)
+      (spaceline-compile)
+      (spaceline-helm-mode))))
 
     ;; (setq-default ns-use-srgb-colorspace nil)
 
-    (use-package spaceline-all-the-icons
-      :after spaceline
-      :config
-      (if (fboundp 'spaceline-all-the-icons-theme)
-          (spaceline-all-the-icons-theme))
-      (setq spaceline-all-the-icons-separator-type 'none))))
+    ;; (use-package spaceline-all-the-icons
+    ;;   :after spaceline
+    ;;   :config
+    ;;   (if (fboundp 'spaceline-all-the-icons-theme)
+    ;;       (spaceline-all-the-icons-theme)))))
+;; (setq spaceline-all-the-icons-separator-type 'none))))
 
 (provide 'stackcats-ui)
 ;;; stackcats-ui.el ends here
