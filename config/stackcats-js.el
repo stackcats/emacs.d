@@ -18,6 +18,8 @@
   (setq js2-idle-timer-delay 2)
   (setq js2-basic-offset 2)
   (setq js-switch-indent-offset 2)
+  (setq js2-mode-show-parse-errors nil)
+  (setq js2-mode-show-strict-warnings nil)
   :bind
   (:map js2-mode-map
         ("C-c j" . xref-find-definitions)
