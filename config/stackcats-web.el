@@ -5,6 +5,7 @@
   :mode (("\\.html\\'" . web-mode)
          ("\\.html\\.eex\\'" . web-mode))
   :config
+  (setq web-mode-markup-indent-offset 2)
   (setq web-mode-enable-auto-pairing nil))
 
 (provide 'stackcats-web)
