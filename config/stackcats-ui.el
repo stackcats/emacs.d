@@ -2,6 +2,9 @@
 ;;; Commentary:
 ;;; Code:
 (use-package aggressive-indent
+  :config
+  (setq aggressive-indent-excluded-modes
+        (remove 'python-mode aggressive-indent-excluded-modes))
   :hook (prog-mode . aggressive-indent-mode))
 
 (use-package column-enforce-mode
