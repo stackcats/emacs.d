@@ -19,16 +19,20 @@
   (setq js2-basic-offset 2)
   (setq js-switch-indent-offset 2)
   (setq js2-mode-show-parse-errors nil)
-  (setq js2-mode-show-strict-warnings nil)
-  :bind
-  (:map js2-mode-map
-        ("C-c j" . xref-find-definitions)
-        ("C-c r" . xref-find-references)))
+  (setq-default js-indent-align-list-continuation nil)
+  (setq js2-mode-show-strict-warnings nil))
 
 (use-package xref-js2
   :hook
   (js2-mode
    . (lambda () (add-hook 'xref-backend-functions 'xref-js2-xref-backend nil t))))
+
+(use-package tern
+  :bind
+  (:map tern-mode-keymap
+        ("M-." . xref-find-definitions)
+        ("M-," . xref-pop-marker-stack)
+        ("M-?" . xref-find-references)))
 
 (use-package company-tern
   :ensure-system-package

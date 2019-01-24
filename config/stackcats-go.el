@@ -12,7 +12,8 @@
   (setq gofmt-command "goimports")
   :bind
   (:map go-mode-map
-        ("C-c j" . godef-jump)))
+        ("M-," . pop-tag-mark)
+        ("M-." . godef-jump)))
 
 (use-package go-guru
   :hook (go-mode-hook . go-guru-hl-identifier-mode))
