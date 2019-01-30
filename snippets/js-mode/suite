@@ -1,6 +1,0 @@
-# -*- mode: snippet -*-
-#name : suite
-# --
-suite("$1", function() {
-    $0
-});

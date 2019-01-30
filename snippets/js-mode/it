@@ -1,0 +1,13 @@
+# -*- mode: snippet -*-
+#name : it
+# --
+it("$1", async (done) => {
+  try {
+    $0
+
+    done();
+  } catch (e) {
+    console.error(e);
+    done(e);
+  }
+});
