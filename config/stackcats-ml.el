@@ -12,6 +12,7 @@
   :after (flycheck merlin)
   :config
   (setq merlin-error-after-save nil)
+  (setq shell-file-name "/bin/sh")
   (flycheck-ocaml-setup))
 
 (provide 'stackcats-ml)
