@@ -1,7 +1,7 @@
 # -*- mode: snippet -*-
 #name : it
 # --
-it("$1", async (done) => {
+it('$1', async (done) => {
   try {
     $0
 
