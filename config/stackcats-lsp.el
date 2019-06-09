@@ -33,8 +33,6 @@
   (use-package helm-lsp
     :commands helm-lsp-workspace-symbol)
 
-  (use-package lsp-treemacs
-    :commands lsp-treemacs-errors-list)
 
   (use-package dap-mode)
   )

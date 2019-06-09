@@ -5,6 +5,12 @@
   :hook ((js2-mode . aggressive-indent-mode)
          (c-mode . aggressive-indent-mode)))
   
+(use-package dashboard
+  :config
+  (setq dashboard-center-content t)
+  (setq dashboard-items '((recents  . 5)
+                        (projects . 5)))
+  (dashboard-setup-startup-hook))
 
 (use-package column-enforce-mode
   :hook (prog-mode . column-enforce-mode))

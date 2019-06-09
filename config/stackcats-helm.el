@@ -29,28 +29,6 @@
   (if (fboundp 'helm-projectile-on)
       (helm-projectile-on)))
 
-(use-package helm-gtags
-  :config
-  (setq helm-gtags-ignore-case t)
-  (setq helm-gtags-auto-update t)
-  (setq helm-gtags-use-input-at-cursor t)
-  (setq helm-gtags-pulse-at-cursor t)
-  (setq helm-gtags-prefix-key "\C-cg")
-  (setq helm-gtags-suggested-key-mapping t)
-  (add-hook 'c++-mode-hook 'helm-gtags-mode)
-  (add-hook 'c-mode-hook 'helm-gtags-mode)
-  :bind
-  (:map helm-gtags-mode-map
-        ("C-c h t" . helm-gtags-find-tag)
-        ("C-c h r" . helm-gtags-find-rtag)
-        ("C-c h s" . helm-gtags-find-symbol)
-        ("C-c ," . helm-gtags-previous-history)
-        ("C-c ." . helm-gtags-next-history)
-        ("M-," . helm-gtags-pop-stack)
-        ("C-c h j" . helm-gtags-select)
-        ("M-." . helm-gtags-dwim)
-        ("C-c h a" . helm-gtags-tags-in-this-function)))
-
 (use-package helm-flycheck
   :config
   (global-set-key (kbd "C-c f") 'helm-flycheck))
