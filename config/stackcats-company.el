@@ -2,7 +2,6 @@
 ;;; Commentary:
 ;;; Code:
 (use-package company
-  :defer t
   :config
   (defvar company-flx-mode +1)
   (setq company-idle-delay 0)

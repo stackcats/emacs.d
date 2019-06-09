@@ -2,10 +2,9 @@
 ;;; Commentary:
 ;;; Code:
 (use-package aggressive-indent
-  :config
-  (setq aggressive-indent-excluded-modes
-        (remove 'python-mode aggressive-indent-excluded-modes))
-  :hook (prog-mode . aggressive-indent-mode))
+  :hook ((js2-mode . aggressive-indent-mode)
+         (c-mode . aggressive-indent-mode)))
+  
 
 (use-package column-enforce-mode
   :hook (prog-mode . column-enforce-mode))
@@ -38,7 +37,7 @@
       :after spaceline
       :config
       (if (fboundp 'spaceline-all-the-icons-theme)
-          (spaceline-all-the-icons-theme))      
+          (spaceline-all-the-icons-theme))
       (setq spaceline-all-the-icons-separator-type 'none))))
 
 (provide 'stackcats-ui)

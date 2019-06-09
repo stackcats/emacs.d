@@ -2,7 +2,6 @@
 ;;; Commentary:
 ;;; Code:
 (use-package yasnippet
-  :defer t
   :init
   (defadvice auto-insert (around yasnippet-expand-after-auto-insert activate)
     "使用yas扩展模板."

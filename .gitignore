@@ -1,3 +1,4 @@
+
 ensime
 .DS_Store
 abbrev_defs
@@ -21,6 +22,9 @@ projectile-bookmarks.eld
 .python-environments/
 network-security.data
 .cask
-anaconda-mode/
+.cache
+.dap-breakpoints
+.lsp-session-*
+transient
 projectile.bak
 url/
