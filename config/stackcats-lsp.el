@@ -13,6 +13,7 @@
          (c-mode . lsp)
          (js2-mode . lsp)
          (tuareg-mode . lsp)
+         (dart-mode . lsp)
          (go-mode . lsp))
   :config
   (setq lsp-prefer-flymake nil)
@@ -21,6 +22,7 @@
   (use-package lsp-ui
     :commands lsp-ui-mode
     :config
+    (setq lsp-ui-sideline-show-code-actions nil)
     (setq lsp-ui-doc-enable nil))
 
   (use-package company-lsp
