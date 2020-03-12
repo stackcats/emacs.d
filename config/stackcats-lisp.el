@@ -16,7 +16,6 @@
   :hook ((lisp-mode . sly-mode)
         (sly-mode . prelude-start-sly))
   :config
-  (require 'sly-autoloads)
   (setq-default inferior-lisp-program "/usr/local/bin/clisp"))
 
 ;;; Racket
