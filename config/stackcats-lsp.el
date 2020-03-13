@@ -15,12 +15,13 @@
          (js2-mode . lsp)
          (tuareg-mode . lsp)
          (dart-mode . lsp)
-;;         (python-mode . lsp)
          (go-mode . lsp))
   :config
-  (setq-default lsp-diagnostic-package :flycheck)
-  (setq-default lsp-eldoc-hook nil)
-  (setq-default lsp-document-sync-method 'full)
+  (setq lsp-prefer-capf t)
+  (setq lsp-diagnostic-package :flycheck)
+  (setq lsp-eldoc-hook nil)
+  (setq lsp-log-io t)
+  (setq lsp-document-sync-method 'full)
   
   (use-package lsp-ui
     :commands lsp-ui-mode
@@ -37,16 +38,7 @@
   
   (use-package helm-lsp
     :commands helm-lsp-workspace-symbol)
-
-
-  (use-package dap-mode)
   )
-
-(use-package lsp-python-ms
-  :demand
-  :hook (python-mode . (lambda ()
-                          (require 'lsp-python-ms)
-                          (lsp))))
 
 (use-package lsp-haskell
   :demand

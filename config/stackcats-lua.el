@@ -9,9 +9,9 @@
   ("C-c c" . lua-send-buffer)))
 
 (use-package company-lua
-  :after company
+  :after (company)
   :config
-  (add-to-list 'company-backends 'company-racer))
+  (add-to-list 'company-backends 'company-lua))
 
 (provide 'stackcats-lua)
 ;;; stackcats-lua.el ends here
