@@ -1,3 +1,4 @@
+
 ;;; package --- Summary
 ;;; Commentary:
 ;;; Code:
@@ -14,11 +15,12 @@
          (js2-mode . lsp)
          (tuareg-mode . lsp)
          (dart-mode . lsp)
-         (python-mode . lsp)
+;;         (python-mode . lsp)
          (go-mode . lsp))
   :config
-  (setq lsp-diagnostic-package :flycheck)
-  (setq lsp-document-sync-method 'full)
+  (setq-default lsp-diagnostic-package :flycheck)
+  (setq-default lsp-eldoc-hook nil)
+  (setq-default lsp-document-sync-method 'full)
   
   (use-package lsp-ui
     :commands lsp-ui-mode
@@ -40,9 +42,11 @@
   (use-package dap-mode)
   )
 
-;; (use-package lsp-python-ms
-;;   :demand
-;;   :hook (python-mode . lsp))
+(use-package lsp-python-ms
+  :demand
+  :hook (python-mode . (lambda ()
+                          (require 'lsp-python-ms)
+                          (lsp))))
 
 (use-package lsp-haskell
   :demand
