@@ -14,9 +14,10 @@
          (js2-mode . lsp)
          (tuareg-mode . lsp)
          (dart-mode . lsp)
+         (python-mode . lsp)
          (go-mode . lsp))
   :config
-  (setq lsp-prefer-flymake nil)
+  (setq lsp-diagnostic-package :flycheck)
   (setq lsp-document-sync-method 'full)
   
   (use-package lsp-ui
@@ -39,9 +40,9 @@
   (use-package dap-mode)
   )
 
-(use-package lsp-python-ms
-  :demand
-  :hook (python-mode . lsp))
+;; (use-package lsp-python-ms
+;;   :demand
+;;   :hook (python-mode . lsp))
 
 (use-package lsp-haskell
   :demand
