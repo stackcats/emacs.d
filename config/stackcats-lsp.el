@@ -12,7 +12,6 @@
    (gopls . "go get golang.org/x/tools/cmd/gopls"))
   :hook ((rust-mode . lsp)
          (c-mode . lsp)
-         (js2-mode . lsp)
          (tuareg-mode . lsp)
          (dart-mode . lsp)
          (go-mode . lsp))
