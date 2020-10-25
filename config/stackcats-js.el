@@ -34,13 +34,13 @@
         ("M-," . xref-pop-marker-stack)
         ("M-?" . xref-find-references)))
 
-(use-package company-tern
-  :ensure-system-package
-  (tern . "npm install -g tern")
-  :after company
-  :config
-  (add-to-list 'company-backends 'company-tern)
-  (setq company-tern-property-marker ""))
+;;(use-package company-tern
+;;  :ensure-system-package
+;;  (tern . "npm install -g tern")
+;;  :after company
+;;  :config
+;;  (add-to-list 'company-backends 'company-tern)
+;;  (setq company-tern-property-marker ""))
 
 (provide 'stackcats-js)
 ;;; stackcats-js.el ends here

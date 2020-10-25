@@ -9,6 +9,7 @@
   ((before-save . gofmt-before-save)
    (go-mode . (lambda () (setq tab-width 4 indent-tabs-mode 1))))
   :config
+  (add-hook 'go-mode-hook 'eglot-ensure)
   (setq gofmt-command "goimports"))
 
 (provide 'stackcats-go)

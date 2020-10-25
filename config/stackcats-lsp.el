@@ -11,8 +11,7 @@
   ;;  (gopls . "go get golang.org/x/tools/cmd/gopls"))
   :hook ((c-mode . lsp)
          (tuareg-mode . lsp)
-         (dart-mode . lsp)
-         (go-mode . lsp))
+         (dart-mode . lsp))
   :config
   (defvar lsp-diagnostics-provider :flycheck)
   (setq lsp-eldoc-hook nil)
