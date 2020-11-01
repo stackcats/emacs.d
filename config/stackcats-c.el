@@ -12,15 +12,10 @@
 
 (defun stackcats-c-mode-hook ()
   (c-toggle-comment-style -1)
-  (add-hook 'before-save-hook 'clang-format-buffer nil t))
-
-(use-package c-mode
-  :ensure nil
-  :commands c-mode
-  :mode "\\.c\\'"
-  :hook (c-mode . stackcats-c-mode-hook)
-  :init
   (setq	indent-tabs-mode t))
+
+(add-hook 'c-mode-hook 'stackcats-c-mode-hook)
+(add-hook 'c-mode-hook 'eglot-ensure)
 
 (add-hook 'compilation-start-hook 'kill-buffer-when-compile-success)
 
@@ -34,11 +29,6 @@
 
 (add-hook 'makefile-bsdmake-mode-hook
           (lambda () (font-lock-add-keywords nil stackcats-extra-keywords)))
-
-;; (use-package rtags
-;;   :commands rtags-start-process-unless-running
-;;   :config (progn
-;; 	    (message "Rtags loaded")))
 
 (provide 'stackcats-c)
 ;;; stackcats-c.el ends here

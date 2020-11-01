@@ -9,8 +9,7 @@
   ;;  (ocaml-language-server . "npm install -g ocaml-language-server")
   ;;  ;; (cquery . "brew install cquery")
   ;;  (gopls . "go get golang.org/x/tools/cmd/gopls"))
-  :hook ((c-mode . lsp)
-         (tuareg-mode . lsp)
+  :hook ((tuareg-mode . lsp)
          (dart-mode . lsp))
   :config
   (defvar lsp-diagnostics-provider :flycheck)
