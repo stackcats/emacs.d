@@ -1,3 +1,4 @@
+
 ;;; package --- Summary
 ;;; Commentary:
 ;;; Code:
@@ -16,6 +17,8 @@
   :defer t
   :hook (prog-mode . flycheck-mode)
   :config
+  (use-package flycheck-credo)
+  (flycheck-credo-setup)
   (setq-default flycheck-temp-prefix ".")
   (setq-default
    flycheck-disabled-checkers
