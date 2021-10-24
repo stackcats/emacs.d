@@ -19,9 +19,10 @@
 (setq use-package-always-ensure t)
 (use-package use-package-ensure-system-package :ensure t)
 
-(use-package wakatime-mode
-  :config
-  (global-wakatime-mode))
+(when (file-exists-p "~/.wakatime.cfg")
+  (use-package wakatime-mode
+    :config
+    (global-wakatime-mode)))
 
 (toggle-debug-on-error)
 
