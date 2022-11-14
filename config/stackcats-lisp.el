@@ -2,11 +2,26 @@
 ;;; Commentary:
 ;;; Code:
 
+(defun close-all-parentheses ()
+  (interactive "*")
+  (let ((closing nil))
+    (save-excursion
+      (while (condition-case nil
+                 (progn
+                   (backward-up-list)
+                   (let ((syntax (syntax-after (point))))
+                     (cl-case (car syntax)
+                       ((4) (setq closing (cons (cdr syntax) closing)))
+                       ((7 8) (setq closing (cons (char-after (point)) closing)))))
+                   t)
+               ((scan-error) nil))))
+    (apply #'insert (nreverse closing))))
+
 (defun prelude-start-sly ()
   (if (and (fboundp 'sly-connected-p)
            (fboundp 'sly)
            (not (sly-connected-p)))
-    (save-excursion (sly))))
+      (save-excursion (sly))))
 
 ;;; Common Lisp
 ;; (use-package sly
@@ -21,8 +36,13 @@
 ;;; Racket
 (use-package racket-mode
   :mode "\\.rkt\\'"
-  :config
-  (add-hook 'go-mode-hook 'eglot-ensure))
+  :hook ((racket-mode . (lambda() (set (make-local-variable 'smartparens-mode) nil)))
+         (racket-mode . racket-xp-mode)
+         (racket-mode . racket-smart-open-bracket-mode)
+         (racket-mode . eglot-ensure))
+  :bind
+  (:map racket-mode-map
+        ("C-]" . close-all-parentheses)))
 
 ;;; Clojure
 (use-package cider
