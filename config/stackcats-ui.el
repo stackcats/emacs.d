@@ -23,15 +23,10 @@
 
 (when (display-graphic-p)
   (progn
-    (use-package kaolin-themes :defer t)
 
-    (use-package circadian
+    (use-package nord-theme
       :config
-      (setq calendar-latitude 39.904202)
-      (setq calendar-longitude 116.407394)
-      (setq-default circadian-themes '((:sunrise . kaolin-bubblegum)
-                                       (:sunset . kaolin-aurora)))
-      (circadian-setup))
+      (load-theme 'nord t))
     
     (use-package spaceline
       :config
