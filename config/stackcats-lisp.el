@@ -9,20 +9,20 @@
     (save-excursion (sly))))
 
 ;;; Common Lisp
-(use-package sly
-  :ensure-system-package
-  (clisp . "brew install clisp")
-  :mode ("\\.lisp\\'" . lisp-mode)
-  :hook ((lisp-mode . sly-mode)
-        (sly-mode . prelude-start-sly))
-  :config
-  (setq-default inferior-lisp-program "/usr/local/bin/clisp"))
+;; (use-package sly
+;;   :ensure-system-package
+;;   (clisp . "brew install clisp")
+;;   :mode ("\\.lisp\\'" . lisp-mode)
+;;   :hook ((lisp-mode . sly-mode)
+;;         (sly-mode . prelude-start-sly))
+;;   :config
+;;   (setq-default inferior-lisp-program "/usr/local/bin/clisp"))
 
 ;;; Racket
 (use-package racket-mode
   :mode "\\.rkt\\'"
   :config
-  (setq racket-program (getenv "RACKET")))
+  (add-hook 'go-mode-hook 'eglot-ensure))
 
 ;;; Clojure
 (use-package cider
