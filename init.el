@@ -19,6 +19,8 @@
 (setq use-package-always-ensure t)
 (use-package use-package-ensure-system-package :ensure t)
 
+;; (setq python-shell-interpreter "python3")
+
 (when (file-exists-p "~/.wakatime.cfg")
   (use-package wakatime-mode
     :config
@@ -45,6 +47,9 @@
 
 (mapc (lambda (name) (require (intern (file-name-sans-extension name))))
       (directory-files config-dir nil "\\.el$"))
+
+(load-file (let ((coding-system-for-read 'utf-8))
+                (shell-command-to-string "agda-mode locate")))
 
 (setq custom-file "~/.custom-file.el")
 (load custom-file :no-error :no-message)
