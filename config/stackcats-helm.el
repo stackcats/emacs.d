@@ -3,7 +3,7 @@
 ;;; Code:
 (use-package helm
   :config
-  (require 'helm-config)
+  ;; (require 'helm-config)
   (setq helm-split-window-inside-p t)
   (setq helm-move-to-line-cycle-in-source t)
   (defvar helm-ff-search-library-in-sexp t)
