@@ -30,5 +30,8 @@
 (add-hook 'makefile-bsdmake-mode-hook
           (lambda () (font-lock-add-keywords nil stackcats-extra-keywords)))
 
+(use-package clang-format+
+  :hook (c-mode-common . clang-format+-mode))
+
 (provide 'stackcats-c)
 ;;; stackcats-c.el ends here
