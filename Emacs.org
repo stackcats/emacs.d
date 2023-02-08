@@ -9,8 +9,9 @@
           ("org" . "https://orgmode.org/elpa/")
           ("melpa" . "http://melpa.org/packages/")))
 
+  (package-initialize)
+
   (unless (package-installed-p 'use-package)
-    (message "==================== refresh-contents")
     (package-refresh-contents)
     (package-install 'use-package))
 
@@ -20,26 +21,17 @@
     :after use-package)
 #+end_src
 
-
 * Basic Config
 
+** UI
 #+begin_src emacs-lisp
   (tool-bar-mode -1)
   (menu-bar-mode  1)
   (scroll-bar-mode -1)
   (set-fringe-mode 10)
+  (setq frame-title-format "%b")
+  (setq inhibit-startup-message t)
   (global-display-line-numbers-mode t)
-  (column-number-mode)
-  (show-paren-mode 1)
-  (toggle-debug-on-error)
-
-  (setq inhibit-compacting-font-caches t)
-
-  (set-face-attribute 'default nil :font "Hack" :height 180)
-  ;; Set the fixed pitch face
-  (set-face-attribute 'fixed-pitch nil :font "Hack" :height 180)
-  ;; Set the variable pitch face
-  (set-face-attribute 'variable-pitch nil :font "Hack" :height 180 :weight 'regular)
 
   ;; Disable line numbers for some modes
   (dolist (mode '(org-mode-hook
@@ -48,17 +40,119 @@
                   eshell-mode-hook))
     (add-hook mode (lambda () (display-line-numbers-mode 0))))
 
-  (defvar local-dir (file-name-directory load-file-name))
+  (setq hl-line-range-function
+        #'(lambda () (cons (line-end-position) (line-beginning-position 2))))
+  (setq global-hl-line-sticky-flag t)
+  (global-hl-line-mode 1)
+#+end_src
 
-  (defvar config-dir (expand-file-name  "config" local-dir))
+** Functional
 
-  (add-to-list 'load-path config-dir)
+#+begin_src emacs-lisp
+  (setq tab-width 2)
+  (indent-tabs-mode nil)
+  (column-number-mode)
+  (show-paren-mode 1)
+  (toggle-debug-on-error)
+  (setq stack-trace-on-error nil)
+  (setq auto-save-default nil)
+  (setq make-backup-files nil)
+  (prefer-coding-system 'utf-8)
+  (setq message-log-max t)
+  (setq select-enable-clipboard t)
+  (pending-delete-mode t)
+  (setq ring-bell-function 'ignore)
 
-  (mapc (lambda (name) (require (intern (file-name-sans-extension name))))
-        (directory-files config-dir nil "\\.el$"))
+  ;; mouse configuration
+  (setq mouse-wheel-scroll-amount '(1 ((shift) . 2)))
+  (setq mouse-wheel-progressive-speed nil)
+  (setq mouse-wheel-follow-mouse 't)
 
   (setq custom-file "~/.custom-file.el")
   (load custom-file :no-error :no-message)
+#+end_src
+
+** Fonts
+
+#+begin_src emacs-lisp
+  ;; display lambda as "λ"
+  (global-font-lock-mode t)
+
+  (global-prettify-symbols-mode 1)
+
+  (setq inhibit-compacting-font-caches t)
+
+  (set-face-attribute 'default nil :font "Hack" :height 180)
+  ;; Set the fixed pitch face
+  (set-face-attribute 'fixed-pitch nil :font "Hack" :height 180)
+  ;; Set the variable pitch face
+  (set-face-attribute 'variable-pitch nil :font "Hack" :height 180 :weight 'regular)
+#+end_src
+
+* Completion
+** Vertico
+
+#+begin_src emacs-lisp
+  (use-package vertico
+    :init
+    (vertico-mode 1)
+    (setq vertico-cycle t))
+
+  (use-package savehist
+    :init
+    (savehist-mode))
+#+end_src
+
+** Orderless: Advanced completion style
+
+#+begin_src emacs-lisp
+  (use-package orderless
+    :after vertico
+    :init
+    (setq completion-styles '(orderless basic)
+          completion-category-defaults nil
+          completion-category-overrides '((file (styles partial-completion)))))
+#+end_src
+
+** Marginalia: Rich annotations in the minibuffer
+
+#+begin_src emacs-lisp
+  (use-package marginalia
+    :init
+    (marginalia-mode))
+#+end_src
+
+** Embark: Minibuffer actions and context menu
+
+#+begin_src emacs-lisp
+  (use-package embark
+    :bind
+    (("C-." . embark-act)         ;; pick some comfortable binding
+     ("C-;" . embark-dwim)        ;; good alternative: M-.
+     ("C-h B" . embark-bindings)) ;; alternative for `describe-bindings'
+
+    :init
+    ;; Optionally replace the key help with a completing-read interface
+    (setq prefix-help-command #'embark-prefix-help-command)
+
+    :config
+    ;; Hide the mode line of the Embark live/completions buffers
+    (add-to-list 'display-buffer-alist
+                 '("\\`\\*Embark Collect \\(Live\\|Completions\\)\\*"
+                   nil
+                   (window-parameters (mode-line-format . none)))))
+
+  (use-package embark-consult
+    :hook
+    (embark-collect-mode . consult-preview-at-point-mode))
+#+end_src
+
+** Consult: Useful search and navigation commands
+
+#+begin_src emacs-lisp
+  (use-package consult
+    :bind
+    (("C-s" . consult-line)))
 #+end_src
 
 * Org Mode
@@ -171,6 +265,30 @@
     (add-to-list 'eglot-server-programs '(elixir-mode "~/.emacs.d/vendor/elixir-ls/language_server.sh")))
 #+end_src
 
+** Company Mode
+
+#+begin_src emacs-lisp
+  (use-package company
+    :config
+    (defvar company-flx-mode +1)
+    (setq company-idle-delay 0)
+    (defvar company-dabbrev-downcase nil)
+    ;; key
+    :bind
+    (:map company-active-map
+          ("C-n" . company-select-next)
+          ("C-p" . company-select-previous)))
+
+  (add-hook 'after-init-hook 'global-company-mode)
+#+end_src
+
+*** A company front-end with icons.
+
+#+begin_src emacs-lisp
+  (use-package company-box
+    :hook (company-mode . company-box-mode))
+#+end_src
+** FlyCheck Mode
 ** Languages
 
 *** C C++
@@ -232,12 +350,50 @@
 
 #+end_src
 
-
-
-
 *** Elixir
 
+#+begin_src emacs-lisp
+  (defun stackcats/elixir-mode-setup ()
+    (add-hook 'before-save-hook 'elixir-format nil t))
 
+  (use-package elixir-mode
+    :mode "\\.exs?$"
+    :hook
+    ((elixir-mode . stackcats/elixir-mode-setup)
+     (elixir-mode . eglot-ensure)))
+#+end_src
+
+*** Golang
+
+#+begin_src emacs-lisp
+  (defun stackcats/go-mode-setup ()
+    (setq tab-width 4)
+    (indent-tabs-mode 1))
+
+  (use-package go-mode
+    :mode "\\.go\\'"
+    :hook
+    ((before-save . gofmt-before-save)
+     (go-mode . stackcats/go-mode-setup)
+     (go-mode . eglot-ensure))
+    :config
+    (setq gofmt-command "goimports"))
+#+end_src
+
+*** Lua
+
+#+begin_src emacs-lisp
+  (use-package lua-mode
+    :mode "\\.lua\\'"
+    :config
+    (setq lua-indent-level 4)
+    (setq lua-indent-nested-block-content-align nil))
+
+  (use-package company-lua
+    :after (lua-mode company)
+    :config
+    (add-to-list 'company-backends 'company-lua))
+#+end_src
 
 * Utils
 

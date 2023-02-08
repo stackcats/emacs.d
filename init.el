@@ -5,8 +5,9 @@
         ("org" . "https://orgmode.org/elpa/")
         ("melpa" . "http://melpa.org/packages/")))
 
+(package-initialize)
+
 (unless (package-installed-p 'use-package)
-  (message "==================== refresh-contents")
   (package-refresh-contents)
   (package-install 'use-package))
 
@@ -19,10 +20,48 @@
 (menu-bar-mode  1)
 (scroll-bar-mode -1)
 (set-fringe-mode 10)
+(setq frame-title-format "%b")
+(setq inhibit-startup-message t)
 (global-display-line-numbers-mode t)
+
+;; Disable line numbers for some modes
+(dolist (mode '(org-mode-hook
+                term-mode-hook
+                shell-mode-hook
+                eshell-mode-hook))
+  (add-hook mode (lambda () (display-line-numbers-mode 0))))
+
+(setq hl-line-range-function
+      #'(lambda () (cons (line-end-position) (line-beginning-position 2))))
+(setq global-hl-line-sticky-flag t)
+(global-hl-line-mode 1)
+
+(setq tab-width 2)
+(indent-tabs-mode nil)
 (column-number-mode)
 (show-paren-mode 1)
 (toggle-debug-on-error)
+(setq stack-trace-on-error nil)
+(setq auto-save-default nil)
+(setq make-backup-files nil)
+(prefer-coding-system 'utf-8)
+(setq message-log-max t)
+(setq select-enable-clipboard t)
+(pending-delete-mode t)
+(setq ring-bell-function 'ignore)
+
+;; mouse configuration
+(setq mouse-wheel-scroll-amount '(1 ((shift) . 2)))
+(setq mouse-wheel-progressive-speed nil)
+(setq mouse-wheel-follow-mouse 't)
+
+(setq custom-file "~/.custom-file.el")
+(load custom-file :no-error :no-message)
+
+;; display lambda as "λ"
+(global-font-lock-mode t)
+
+(global-prettify-symbols-mode 1)
 
 (setq inhibit-compacting-font-caches t)
 
@@ -32,24 +71,50 @@
 ;; Set the variable pitch face
 (set-face-attribute 'variable-pitch nil :font "Hack" :height 180 :weight 'regular)
 
-;; Disable line numbers for some modes
-(dolist (mode '(org-mode-hook
-                term-mode-hook
-                shell-mode-hook
-                eshell-mode-hook))
-  (add-hook mode (lambda () (display-line-numbers-mode 0))))
+(use-package vertico
+  :init
+  (vertico-mode 1)
+  (setq vertico-cycle t))
 
-(defvar local-dir (file-name-directory load-file-name))
+(use-package savehist
+  :init
+  (savehist-mode))
 
-(defvar config-dir (expand-file-name  "config" local-dir))
+(use-package orderless
+  :after vertico
+  :init
+  (setq completion-styles '(orderless basic)
+        completion-category-defaults nil
+        completion-category-overrides '((file (styles partial-completion)))))
 
-(add-to-list 'load-path config-dir)
+(use-package marginalia
+  :init
+  (marginalia-mode))
 
-(mapc (lambda (name) (require (intern (file-name-sans-extension name))))
-      (directory-files config-dir nil "\\.el$"))
+(use-package embark
+  :bind
+  (("C-." . embark-act)         ;; pick some comfortable binding
+   ("C-;" . embark-dwim)        ;; good alternative: M-.
+   ("C-h B" . embark-bindings)) ;; alternative for `describe-bindings'
 
-(setq custom-file "~/.custom-file.el")
-(load custom-file :no-error :no-message)
+  :init
+  ;; Optionally replace the key help with a completing-read interface
+  (setq prefix-help-command #'embark-prefix-help-command)
+
+  :config
+  ;; Hide the mode line of the Embark live/completions buffers
+  (add-to-list 'display-buffer-alist
+               '("\\`\\*Embark Collect \\(Live\\|Completions\\)\\*"
+                 nil
+                 (window-parameters (mode-line-format . none)))))
+
+(use-package embark-consult
+  :hook
+  (embark-collect-mode . consult-preview-at-point-mode))
+
+(use-package consult
+  :bind
+  (("C-s" . consult-line)))
 
 (defun stackcats/org-font-setup ()
   ;; Replace list hyphen with dot
@@ -126,6 +191,22 @@
   (add-to-list 'eglot-server-programs '(rust-mode . "rust-analyzer"))
   (add-to-list 'eglot-server-programs '(elixir-mode "~/.emacs.d/vendor/elixir-ls/language_server.sh")))
 
+(use-package company
+  :config
+  (defvar company-flx-mode +1)
+  (setq company-idle-delay 0)
+  (defvar company-dabbrev-downcase nil)
+  ;; key
+  :bind
+  (:map company-active-map
+        ("C-n" . company-select-next)
+        ("C-p" . company-select-previous)))
+
+(add-hook 'after-init-hook 'global-company-mode)
+
+(use-package company-box
+  :hook (company-mode . company-box-mode))
+
 (defun stackcats/c-mode-setup ()
   (c-toggle-comment-style -1)
   (setq	indent-tabs-mode t))
@@ -158,6 +239,39 @@
   (font-lock-add-keywords nil stackcats-extra-keywords))
 
 (add-hook 'makefile-bsdmake-mode-hook 'stackcats/makefile-setup)
+
+(defun stackcats/elixir-mode-setup ()
+  (add-hook 'before-save-hook 'elixir-format nil t))
+
+(use-package elixir-mode
+  :mode "\\.exs?$"
+  :hook
+  ((elixir-mode . stackcats/elixir-mode-setup)
+   (elixir-mode . eglot-ensure)))
+
+(defun stackcats/go-mode-setup ()
+  (setq tab-width 4)
+  (indent-tabs-mode 1))
+
+(use-package go-mode
+  :mode "\\.go\\'"
+  :hook
+  ((before-save . gofmt-before-save)
+   (go-mode . stackcats/go-mode-setup)
+   (go-mode . eglot-ensure))
+  :config
+  (setq gofmt-command "goimports"))
+
+(use-package lua-mode
+  :mode "\\.lua\\'"
+  :config
+  (setq lua-indent-level 4)
+  (setq lua-indent-nested-block-content-align nil))
+
+(use-package company-lua
+  :after (lua-mode company)
+  :config
+  (add-to-list 'company-backends 'company-lua))
 
 (defun stackcats/indent-whole ()
   "Indent the whole buffer."
