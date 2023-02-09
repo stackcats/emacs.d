@@ -1,3 +1,5 @@
+(setq gc-cons-threshold 100000000)
+
 (require 'package)
 
 (setq package-archives
@@ -15,6 +17,16 @@
 (setq use-package-always-ensure t)
 (use-package use-package-ensure-system-package
   :after use-package)
+
+(setq use-package-verbose t)
+
+(setq exec-path (append exec-path '("/usr/local/bin" "~/.cargo/bin" "~/.asdf/shims")))
+
+(when (memq window-system '(mac ns))
+  (use-package exec-path-from-shell
+    :defer t
+    :init
+    (exec-path-from-shell-initialize)))
 
 (tool-bar-mode -1)
 (menu-bar-mode  1)
@@ -71,6 +83,26 @@
 ;; Set the variable pitch face
 (set-face-attribute 'variable-pitch nil :font "Hack" :height 180 :weight 'regular)
 
+(use-package dashboard
+  :config
+  (setq dashboard-center-content t)
+  (setq dashboard-items '((recents  . 5)
+                          (projects . 5)))
+  (dashboard-setup-startup-hook))
+
+(use-package doom-themes
+  :init (load-theme 'modus-vivendi-deuteranopia t))
+
+(use-package all-the-icons)
+
+(use-package doom-modeline
+  :init (doom-modeline-mode 1)
+  :custom ((doom-modeline-height 15)))
+
+;; change mode-line to the top
+(setq-default header-line-format mode-line-format)
+(setq-default mode-line-format nil)
+
 (use-package vertico
   :init
   (vertico-mode 1)
@@ -94,7 +126,7 @@
 (use-package embark
   :bind
   (("C-." . embark-act)         ;; pick some comfortable binding
-   ("C-;" . embark-dwim)        ;; good alternative: M-.
+   ("C-'" . embark-dwim)        ;; good alternative: M-.
    ("C-h B" . embark-bindings)) ;; alternative for `describe-bindings'
 
   :init
@@ -114,7 +146,11 @@
 
 (use-package consult
   :bind
-  (("C-s" . consult-line)))
+  (("C-s" . consult-line)
+   ("C-c f" . consult-flycheck)))
+
+(use-package consult-flycheck
+  :after (consult flyCheck))
 
 (defun stackcats/org-font-setup ()
   ;; Replace list hyphen with dot
@@ -177,10 +213,92 @@
 
 (add-hook 'org-mode-hook (lambda () (add-hook 'after-save-hook #'stackcats/org-babel-tangle-config)))
 
+(with-eval-after-load 'org
+  ;; This is needed as of Org 9.2
+  (require 'org-tempo)
+
+  (add-to-list 'org-structure-template-alist '("sh" . "src shell"))
+  (add-to-list 'org-structure-template-alist '("el" . "src emacs-lisp"))
+  (add-to-list 'org-structure-template-alist '("py" . "src python")))
+
 (when (file-exists-p "~/.wakatime.cfg")
   (use-package wakatime-mode
     :config
     (global-wakatime-mode)))
+
+(use-package column-enforce-mode
+  :hook (prog-mode . column-enforce-mode))
+
+(use-package rainbow-delimiters
+  :hook (prog-mode . rainbow-delimiters-mode))
+
+(use-package highlight-numbers
+  :hook (prog-mode . highlight-numbers-mode))
+
+(use-package smartparens
+  :hook ((prog-mode css-mode) . smartparens-mode)
+  :config
+  (setq-default sp-escape-quotes-after-insert nil)
+  (require 'smartparens-config)
+  (sp-with-modes '(web-mode)
+    (sp-local-pair "%" "%"
+                   :unless '(sp-in-string-p)
+                   :post-handlers '(((lambda (&rest _ignored)
+                                       (just-one-space)
+                                       (save-excursion (insert " ")))
+                                     "SPC" "=" "#")))
+    (sp-local-tag "%" "<% "  " %>")
+    (sp-local-tag "=" "<%= " " %>")
+    (sp-local-tag "#" "<%# " " %>")))
+
+(use-package projectile
+  :diminish projectile-mode
+  :config (projectile-mode)
+  :custom ((projectile-completion-system 'default))
+  :bind-keymap
+  ("C-c p" . projectile-command-map)
+  :init
+  ;; NOTE: Set this to the folder where you keep your Git repos!
+  (when (file-directory-p "~/project")
+    (setq projectile-project-search-path '("~/project")))
+  (setq projectile-switch-project-action #'projectile-dired))
+
+(use-package magit
+  :commands magit-status
+  :custom
+  (magit-display-buffer-function #'magit-display-buffer-same-window-except-diff-v1))
+
+(use-package smerge-mode
+  :config
+  (setq smerge-command-prefix "C-c s"))
+
+(use-package git-gutter
+  :hook (prog-mode . git-gutter-mode)
+  :config
+  (setq git-gutter:update-interval 0.02))
+
+(use-package git-gutter-fringe
+  :after git-gutter
+  :config
+  (define-fringe-bitmap 'git-gutter-fr:added [224] nil nil '(center repeated))
+  (define-fringe-bitmap 'git-gutter-fr:modified [224] nil nil '(center repeated))
+  (define-fringe-bitmap 'git-gutter-fr:deleted [128 192 224 240] nil nil 'bottom))
+
+(defun stackcats/use-eslint-from-node-modules ()
+  (let* ((root (locate-dominating-file
+                (or (buffer-file-name) default-directory)
+                "node_modules"))
+         (eslint (and root
+                      (expand-file-name "node_modules/.bin/eslint"
+                                        root))))
+    (when (and eslint (file-executable-p eslint))
+      (setq-default flycheck-javascript-eslint-executable eslint))))
+
+(use-package flycheck
+  :defer t
+  :hook (prog-mode . flycheck-mode)
+  :config
+  (setq-default flycheck-temp-prefix "."))
 
 (cl-defmethod project-root ((project (head eglot-project)))
   (cdr project))
@@ -190,6 +308,11 @@
   (add-to-list 'eglot-server-programs '((c++-mode c-mode) "clangd"))
   (add-to-list 'eglot-server-programs '(rust-mode . "rust-analyzer"))
   (add-to-list 'eglot-server-programs '(elixir-mode "~/.emacs.d/vendor/elixir-ls/language_server.sh")))
+
+(use-package flycheck-eglot
+  :after (flycheck eglot)
+  :config
+  (global-flycheck-eglot-mode 1))
 
 (use-package company
   :config
@@ -272,6 +395,40 @@
   :after (lua-mode company)
   :config
   (add-to-list 'company-backends 'company-lua))
+
+(use-package cperl-mode
+  :config
+  (defalias 'perl-mode 'cperl-mode))
+
+(use-package which-key
+  :config
+  (if (fboundp 'which-key-mode)
+      (which-key-mode))
+  (setq which-key-idle-delay 0.1)
+  (setq which-key-special-keys '("SPC" "TAB" "RET" "ESC" "DEL")))
+
+(when (eq system-type 'darwin)
+  (setq mac-option-modifier 'meta)
+  (setq mac-command-modifier 'super))
+
+(global-set-key (kbd "C-c g") 'magit-status)
+(global-set-key (kbd "C-c o") 'other-frame)
+(global-set-key (kbd "C-c k") 'kill-this-buffer)
+(global-set-key (kbd "C-q") 'set-mark-command)
+(global-set-key (kbd "RET") 'newline-and-indent)
+(global-set-key (kbd "C-;") 'comment-or-uncomment-region)
+
+(use-package expand-region
+  :config
+  (global-set-key (kbd "C-=") 'er/expand-region))
+
+(use-package ace-jump-mode
+  :config
+  (global-set-key (kbd "C-c SPC") 'ace-jump-mode))
+
+(use-package ace-window
+  :config
+  (global-set-key (kbd "C-c w") 'ace-window))
 
 (defun stackcats/indent-whole ()
   "Indent the whole buffer."
