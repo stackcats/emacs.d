@@ -1,3 +1,7 @@
+;;; -*- lexical-binding: t -*-
+;; NOTE: init.el is now generated from Emacs.org.  Please edit that file 
+;;       in Emacs and init.el will be generated automatically!
+
 (setq gc-cons-threshold 100000000)
 
 (require 'package)
@@ -19,6 +23,15 @@
   :after use-package)
 
 (setq use-package-verbose t)
+
+(use-package auto-package-update
+  :custom
+  (auto-package-update-interval 7)
+  (auto-package-update-prompt-before-update t)
+  (auto-package-update-hide-results t)
+  :config
+  (auto-package-update-maybe)
+  (auto-package-update-at-time "09:00"))
 
 (setq exec-path (append exec-path '("/usr/local/bin" "~/.cargo/bin" "~/.asdf/shims")))
 
@@ -47,6 +60,12 @@
       #'(lambda () (cons (line-end-position) (line-beginning-position 2))))
 (setq global-hl-line-sticky-flag t)
 (global-hl-line-mode 1)
+
+(defvar stackcats/frame-transparency '(90 . 90))
+(set-frame-parameter (selected-frame) 'alpha stackcats/frame-transparency)
+(add-to-list 'default-frame-alist `(alpha . ,stackcats/frame-transparency))
+(set-frame-parameter (selected-frame) 'fullscreen 'maximized)
+(add-to-list 'default-frame-alist '(fullscreen . maximized))
 
 (setq tab-width 2)
 (indent-tabs-mode nil)
@@ -90,6 +109,8 @@
                           (projects . 5)))
   (dashboard-setup-startup-hook))
 
+(use-package modus-themes)
+
 (use-package doom-themes
   :init (load-theme 'modus-vivendi-deuteranopia t))
 
@@ -102,6 +123,15 @@
 ;; change mode-line to the top
 (setq-default header-line-format mode-line-format)
 (setq-default mode-line-format nil)
+
+(use-package mini-frame
+  :config
+  (custom-set-variables
+   '(mini-frame-show-parameters
+     '((top . 100)
+       (width . 0.7)
+       (left . 0.5))))
+  (mini-frame-mode 1))
 
 (use-package vertico
   :init
@@ -251,6 +281,14 @@
     (sp-local-tag "=" "<%= " " %>")
     (sp-local-tag "#" "<%# " " %>")))
 
+(use-package yasnippet
+  :config
+  (add-to-list 'yas-snippet-dirs "~/.emacs.d/snippets")
+  (yas-global-mode 1))
+
+(use-package yasnippet-snippets
+  :after yasnippet)
+
 (use-package projectile
   :diminish projectile-mode
   :config (projectile-mode)
@@ -278,7 +316,8 @@
   (setq git-gutter:update-interval 0.02))
 
 (use-package git-gutter-fringe
-  :after git-gutter
+  :after git-gutter-mode
+  :hook (prog-mode . git-gutter-fringe-mode)
   :config
   (define-fringe-bitmap 'git-gutter-fr:added [224] nil nil '(center repeated))
   (define-fringe-bitmap 'git-gutter-fr:modified [224] nil nil '(center repeated))
@@ -310,7 +349,9 @@
   (add-to-list 'eglot-server-programs '(elixir-mode "~/.emacs.d/vendor/elixir-ls/language_server.sh")))
 
 (use-package flycheck-eglot
+  :hook prog-mode
   :after (flycheck eglot)
+  :custom (flycheck-eglot-exclusive nil)
   :config
   (global-flycheck-eglot-mode 1))
 
@@ -363,6 +404,19 @@
 
 (add-hook 'makefile-bsdmake-mode-hook 'stackcats/makefile-setup)
 
+(use-package clojure-mode
+  :mode "\\.clj\\'")
+
+(use-package cider
+  :after clojure-mode
+  :config
+  (setq cider-repl-display-help-banner nil))
+
+(use-package flycheck-clojure
+  :after (cider flycheck)
+  :hook ((flycheck-mode . flycheck-clojure-setup)
+         (cider-mode . flycheck-mode)))
+
 (defun stackcats/elixir-mode-setup ()
   (add-hook 'before-save-hook 'elixir-format nil t))
 
@@ -385,6 +439,24 @@
   :config
   (setq gofmt-command "goimports"))
 
+(use-package json-mode
+  :mode "\\.json\\'")
+
+(use-package rjsx-mode
+  :mode "\\.jsx\\'")
+
+(use-package js2-mode
+  :mode "\\.js\\'"
+  :hook ((js2-mode . js2-imenu-extras-mode)
+         (js2-mode . eglot-ensure))
+  :config
+  (setq js2-idle-timer-delay 2)
+  (setq js2-basic-offset 2)
+  (setq js-switch-indent-offset 2)
+  (setq js2-mode-show-parse-errors nil)
+  (setq-default js-indent-align-list-continuation nil)
+  (setq js2-mode-show-strict-warnings nil))
+
 (use-package lua-mode
   :mode "\\.lua\\'"
   :config
@@ -397,8 +469,47 @@
   (add-to-list 'company-backends 'company-lua))
 
 (use-package cperl-mode
+  :mode "\\.\\(p\\([lm]\\)\\)\\'"
   :config
   (defalias 'perl-mode 'cperl-mode))
+
+(use-package python-mode
+  :mode "\\.py\\'")
+
+(use-package anaconda-mode
+  :after python-mode
+  :hook
+  ((python-mode . anaconda-mode)
+   (python-mode . anaconda-eldoc-mode)))
+
+(use-package company-anaconda
+  :after company
+  :config
+  (add-to-list 'company-backends 'company-anaconda))
+
+(use-package racket-mode
+  :mode "\\.rkt\\'"
+  :hook ((racket-mode . (lambda() (set (make-local-variable 'smartparens-mode) nil)))
+         (racket-mode . racket-xp-mode)
+         (racket-mode . racket-smart-open-bracket-mode)
+         (racket-mode . eglot-ensure))
+  :bind
+  (:map racket-mode-map
+        ("C-]" . close-all-parentheses)))
+
+(use-package rustic
+  :mode ("\\.rs\\'" . rustic-mode)
+  :config
+  (setq rustic-lsp-client 'eglot)
+  (push 'rustic-clippy flycheck-checkers)
+  (setq rustic-format-trigger 'on-save))
+
+(use-package web-mode
+  :mode (("\\.html\\'" . web-mode)
+         ("\\.html\\.eex\\'" . web-mode))
+  :config
+  (setq web-mode-markup-indent-offset 2)
+  (setq web-mode-enable-auto-pairing nil))
 
 (use-package which-key
   :config
@@ -417,6 +528,7 @@
 (global-set-key (kbd "C-q") 'set-mark-command)
 (global-set-key (kbd "RET") 'newline-and-indent)
 (global-set-key (kbd "C-;") 'comment-or-uncomment-region)
+(global-set-key (kbd "C-c i") 'stackcats/indent-whole)
 
 (use-package expand-region
   :config
@@ -429,6 +541,21 @@
 (use-package ace-window
   :config
   (global-set-key (kbd "C-c w") 'ace-window))
+
+(defun close-all-parentheses ()
+  (interactive "*")
+  (let ((closing nil))
+    (save-excursion
+      (while (condition-case nil
+                 (progn
+                   (backward-up-list)
+                   (let ((syntax (syntax-after (point))))
+                     (cl-case (car syntax)
+                       ((4) (setq closing (cons (cdr syntax) closing)))
+                       ((7 8) (setq closing (cons (char-after (point)) closing)))))
+                   t)
+               ((scan-error) nil))))
+    (apply #'insert (nreverse closing))))
 
 (defun stackcats/indent-whole ()
   "Indent the whole buffer."

@@ -1,6 +1,0 @@
-;;; package --- Summary
-;;; Commentary:
-;;; Code:
-
-(provide '`(file-name-base (buffer-name))`)
-;;; `(buffer-name)` ends here
