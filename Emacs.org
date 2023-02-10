@@ -25,6 +25,7 @@
   (setq use-package-always-ensure t)
   (use-package use-package-ensure-system-package
     :after use-package)
+  (use-package general :after use-package)
 
   (setq use-package-verbose t)
 #+end_src
@@ -186,9 +187,14 @@
 
 #+begin_src emacs-lisp
   (use-package vertico
-    :init
-    (vertico-mode 1)
-    (setq vertico-cycle t))
+    :custom
+    (vertico-cycle t)
+    :general
+    (:keymaps 'vertico-map
+              "C-j" #'vertico-insert
+              "C-l" #'vertico-directory-delete-word)
+    :config
+    (vertico-mode 1))
 
   (use-package savehist
     :init
@@ -212,6 +218,12 @@
   (use-package marginalia
     :init
     (marginalia-mode))
+
+  (use-package all-the-icons-completion
+    :after (marginalia all-the-icons)
+    :hook (marginalia-mode . all-the-icons-completion-marginalia-setup)
+    :init
+    (all-the-icons-completion-mode))
 #+end_src
 
 ** Embark: Minibuffer actions and context menu
@@ -736,6 +748,19 @@
     (setq mac-command-modifier 'super))
 #+end_src
 
+** Misc
+
+#+begin_src emacs-lisp
+  (use-package expand-region
+    :commands er/expand-region)
+
+  (use-package ace-jump-mode
+    :commands ace-jump-mode)
+
+  (use-package ace-window
+    :commands ace-window)
+#+end_src
+
 ** Global Set Key
 
 #+begin_src emacs-lisp
@@ -746,22 +771,9 @@
   (global-set-key (kbd "RET") 'newline-and-indent)
   (global-set-key (kbd "C-;") 'comment-or-uncomment-region)
   (global-set-key (kbd "C-c i") 'stackcats/indent-whole)
-#+end_src
-
-** Misc
-
-#+begin_src emacs-lisp
-  (use-package expand-region
-    :config
-    (global-set-key (kbd "C-=") 'er/expand-region))
-
-  (use-package ace-jump-mode
-    :config
-    (global-set-key (kbd "C-c SPC") 'ace-jump-mode))
-
-  (use-package ace-window
-    :config
-    (global-set-key (kbd "C-c w") 'ace-window))
+  (global-set-key (kbd "C-=") 'er/expand-region)
+  (global-set-key (kbd "C-c SPC") 'ace-jump-mode)
+  (global-set-key (kbd "C-c w") 'ace-window)
 #+end_src
 
 * Functions

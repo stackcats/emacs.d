@@ -21,6 +21,7 @@
 (setq use-package-always-ensure t)
 (use-package use-package-ensure-system-package
   :after use-package)
+(use-package general :after use-package)
 
 (setq use-package-verbose t)
 
@@ -139,9 +140,14 @@
   (mini-frame-mode 1))
 
 (use-package vertico
-  :init
-  (vertico-mode 1)
-  (setq vertico-cycle t))
+  :custom
+  (vertico-cycle t)
+  :general
+  (:keymaps 'vertico-map
+            "C-j" #'vertico-insert
+            "C-l" #'vertico-directory-delete-word)
+  :config
+  (vertico-mode 1))
 
 (use-package savehist
   :init
@@ -157,6 +163,12 @@
 (use-package marginalia
   :init
   (marginalia-mode))
+
+(use-package all-the-icons-completion
+  :after (marginalia all-the-icons)
+  :hook (marginalia-mode . all-the-icons-completion-marginalia-setup)
+  :init
+  (all-the-icons-completion-mode))
 
 (use-package embark
   :bind
@@ -527,6 +539,15 @@
   (setq mac-option-modifier 'meta)
   (setq mac-command-modifier 'super))
 
+(use-package expand-region
+  :commands er/expand-region)
+
+(use-package ace-jump-mode
+  :commands ace-jump-mode)
+
+(use-package ace-window
+  :commands ace-window)
+
 (global-set-key (kbd "C-c g") 'magit-status)
 (global-set-key (kbd "C-c o") 'other-frame)
 (global-set-key (kbd "C-c k") 'kill-this-buffer)
@@ -534,18 +555,9 @@
 (global-set-key (kbd "RET") 'newline-and-indent)
 (global-set-key (kbd "C-;") 'comment-or-uncomment-region)
 (global-set-key (kbd "C-c i") 'stackcats/indent-whole)
-
-(use-package expand-region
-  :config
-  (global-set-key (kbd "C-=") 'er/expand-region))
-
-(use-package ace-jump-mode
-  :config
-  (global-set-key (kbd "C-c SPC") 'ace-jump-mode))
-
-(use-package ace-window
-  :config
-  (global-set-key (kbd "C-c w") 'ace-window))
+(global-set-key (kbd "C-=") 'er/expand-region)
+(global-set-key (kbd "C-c SPC") 'ace-jump-mode)
+(global-set-key (kbd "C-c w") 'ace-window)
 
 (defun close-all-parentheses ()
   (interactive "*")
