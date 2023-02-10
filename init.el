@@ -125,12 +125,17 @@
 (setq-default mode-line-format nil)
 
 (use-package mini-frame
+  :custom ((mini-frame-show-parameters '((top . 200)
+                                         (width . 0.7)
+                                         (height . 30)
+                                         (left . 0.5)
+                                         (min-height . 16)
+
+                                         ;; fix empty initial candidate list
+                                         (no-accept-focus . t)))
+           (mini-frame-interval-border-color "Color")
+           (mini-frame-create-lazy nil))
   :config
-  (custom-set-variables
-   '(mini-frame-show-parameters
-     '((top . 100)
-       (width . 0.7)
-       (left . 0.5))))
   (mini-frame-mode 1))
 
 (use-package vertico
