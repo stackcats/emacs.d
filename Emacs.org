@@ -186,20 +186,20 @@
 ** Vertico
 
 #+begin_src emacs-lisp
-  (use-package vertico
-    :custom
-    (vertico-cycle t)
-    (vertico-resize t)
-    :general
-    (:keymaps 'vertico-map
-              "C-j" #'vertico-insert
-              "C-l" #'vertico-directory-delete-word)
-    :init
-    (vertico-mode 1))
+    (use-package vertico
+      :custom
+      (vertico-cycle t)
+      (vertico-resize t)
+      :general
+      (:keymaps 'vertico-map
+                "C-j" #'vertico-insert
+                "C-l" #'vertico-directory-delete-word)
+      :init
+      (vertico-mode 1))
 
-  (use-package savehist
-    :init
-    (savehist-mode))
+    (use-package savehist
+      :init
+      (savehist-mode))
 #+end_src
 
 ** Orderless: Advanced completion style
@@ -258,6 +258,7 @@
   (use-package consult
     :bind
     (("C-s" . consult-line)
+     ("C-x b" . consult-buffer)
      ("C-c f" . consult-flycheck)))
 #+end_src
 

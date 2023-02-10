@@ -195,6 +195,7 @@
 (use-package consult
   :bind
   (("C-s" . consult-line)
+   ("C-x b" . consult-buffer)
    ("C-c f" . consult-flycheck)))
 
 (use-package consult-flycheck
