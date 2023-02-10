@@ -142,11 +142,12 @@
 (use-package vertico
   :custom
   (vertico-cycle t)
+  (vertico-resize t)
   :general
   (:keymaps 'vertico-map
             "C-j" #'vertico-insert
             "C-l" #'vertico-directory-delete-word)
-  :config
+  :init
   (vertico-mode 1))
 
 (use-package savehist
