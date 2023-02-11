@@ -62,7 +62,7 @@
 (setq global-hl-line-sticky-flag t)
 (global-hl-line-mode 1)
 
-(defvar stackcats/frame-transparency '(90 . 90))
+(defvar stackcats/frame-transparency '(95 . 95))
 (set-frame-parameter (selected-frame) 'alpha stackcats/frame-transparency)
 (add-to-list 'default-frame-alist `(alpha . ,stackcats/frame-transparency))
 (set-frame-parameter (selected-frame) 'fullscreen 'maximized)
@@ -113,27 +113,27 @@
 (use-package modus-themes)
 
 (use-package doom-themes
-  :init (load-theme 'modus-vivendi-deuteranopia t))
+  :init (load-theme 'doom-tokyo-night t))
 
 (use-package all-the-icons)
 
 (use-package doom-modeline
   :init (doom-modeline-mode 1)
-  :custom ((doom-modeline-height 15)))
+  :custom ((doom-modeline-height 12)))
 
 ;; change mode-line to the top
 (setq-default header-line-format mode-line-format)
 (setq-default mode-line-format nil)
 
 (use-package mini-frame
-  :custom ((mini-frame-show-parameters '((top . 200)
-                                         (width . 0.7)
-                                         (height . 30)
-                                         (left . 0.5)
-                                         (min-height . 16)
+  :custom ((mini-frame-show-parameters
+            '((top . 200)
+              (width . 0.7)
+              (height . 30)
+              (left . 0.5)
 
-                                         ;; fix empty initial candidate list
-                                         (no-accept-focus . t)))
+              ;; fix empty initial candidate list
+              (no-accept-focus . t)))
            (mini-frame-interval-border-color "Color")
            (mini-frame-create-lazy nil))
   :config
@@ -193,13 +193,20 @@
   (embark-collect-mode . consult-preview-at-point-mode))
 
 (use-package consult
+  :custom
+  (xref-show-xrefs-function #'consult-xref)
+  (xref-show-definitions-function #'consult-xref)
   :bind
   (("C-s" . consult-line)
    ("C-x b" . consult-buffer)
+   ("M-g g" . consult-goto-line)
+   ("C-c p" . consult-projectile)
    ("C-c f" . consult-flycheck)))
 
 (use-package consult-flycheck
   :after (consult flyCheck))
+
+(use-package consult-projectile)
 
 (defun stackcats/org-font-setup ()
   ;; Replace list hyphen with dot
@@ -312,8 +319,6 @@
   :diminish projectile-mode
   :config (projectile-mode)
   :custom ((projectile-completion-system 'default))
-  :bind-keymap
-  ("C-c p" . projectile-command-map)
   :init
   ;; NOTE: Set this to the folder where you keep your Git repos!
   (when (file-directory-p "~/project")
@@ -364,7 +369,8 @@
 (use-package eglot
   :config
   (add-to-list 'eglot-server-programs '((c++-mode c-mode) "clangd"))
-  (add-to-list 'eglot-server-programs '(rust-mode . "rust-analyzer"))
+  (add-to-list 'eglot-server-programs '(rust-mode "rust-analyzer"))
+  (add-to-list 'eglot-server-programs '(lua-mode "lua-language-server"))
   (add-to-list 'eglot-server-programs '(elixir-mode "~/.emacs.d/vendor/elixir-ls/language_server.sh")))
 
 (use-package flycheck-eglot
@@ -478,6 +484,7 @@
 
 (use-package lua-mode
   :mode "\\.lua\\'"
+  :hook (lua-mode . eglot-ensure)
   :config
   (setq lua-indent-level 4)
   (setq lua-indent-nested-block-content-align nil))
@@ -531,11 +538,12 @@
   (setq web-mode-enable-auto-pairing nil))
 
 (use-package which-key
+  :custom
+  (which-key-idle-delay 0.1)
+  (which-key-special-keys '("SPC" "TAB" "RET" "ESC" "DEL"))
   :config
-  (if (fboundp 'which-key-mode)
-      (which-key-mode))
-  (setq which-key-idle-delay 0.1)
-  (setq which-key-special-keys '("SPC" "TAB" "RET" "ESC" "DEL")))
+  (which-key-mode)
+  (which-key-setup-minibuffer))
 
 (when (eq system-type 'darwin)
   (setq mac-option-modifier 'meta)
