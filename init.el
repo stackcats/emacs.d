@@ -446,10 +446,14 @@
   (add-hook 'before-save-hook 'elixir-format nil t))
 
 (use-package elixir-mode
-  :mode "\\.exs?$"
+  :mode "\\.ex[s]?\\'"
   :hook
   ((elixir-mode . stackcats/elixir-mode-setup)
    (elixir-mode . eglot-ensure)))
+
+(use-package flycheck-credo
+  :after (elixir-mode flycheck-mode)
+  :hook (flycheck-mode . flycheck-credo-setup))
 
 (defun stackcats/go-mode-setup ()
   (setq tab-width 4)
@@ -589,3 +593,10 @@
   (interactive)
   (indent-region (point-min) (point-max))
   (message "format successfully"))
+
+(defadvice find-file (before make-directory-maybe (filename &optional wildcards) activate)
+  "Create parent directory if not exists while visiting file."
+  (unless (file-exists-p filename)
+    (let ((dir (file-name-directory filename)))
+      (unless (file-exists-p dir)
+        (make-directory dir t)))))

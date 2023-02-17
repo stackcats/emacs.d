@@ -614,6 +614,7 @@
     :hook ((flycheck-mode . flycheck-clojure-setup)
            (cider-mode . flycheck-mode)))
 #+end_src
+
 *** Elixir
 
 #+begin_src emacs-lisp
@@ -621,10 +622,14 @@
     (add-hook 'before-save-hook 'elixir-format nil t))
 
   (use-package elixir-mode
-    :mode "\\.exs?$"
+    :mode "\\.ex[s]?\\'"
     :hook
     ((elixir-mode . stackcats/elixir-mode-setup)
      (elixir-mode . eglot-ensure)))
+
+  (use-package flycheck-credo
+    :after (elixir-mode flycheck-mode)
+    :hook (flycheck-mode . flycheck-credo-setup))
 #+end_src
 
 *** Golang
@@ -815,4 +820,13 @@
     (interactive)
     (indent-region (point-min) (point-max))
     (message "format successfully"))
+#+end_src
+
+#+begin_src emacs-lisp
+(defadvice find-file (before make-directory-maybe (filename &optional wildcards) activate)
+  "Create parent directory if not exists while visiting file."
+  (unless (file-exists-p filename)
+    (let ((dir (file-name-directory filename)))
+      (unless (file-exists-p dir)
+        (make-directory dir t)))))
 #+end_src
