@@ -1,4 +1,5 @@
 #+PROPERTY: header-args:emacs-lisp :tangle ./init.el :mkdirp yes
+#+auto_tangle: t
 * Package System Setup
 
 #+begin_src emacs-lisp
@@ -364,6 +365,12 @@
   (add-hook 'org-mode-hook (lambda () (add-hook 'after-save-hook #'stackcats/org-babel-tangle-config)))
 #+end_src
 
+#+begin_src emacs-lisp
+  (use-package org-auto-tangle
+    :after (org-mode)
+    :hook (org-mode . org-auto-tangle-mode))
+#+end_src
+
 ** Structure Template
 
 #+begin_src emacs-lisp
@@ -374,6 +381,18 @@
     (add-to-list 'org-structure-template-alist '("sh" . "src shell"))
     (add-to-list 'org-structure-template-alist '("el" . "src emacs-lisp"))
     (add-to-list 'org-structure-template-alist '("py" . "src python")))
+#+end_src
+
+** Configure Babel Languages
+
+#+begin_src emacs-lisp
+  (with-eval-after-load 'org
+    (org-babel-do-load-languages
+     'org-babel-load-languages
+     '((emacs-lisp . t)
+       (shell . t)
+       (python . t)))
+    (push '("conf-unix" . conf-unix) org-src-lang-modes))
 #+end_src
 
 * Development
@@ -450,6 +469,7 @@
   (use-package magit
     :commands magit-status
     :custom
+    (auto-revert-check-vc-info t)
     (magit-display-buffer-function #'magit-display-buffer-same-window-except-diff-v1))
 
   (use-package smerge-mode
@@ -640,6 +660,7 @@
     (indent-tabs-mode 1))
 
   (use-package go-mode
+    :after (flycheck-eglot)
     :mode "\\.go\\'"
     :hook
     ((before-save . gofmt-before-save)
@@ -823,10 +844,10 @@
 #+end_src
 
 #+begin_src emacs-lisp
-(defadvice find-file (before make-directory-maybe (filename &optional wildcards) activate)
-  "Create parent directory if not exists while visiting file."
-  (unless (file-exists-p filename)
-    (let ((dir (file-name-directory filename)))
-      (unless (file-exists-p dir)
-        (make-directory dir t)))))
+  (defadvice find-file (before make-directory-maybe (filename &optional wildcards) activate)
+    "Create parent directory if not exists while visiting file."
+    (unless (file-exists-p filename)
+      (let ((dir (file-name-directory filename)))
+        (unless (file-exists-p dir)
+          (make-directory dir t)))))
 #+end_src

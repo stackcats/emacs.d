@@ -269,6 +269,10 @@
 
 (add-hook 'org-mode-hook (lambda () (add-hook 'after-save-hook #'stackcats/org-babel-tangle-config)))
 
+(use-package org-auto-tangle
+  :after (org-mode)
+  :hook (org-mode . org-auto-tangle-mode))
+
 (with-eval-after-load 'org
   ;; This is needed as of Org 9.2
   (require 'org-tempo)
@@ -276,6 +280,14 @@
   (add-to-list 'org-structure-template-alist '("sh" . "src shell"))
   (add-to-list 'org-structure-template-alist '("el" . "src emacs-lisp"))
   (add-to-list 'org-structure-template-alist '("py" . "src python")))
+
+(with-eval-after-load 'org
+  (org-babel-do-load-languages
+   'org-babel-load-languages
+   '((emacs-lisp . t)
+     (shell . t)
+     (python . t)))
+  (push '("conf-unix" . conf-unix) org-src-lang-modes))
 
 (when (file-exists-p "~/.wakatime.cfg")
   (use-package wakatime-mode
@@ -328,6 +340,7 @@
 (use-package magit
   :commands magit-status
   :custom
+  (auto-revert-check-vc-info t)
   (magit-display-buffer-function #'magit-display-buffer-same-window-except-diff-v1))
 
 (use-package smerge-mode
@@ -460,6 +473,7 @@
   (indent-tabs-mode 1))
 
 (use-package go-mode
+  :after (flycheck-eglot)
   :mode "\\.go\\'"
   :hook
   ((before-save . gofmt-before-save)
