@@ -563,6 +563,9 @@
   (which-key-mode)
   (which-key-setup-minibuffer))
 
+(use-package which-key-posframe
+  :after which-key)
+
 (when (eq system-type 'darwin)
   (setq mac-option-modifier 'meta)
   (setq mac-command-modifier 'super))

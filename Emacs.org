@@ -779,6 +779,9 @@
     :config
     (which-key-mode)
     (which-key-setup-minibuffer))
+
+  (use-package which-key-posframe
+    :after which-key)
 #+end_src
 
 ** Set Macos Hotkey
