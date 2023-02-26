@@ -555,6 +555,11 @@
   (setq web-mode-markup-indent-offset 2)
   (setq web-mode-enable-auto-pairing nil))
 
+(use-package vterm
+  :commands vterm
+  :custom
+  (vterm-max-scrollback 10000))
+
 (use-package which-key
   :custom
   (which-key-idle-delay 0.1)

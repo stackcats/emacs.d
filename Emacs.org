@@ -768,6 +768,14 @@
     (setq web-mode-enable-auto-pairing nil))
 #+end_src
 
+* Terminal
+** Vterm
+#+begin_src emacs-lisp
+  (use-package vterm
+    :commands vterm
+    :custom
+    (vterm-max-scrollback 10000))
+#+end_src
 * Key bindings
 ** Which Key
 
