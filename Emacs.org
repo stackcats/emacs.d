@@ -71,6 +71,7 @@
 
   ;; Disable line numbers for some modes
   (dolist (mode '(org-mode-hook
+                  vterm-mode-hook
                   term-mode-hook
                   shell-mode-hook
                   eshell-mode-hook))
