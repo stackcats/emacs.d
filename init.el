@@ -272,13 +272,16 @@
 
 (use-package org-auto-tangle
   :after (org-mode)
-  :hook (org-mode . org-auto-tangle-mode))
+  :hook (org-mode . org-auto-tangle-mode)
+  :custom
+  (org-auto-tangle-default t))
 
 (with-eval-after-load 'org
   ;; This is needed as of Org 9.2
   (require 'org-tempo)
 
   (add-to-list 'org-structure-template-alist '("sh" . "src shell"))
+  (add-to-list 'org-structure-template-alist '("mk" . "src makefile"))
   (add-to-list 'org-structure-template-alist '("el" . "src emacs-lisp"))
   (add-to-list 'org-structure-template-alist '("py" . "src python")))
 
@@ -287,6 +290,7 @@
    'org-babel-load-languages
    '((emacs-lisp . t)
      (shell . t)
+     (makefile . t)
      (python . t)))
   (push '("conf-unix" . conf-unix) org-src-lang-modes))
 
