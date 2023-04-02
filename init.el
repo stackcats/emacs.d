@@ -600,6 +600,13 @@
 (global-set-key (kbd "C-c SPC") 'ace-jump-mode)
 (global-set-key (kbd "C-c w") 'ace-window)
 
+(unless (string= "" (getenv "OPENAI_API_KEY"))
+  (use-package gptel
+    :custom
+    (gptel-api-key (getenv "OPENAI_API_KEY"))
+    :config
+    (setq gptel-default-mode 'org-mode)))
+
 (defun close-all-parentheses ()
   (interactive "*")
   (let ((closing nil))

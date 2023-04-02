@@ -832,6 +832,16 @@
   (global-set-key (kbd "C-c w") 'ace-window)
 #+end_src
 
+* Misc
+** ChatGPT
+#+begin_src emacs-lisp
+  (unless (string= "" (getenv "OPENAI_API_KEY"))
+    (use-package gptel
+      :custom
+      (gptel-api-key (getenv "OPENAI_API_KEY"))
+      :config
+      (setq gptel-default-mode 'org-mode)))
+#+end_src
 * Functions
 
 #+begin_src emacs-lisp
