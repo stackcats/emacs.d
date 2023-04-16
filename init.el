@@ -201,6 +201,8 @@
   (("C-s" . consult-line)
    ("C-x b" . consult-buffer)
    ("M-g g" . consult-goto-line)
+   ("C-c o" . consult-outline)
+   ("C-c h" . consult-org-heading)
    ("C-c p" . consult-projectile)
    ("C-c f" . consult-flycheck)))
 
@@ -414,15 +416,21 @@
 (use-package company-box
   :hook (company-mode . company-box-mode))
 
+(use-package format-all
+  :hook
+  ((prog-mode . format-all-mode)
+   (format-all-mode . format-all-ensure-formatter))
+  :custom
+  (format-all-show-errors 'errors)
+  :config
+  (setcdr (assoc "Python" format-all-default-formatters) '(yapf)))
+
 (defun stackcats/c-mode-setup ()
   (c-toggle-comment-style -1)
   (setq	indent-tabs-mode t))
 
 (add-hook 'c-mode-hook 'stackcats-c-mode-setup)
 (add-hook 'c-mode-hook 'eglot-ensure)
-
-(use-package clang-format+
-  :hook (c-mode-common . clang-format+-mode))
 
 (defun stackcats/kill-buffer-when-compile-success (process)
   "Close current PROCESS when `shell-command' exit."
@@ -481,8 +489,7 @@
   :after (flycheck-eglot)
   :mode "\\.go\\'"
   :hook
-  ((before-save . gofmt-before-save)
-   (go-mode . stackcats/go-mode-setup)
+  ((go-mode . stackcats/go-mode-setup)
    (go-mode . eglot-ensure))
   :config
   (setq gofmt-command "goimports"))
@@ -550,8 +557,7 @@
   :mode ("\\.rs\\'" . rustic-mode)
   :config
   (setq rustic-lsp-client 'eglot)
-  (push 'rustic-clippy flycheck-checkers)
-  (setq rustic-format-trigger 'on-save))
+  (push 'rustic-clippy flycheck-checkers))
 
 (use-package web-mode
   :mode (("\\.html\\'" . web-mode)

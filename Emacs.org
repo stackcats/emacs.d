@@ -265,6 +265,8 @@
     (("C-s" . consult-line)
      ("C-x b" . consult-buffer)
      ("M-g g" . consult-goto-line)
+     ("C-c o" . consult-outline)
+     ("C-c h" . consult-org-heading)
      ("C-c p" . consult-projectile)
      ("C-c f" . consult-flycheck)))
 #+end_src
@@ -563,6 +565,28 @@
   (use-package company-box
     :hook (company-mode . company-box-mode))
 #+end_src
+** Format Codes
+
+#+begin_src emacs-lisp
+  (use-package format-all
+    :hook
+    ((prog-mode . format-all-mode)
+     (format-all-mode . format-all-ensure-formatter))
+    :custom
+    (format-all-show-errors 'errors)
+    :config
+    (setcdr (assoc "Python" format-all-default-formatters) '(yapf)))
+#+end_src
+
+*** Formatters
+
+| Language | formatter    | How to install               |
+|----------+--------------+------------------------------|
+| C / C++  | clang-format | clang-format                 |
+| Golang   | gofmt        | -                            |
+| Python   | yapf         | python3 -m pip install yapf  |
+| Rust     | rustfmt      | rustup component add rustfmt |
+
 ** Languages
 *** C C++
 
@@ -576,15 +600,6 @@
 
   (add-hook 'c-mode-hook 'stackcats-c-mode-setup)
   (add-hook 'c-mode-hook 'eglot-ensure)
-
-#+end_src
-
-**** Code Format
-
-#+begin_src emacs-lisp
-
-  (use-package clang-format+
-    :hook (c-mode-common . clang-format+-mode))
 
 #+end_src
 
@@ -668,8 +683,7 @@
     :after (flycheck-eglot)
     :mode "\\.go\\'"
     :hook
-    ((before-save . gofmt-before-save)
-     (go-mode . stackcats/go-mode-setup)
+    ((go-mode . stackcats/go-mode-setup)
      (go-mode . eglot-ensure))
     :config
     (setq gofmt-command "goimports"))
@@ -759,8 +773,7 @@
     :mode ("\\.rs\\'" . rustic-mode)
     :config
     (setq rustic-lsp-client 'eglot)
-    (push 'rustic-clippy flycheck-checkers)
-    (setq rustic-format-trigger 'on-save))
+    (push 'rustic-clippy flycheck-checkers))
 #+end_src
 ** Web
 
