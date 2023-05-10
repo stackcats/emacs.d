@@ -393,25 +393,24 @@
   (add-to-list 'eglot-server-programs '(lua-mode "lua-language-server"))
   (add-to-list 'eglot-server-programs '(elixir-mode "~/.emacs.d/vendor/elixir-ls/language_server.sh")))
 
-(use-package flycheck-eglot
-  :hook prog-mode
-  :after (flycheck eglot)
-  :custom (flycheck-eglot-exclusive nil)
-  :config
-  (global-flycheck-eglot-mode 1))
+;  (use-package flycheck-eglot
+;    :hook prog-mode
+;    :after (flycheck eglot)
+;    :custom (flycheck-eglot-exclusive nil)
+;    :config
+;    (global-flycheck-eglot-mode 1))
 
 (use-package company
   :config
   (defvar company-flx-mode +1)
   (setq company-idle-delay 0)
   (defvar company-dabbrev-downcase nil)
+  (add-hook 'after-init-hook 'global-company-mode)
   ;; key
   :bind
   (:map company-active-map
         ("C-n" . company-select-next)
         ("C-p" . company-select-previous)))
-
-(add-hook 'after-init-hook 'global-company-mode)
 
 (use-package company-box
   :hook (company-mode . company-box-mode))
@@ -607,11 +606,12 @@
 (global-set-key (kbd "C-c w") 'ace-window)
 
 (unless (string= "" (getenv "OPENAI_API_KEY"))
-  (use-package gptel
-    :custom
-    (gptel-api-key (getenv "OPENAI_API_KEY"))
-    :config
-    (setq gptel-default-mode 'org-mode)))
+    (use-package gptel
+      :custom
+      (gptel-api-key (getenv "OPENAI_API_KEY"))
+;      (gptel-mode "gpt-4")
+      :config
+      (setq gptel-default-mode 'org-mode)))
 
 (defun close-all-parentheses ()
   (interactive "*")

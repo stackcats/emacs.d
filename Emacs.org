@@ -534,12 +534,12 @@
 *** Use Flycheck instead of Flymake
 
 #+begin_src emacs-lisp
-  (use-package flycheck-eglot
-    :hook prog-mode
-    :after (flycheck eglot)
-    :custom (flycheck-eglot-exclusive nil)
-    :config
-    (global-flycheck-eglot-mode 1))
+;  (use-package flycheck-eglot
+;    :hook prog-mode
+;    :after (flycheck eglot)
+;    :custom (flycheck-eglot-exclusive nil)
+;    :config
+;    (global-flycheck-eglot-mode 1))
 #+end_src
 
 ** Company
@@ -550,13 +550,12 @@
     (defvar company-flx-mode +1)
     (setq company-idle-delay 0)
     (defvar company-dabbrev-downcase nil)
+    (add-hook 'after-init-hook 'global-company-mode)
     ;; key
     :bind
     (:map company-active-map
           ("C-n" . company-select-next)
           ("C-p" . company-select-previous)))
-
-  (add-hook 'after-init-hook 'global-company-mode)
 #+end_src
 
 *** A company front-end with icons.
@@ -852,6 +851,7 @@
     (use-package gptel
       :custom
       (gptel-api-key (getenv "OPENAI_API_KEY"))
+;      (gptel-mode "gpt-4")
       :config
       (setq gptel-default-mode 'org-mode)))
 #+end_src
