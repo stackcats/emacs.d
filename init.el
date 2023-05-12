@@ -113,8 +113,6 @@
 (use-package doom-themes
   :init (load-theme 'doom-sourcerer t))
 
-(use-package all-the-icons)
-
 (use-package doom-modeline
   :init (doom-modeline-mode 1)
   :custom
