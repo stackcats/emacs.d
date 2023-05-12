@@ -58,14 +58,9 @@
                 eshell-mode-hook))
   (add-hook mode (lambda () (display-line-numbers-mode 0))))
 
-(setq hl-line-range-function
-      #'(lambda () (cons (line-end-position) (line-beginning-position 2))))
 (setq global-hl-line-sticky-flag t)
 (global-hl-line-mode 1)
 
-(defvar stackcats/frame-transparency '(95 . 95))
-(set-frame-parameter (selected-frame) 'alpha stackcats/frame-transparency)
-(add-to-list 'default-frame-alist `(alpha . ,stackcats/frame-transparency))
 (set-frame-parameter (selected-frame) 'fullscreen 'maximized)
 (add-to-list 'default-frame-alist '(fullscreen . maximized))
 
@@ -98,11 +93,13 @@
 
 (setq inhibit-compacting-font-caches t)
 
-(set-face-attribute 'default nil :font "Hack" :height 180)
+(defvar font "Jetbrains Mono")
+
+(set-face-attribute 'default nil :font font :height 180)
 ;; Set the fixed pitch face
-(set-face-attribute 'fixed-pitch nil :font "Hack" :height 180)
+(set-face-attribute 'fixed-pitch nil :font font :height 180)
 ;; Set the variable pitch face
-(set-face-attribute 'variable-pitch nil :font "Hack" :height 180 :weight 'regular)
+(set-face-attribute 'variable-pitch nil :font font :height 180 :weight 'regular)
 
 (use-package dashboard
   :config
@@ -114,29 +111,34 @@
 (use-package modus-themes)
 
 (use-package doom-themes
-  :init (load-theme 'doom-tokyo-night t))
+  :init (load-theme 'doom-sourcerer t))
 
 (use-package all-the-icons)
 
 (use-package doom-modeline
   :init (doom-modeline-mode 1)
-  :custom ((doom-modeline-height 12)))
+  :custom
+  (doom-modeline-buffer-file-name-style 'relative-to-project)
+  (doom-modeline-height 16))
 
 ;; change mode-line to the top
 (setq-default header-line-format mode-line-format)
 (setq-default mode-line-format nil)
 
 (use-package mini-frame
-  :custom ((mini-frame-show-parameters
-            '((top . 200)
-              (width . 0.7)
-              (height . 30)
-              (left . 0.5)
+  :custom
+  (mini-frame-show-parameters
+   '((top . 200)
+     (width . 0.7)
+     (height . 30)
+     (left . 0.5)
 
-              ;; fix empty initial candidate list
-              (no-accept-focus . t)))
-           (mini-frame-interval-border-color "Color")
-           (mini-frame-create-lazy nil))
+     ;; fix empty initial candidate list
+     (no-accept-focus . t)))
+  (mini-frame-interval-border-color "Color")
+  (mini-frame-create-lazy nil)
+  :custom-face
+  (child-frame-border ((t (:background "systemMintColor"))))
   :config
   (mini-frame-mode 1))
 
@@ -226,7 +228,7 @@
                   (org-level-6 . 1.1)
                   (org-level-7 . 1.1)
                   (org-level-8 . 1.1)))
-    (set-face-attribute (car face) nil :font "Hack" :weight 'regular :height (cdr face)))
+    (set-face-attribute (car face) nil :font font :weight 'regular :height (cdr face)))
 
   ;; Ensure that anything that should be fixed-pitch in Org files appears that way
   (set-face-attribute 'org-block nil :foreground nil :inherit 'fixed-pitch)
@@ -606,12 +608,12 @@
 (global-set-key (kbd "C-c w") 'ace-window)
 
 (unless (string= "" (getenv "OPENAI_API_KEY"))
-    (use-package gptel
-      :custom
-      (gptel-api-key (getenv "OPENAI_API_KEY"))
-;      (gptel-mode "gpt-4")
-      :config
-      (setq gptel-default-mode 'org-mode)))
+  (use-package gptel
+    :custom
+    (gptel-api-key (getenv "OPENAI_API_KEY"))
+                                        ;      (gptel-mode "gpt-4")
+    :config
+    (setq gptel-default-mode 'org-mode)))
 
 (defun close-all-parentheses ()
   (interactive "*")
