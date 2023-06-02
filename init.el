@@ -405,12 +405,13 @@
   (defvar company-flx-mode +1)
   (setq company-idle-delay 0)
   (defvar company-dabbrev-downcase nil)
-  (add-hook 'after-init-hook 'global-company-mode)
   ;; key
   :bind
   (:map company-active-map
         ("C-n" . company-select-next)
         ("C-p" . company-select-previous)))
+
+(add-hook 'after-init-hook 'global-company-mode)
 
 (use-package company-box
   :hook (company-mode . company-box-mode))
@@ -529,6 +530,8 @@
   (defalias 'perl-mode 'cperl-mode))
 
 (use-package python-mode
+  :hook
+  (python-mode . eglot-ensure)
   :mode "\\.py\\'")
 
 (use-package anaconda-mode
@@ -541,6 +544,16 @@
   :after company
   :config
   (add-to-list 'company-backends 'company-anaconda))
+
+(use-package pyvenv
+  :config
+  (pyvenv-mode t)
+  (setq pyvenv-post-activate-hooks
+        (list (lambda ()
+                (setq python-shell-interpreter (concat pyvenv-virtual-env "bin/python3")))))
+  (setq pyvenv-post-deactivate-hooks
+        (list (lambda ()
+                (setq python-shell-interpreter "python3")))))
 
 (use-package racket-mode
   :mode "\\.rkt\\'"
@@ -609,7 +622,7 @@
   (use-package gptel
     :custom
     (gptel-api-key (getenv "OPENAI_API_KEY"))
-                                        ;      (gptel-mode "gpt-4")
+    (gptel-mode "gpt-4")
     :config
     (setq gptel-default-mode 'org-mode)))
 
