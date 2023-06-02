@@ -393,13 +393,6 @@
   (add-to-list 'eglot-server-programs '(lua-mode "lua-language-server"))
   (add-to-list 'eglot-server-programs '(elixir-mode "~/.emacs.d/vendor/elixir-ls/language_server.sh")))
 
-;  (use-package flycheck-eglot
-;    :hook prog-mode
-;    :after (flycheck eglot)
-;    :custom (flycheck-eglot-exclusive nil)
-;    :config
-;    (global-flycheck-eglot-mode 1))
-
 (use-package company
   :config
   (defvar company-flx-mode +1)

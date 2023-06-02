@@ -531,16 +531,15 @@
     (add-to-list 'eglot-server-programs '(elixir-mode "~/.emacs.d/vendor/elixir-ls/language_server.sh")))
 #+end_src
 
-*** Use Flycheck instead of Flymake
+**** Lsp servers
 
-#+begin_src emacs-lisp
-                                          ;  (use-package flycheck-eglot
-                                          ;    :hook prog-mode
-                                          ;    :after (flycheck eglot)
-                                          ;    :custom (flycheck-eglot-exclusive nil)
-                                          ;    :config
-                                          ;    (global-flycheck-eglot-mode 1))
-#+end_src
+| Language | server              | How to install                             |
+|----------+---------------------+--------------------------------------------|
+| C / C++  | clangd              | brew install llvm                          |
+| Golang   | gopls               | go install golang.org/x/tools/gopls@latest |
+| Lua      | lua-language-server | brew install lua-language-server           |
+| Python   | pyright             | node install -g pyright                    |
+| Rust     | rust-analyzer       | rustup component add rust-analyzer         |
 
 ** Company
 
@@ -565,6 +564,7 @@
   (use-package company-box
     :hook (company-mode . company-box-mode))
 #+end_src
+
 ** Format Codes
 
 #+begin_src emacs-lisp
