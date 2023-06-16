@@ -533,6 +533,7 @@
 
 **** Lsp servers
 
+|----------+---------------------+--------------------------------------------|
 | Language | server              | How to install                             |
 |----------+---------------------+--------------------------------------------|
 | C / C++  | clangd              | brew install llvm                          |
@@ -540,6 +541,7 @@
 | Lua      | lua-language-server | brew install lua-language-server           |
 | Python   | pyright             | node install -g pyright                    |
 | Rust     | rust-analyzer       | rustup component add rust-analyzer         |
+|----------+---------------------+--------------------------------------------|
 
 ** Company
 
@@ -580,12 +582,14 @@
 
 *** Formatters
 
+|----------+--------------+------------------------------|
 | Language | formatter    | How to install               |
 |----------+--------------+------------------------------|
 | C / C++  | clang-format | clang-format                 |
 | Golang   | gofmt        | -                            |
 | Python   | yapf         | python3 -m pip install yapf  |
 | Rust     | rustfmt      | rustup component add rustfmt |
+|----------+--------------+------------------------------|
 
 ** Languages
 *** C C++
@@ -680,7 +684,6 @@
     (indent-tabs-mode 1))
 
   (use-package go-mode
-    :after (flycheck-eglot)
     :mode "\\.go\\'"
     :hook
     ((go-mode . stackcats/go-mode-setup)

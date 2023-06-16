@@ -479,7 +479,6 @@
   (indent-tabs-mode 1))
 
 (use-package go-mode
-  :after (flycheck-eglot)
   :mode "\\.go\\'"
   :hook
   ((go-mode . stackcats/go-mode-setup)
