@@ -145,8 +145,7 @@
 #+begin_src emacs-lisp
   (use-package modus-themes)
 
-  (use-package doom-themes
-    :init (load-theme 'doom-sourcerer t))
+  (use-package doom-themes)
 #+end_src
 
 ** Better Modeline
@@ -423,6 +422,9 @@
 
   (use-package highlight-numbers
     :hook (prog-mode . highlight-numbers-mode))
+
+  (use-package indent-guide
+    :hook (prog-mode . indent-guide-mode))
 #+end_src
 
 ** Smartparens

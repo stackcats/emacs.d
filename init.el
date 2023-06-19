@@ -110,8 +110,7 @@
 
 (use-package modus-themes)
 
-(use-package doom-themes
-  :init (load-theme 'doom-sourcerer t))
+(use-package doom-themes)
 
 (use-package doom-modeline
   :init (doom-modeline-mode 1)
@@ -309,6 +308,9 @@
 
 (use-package highlight-numbers
   :hook (prog-mode . highlight-numbers-mode))
+
+(use-package indent-guide
+  :hook (prog-mode . indent-guide-mode))
 
 (use-package smartparens
   :hook ((prog-mode css-mode) . smartparens-mode)
