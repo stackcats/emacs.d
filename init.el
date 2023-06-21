@@ -93,7 +93,8 @@
 
 (setq inhibit-compacting-font-caches t)
 
-(defvar font "Jetbrains Mono")
+;; (defvar font "Jetbrains Mono")
+(defvar font "Pixel Code")
 
 (set-face-attribute 'default nil :font font :height 180)
 ;; Set the fixed pitch face
