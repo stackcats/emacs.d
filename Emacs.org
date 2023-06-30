@@ -370,7 +370,7 @@
 
 #+begin_src emacs-lisp
   (use-package org-auto-tangle
-    :after (org-mode)
+    :defer t
     :hook (org-mode . org-auto-tangle-mode)
     :custom
     (org-auto-tangle-default t))

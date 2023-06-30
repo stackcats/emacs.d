@@ -273,7 +273,7 @@
 (add-hook 'org-mode-hook (lambda () (add-hook 'after-save-hook #'stackcats/org-babel-tangle-config)))
 
 (use-package org-auto-tangle
-  :after (org-mode)
+  :defer t
   :hook (org-mode . org-auto-tangle-mode)
   :custom
   (org-auto-tangle-default t))
