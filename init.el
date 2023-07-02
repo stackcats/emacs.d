@@ -423,9 +423,9 @@
 
 (defun stackcats/c-mode-setup ()
   (c-toggle-comment-style -1)
-  (setq	indent-tabs-mode t))
+  (setq indent-tabs-mode t))
 
-(add-hook 'c-mode-hook 'stackcats-c-mode-setup)
+(add-hook 'c-mode-hook 'stackcats/c-mode-setup)
 (add-hook 'c-mode-hook 'eglot-ensure)
 
 (defun stackcats/kill-buffer-when-compile-success (process)
