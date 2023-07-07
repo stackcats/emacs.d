@@ -93,8 +93,8 @@
 
 (setq inhibit-compacting-font-caches t)
 
-;; (defvar font "Jetbrains Mono")
-(defvar font "Pixel Code")
+(defvar font "Jetbrains Mono")
+;; (defvar font "Pixel Code")
 
 (set-face-attribute 'default nil :font font :height 180)
 ;; Set the fixed pitch face
@@ -112,6 +112,8 @@
 (use-package modus-themes)
 
 (use-package doom-themes)
+
+(load-theme 'doom-feather-dark)
 
 (use-package doom-modeline
   :init (doom-modeline-mode 1)
@@ -262,16 +264,6 @@
 (use-package visual-fill-column
   :hook (org-mode . stackcats/org-mode-visual-fill-setup))
 
-;; Automatically tangle our Emacs.org config file when we save it
-(defun stackcats/org-babel-tangle-config ()
-  (when (string-equal (file-name-directory (buffer-file-name))
-                      (expand-file-name user-emacs-directory))
-    ;; Dynamic scoping to the rescue
-    (let ((org-confirm-babel-evaluate nil))
-      (org-babel-tangle))))
-
-(add-hook 'org-mode-hook (lambda () (add-hook 'after-save-hook #'stackcats/org-babel-tangle-config)))
-
 (use-package org-auto-tangle
   :defer t
   :hook (org-mode . org-auto-tangle-mode)
@@ -292,6 +284,7 @@
    'org-babel-load-languages
    '((emacs-lisp . t)
      (shell . t)
+     (ein . t)
      (makefile . t)
      (python . t)))
   (push '("conf-unix" . conf-unix) org-src-lang-modes))
@@ -541,6 +534,7 @@
   (add-to-list 'company-backends 'company-anaconda))
 
 (use-package pyvenv
+  :after python-mode
   :config
   (pyvenv-mode t)
   (setq pyvenv-post-activate-hooks
@@ -549,6 +543,10 @@
   (setq pyvenv-post-deactivate-hooks
         (list (lambda ()
                 (setq python-shell-interpreter "python3")))))
+
+(use-package ein
+  :custom
+  (ein:jupyter-server-use-subcommand "server"))
 
 (use-package racket-mode
   :mode "\\.rkt\\'"
