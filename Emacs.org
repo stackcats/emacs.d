@@ -586,6 +586,18 @@
 | Rust     | rustfmt      | rustup component add rustfmt |
 |----------+--------------+------------------------------|
 
+** Tree-Sitter
+
+#+begin_src emacs-lisp
+  (use-package tree-sitter-langs)
+
+  (use-package tree-sitter
+    :after tree-sitter-langs
+    :config
+    (global-tree-sitter-mode)
+    (add-hook 'tree-sitter-after-on-hook #'tree-sitter-hl-mode))
+#+end_src
+
 ** Languages
 *** C C++
 
