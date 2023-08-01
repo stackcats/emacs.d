@@ -532,6 +532,7 @@
 |----------+---------------------+--------------------------------------------------|
 | C / C++  | clangd              | brew install llvm                                |
 | Clojure  | clojure-lsp         | brew install clojure-lsp/brew/clojure-lsp-native |
+| Elm      | elm-language-server | npm install -g @elm-tooling/elm-language-server  |
 | Golang   | gopls               | go install golang.org/x/tools/gopls@latest       |
 | Lua      | lua-language-server | brew install lua-language-server                 |
 | Python   | pyright             | node install -g pyright                          |
@@ -581,6 +582,7 @@
 | Language | formatter    | How to install               |
 |----------+--------------+------------------------------|
 | C / C++  | clang-format | clang-format                 |
+| Elm      | elm-format   | npm install -g elm-format    |
 | Golang   | gofmt        | -                            |
 | Python   | yapf         | python3 -m pip install yapf  |
 | Rust     | rustfmt      | rustup component add rustfmt |
@@ -664,6 +666,14 @@
     :after (cider flycheck)
     :hook ((flycheck-mode . flycheck-clojure-setup)
            (cider-mode . flycheck-mode)))
+#+end_src
+
+*** Elm
+
+#+begin_src emacs-lisp
+  (use-package elm-mode
+    :hook
+    (elm-mode . eglot-ensure))
 #+end_src
 
 *** Elixir

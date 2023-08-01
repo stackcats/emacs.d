@@ -465,6 +465,10 @@
   :hook ((flycheck-mode . flycheck-clojure-setup)
          (cider-mode . flycheck-mode)))
 
+(use-package elm-mode
+  :hook
+  (elm-mode . eglot-ensure))
+
 (defun stackcats/elixir-mode-setup ()
   (add-hook 'before-save-hook 'elixir-format nil t))
 
