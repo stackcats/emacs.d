@@ -103,10 +103,11 @@
 (set-face-attribute 'variable-pitch nil :font font :height 180 :weight 'regular)
 
 (use-package dashboard
+  :custom
+  (dashboard-center-content t)
+  (dashboard-items '((recents  . 5)
+                     (projects . 5)))
   :config
-  (setq dashboard-center-content t)
-  (setq dashboard-items '((recents  . 5)
-                          (projects . 5)))
   (dashboard-setup-startup-hook))
 
 (use-package modus-themes)
@@ -122,8 +123,8 @@
   (doom-modeline-height 16))
 
 ;; change mode-line to the top
-(setq-default header-line-format mode-line-format)
-(setq-default mode-line-format nil)
+;; (setq-default header-line-format mode-line-format)
+;; (setq-default mode-line-format nil)
 
 (use-package mini-frame
   :custom
@@ -206,10 +207,7 @@
    ("C-c o" . consult-outline)
    ("C-c h" . consult-org-heading)
    ("C-c p" . consult-projectile)
-   ("C-c f" . consult-flycheck)))
-
-(use-package consult-flycheck
-  :after (consult flyCheck))
+   ("C-c f" . consult-flymake)))
 
 (use-package consult-projectile)
 
@@ -284,7 +282,6 @@
    'org-babel-load-languages
    '((emacs-lisp . t)
      (shell . t)
-     (ein . t)
      (makefile . t)
      (python . t)))
   (push '("conf-unix" . conf-unix) org-src-lang-modes))
@@ -362,22 +359,6 @@
   (define-fringe-bitmap 'git-gutter-fr:added [224] nil nil '(center repeated))
   (define-fringe-bitmap 'git-gutter-fr:modified [224] nil nil '(center repeated))
   (define-fringe-bitmap 'git-gutter-fr:deleted [128 192 224 240] nil nil 'bottom))
-
-(defun stackcats/use-eslint-from-node-modules ()
-  (let* ((root (locate-dominating-file
-                (or (buffer-file-name) default-directory)
-                "node_modules"))
-         (eslint (and root
-                      (expand-file-name "node_modules/.bin/eslint"
-                                        root))))
-    (when (and eslint (file-executable-p eslint))
-      (setq-default flycheck-javascript-eslint-executable eslint))))
-
-(use-package flycheck
-  :defer t
-  :hook (prog-mode . flycheck-mode)
-  :config
-  (setq-default flycheck-temp-prefix "."))
 
 (cl-defmethod project-root ((project (head eglot-project)))
   (cdr project))
@@ -460,11 +441,6 @@
   :config
   (setq cider-repl-display-help-banner nil))
 
-(use-package flycheck-clojure
-  :after (cider flycheck)
-  :hook ((flycheck-mode . flycheck-clojure-setup)
-         (cider-mode . flycheck-mode)))
-
 (use-package elm-mode
   :hook
   (elm-mode . eglot-ensure))
@@ -478,9 +454,12 @@
   ((elixir-mode . stackcats/elixir-mode-setup)
    (elixir-mode . eglot-ensure)))
 
-(use-package flycheck-credo
-  :after (elixir-mode flycheck-mode)
-  :hook (flycheck-mode . flycheck-credo-setup))
+(use-package gdscript-mode
+  :hook
+  (gdscript-mode . eglot-ensure)
+  :custom
+  (gdscript-eglot-version 3)
+  (gdscript-godot-executable "/Applications/Godot.app/Contents/MacOS/Godot"))
 
 (defun stackcats/go-mode-setup ()
   (setq tab-width 4)
@@ -545,20 +524,22 @@
   :config
   (add-to-list 'company-backends 'company-anaconda))
 
-(use-package pyvenv
-  :after python-mode
+;; (use-package pyvenv
+;;   :after python-mode
+;;   :config
+;;   (pyvenv-mode t)
+;;   (setq pyvenv-post-activate-hooks
+;;         (list (lambda ()
+;;                 (setq python-shell-interpreter (concat pyvenv-virtual-env "bin/python3")))))
+;;   (setq pyvenv-post-deactivate-hooks
+;;         (list (lambda ()
+;;                 (setq python-shell-interpreter "python3")))))
+(use-package auto-virtualenv
+  :init
+  (use-package pyvenv)
   :config
-  (pyvenv-mode t)
-  (setq pyvenv-post-activate-hooks
-        (list (lambda ()
-                (setq python-shell-interpreter (concat pyvenv-virtual-env "bin/python3")))))
-  (setq pyvenv-post-deactivate-hooks
-        (list (lambda ()
-                (setq python-shell-interpreter "python3")))))
-
-(use-package ein
-  :custom
-  (ein:jupyter-server-use-subcommand "server"))
+  (add-hook 'python-mode-hook 'auto-virtualenv-set-virtualenv)
+  (add-hook 'projectile-after-switch-project-hook 'auto-virtualenv-set-virtualenv))
 
 (use-package racket-mode
   :mode "\\.rkt\\'"
@@ -572,9 +553,8 @@
 
 (use-package rustic
   :mode ("\\.rs\\'" . rustic-mode)
-  :config
-  (setq rustic-lsp-client 'eglot)
-  (push 'rustic-clippy flycheck-checkers))
+  :custom
+  (rustic-lsp-client 'eglot))
 
 (use-package web-mode
   :mode (("\\.html\\'" . web-mode)

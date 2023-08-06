@@ -134,10 +134,11 @@
 
 #+begin_src emacs-lisp
   (use-package dashboard
+    :custom
+    (dashboard-center-content t)
+    (dashboard-items '((recents  . 5)
+                       (projects . 5)))
     :config
-    (setq dashboard-center-content t)
-    (setq dashboard-items '((recents  . 5)
-                            (projects . 5)))
     (dashboard-setup-startup-hook))
 #+end_src
 
@@ -161,8 +162,8 @@
     (doom-modeline-height 16))
 
   ;; change mode-line to the top
-  (setq-default header-line-format mode-line-format)
-  (setq-default mode-line-format nil)
+  ;; (setq-default header-line-format mode-line-format)
+  ;; (setq-default mode-line-format nil)
 #+end_src
 
 ** Mini Frame
@@ -270,14 +271,7 @@
      ("C-c o" . consult-outline)
      ("C-c h" . consult-org-heading)
      ("C-c p" . consult-projectile)
-     ("C-c f" . consult-flycheck)))
-#+end_src
-
-*** Use with Flycheck
-
-#+begin_src emacs-lisp
-  (use-package consult-flycheck
-    :after (consult flyCheck))
+     ("C-c f" . consult-flymake)))
 #+end_src
 
 *** Use with projectile
@@ -387,7 +381,6 @@
      'org-babel-load-languages
      '((emacs-lisp . t)
        (shell . t)
-       (ein . t)
        (makefile . t)
        (python . t)))
     (push '("conf-unix" . conf-unix) org-src-lang-modes))
@@ -489,26 +482,6 @@
     (define-fringe-bitmap 'git-gutter-fr:added [224] nil nil '(center repeated))
     (define-fringe-bitmap 'git-gutter-fr:modified [224] nil nil '(center repeated))
     (define-fringe-bitmap 'git-gutter-fr:deleted [128 192 224 240] nil nil 'bottom))
-#+end_src
-
-** FlyCheck
-
-#+begin_src emacs-lisp
-  (defun stackcats/use-eslint-from-node-modules ()
-    (let* ((root (locate-dominating-file
-                  (or (buffer-file-name) default-directory)
-                  "node_modules"))
-           (eslint (and root
-                        (expand-file-name "node_modules/.bin/eslint"
-                                          root))))
-      (when (and eslint (file-executable-p eslint))
-        (setq-default flycheck-javascript-eslint-executable eslint))))
-
-  (use-package flycheck
-    :defer t
-    :hook (prog-mode . flycheck-mode)
-    :config
-    (setq-default flycheck-temp-prefix "."))
 #+end_src
 
 ** Eglot
@@ -661,11 +634,6 @@
     :after clojure-mode
     :config
     (setq cider-repl-display-help-banner nil))
-
-  (use-package flycheck-clojure
-    :after (cider flycheck)
-    :hook ((flycheck-mode . flycheck-clojure-setup)
-           (cider-mode . flycheck-mode)))
 #+end_src
 
 *** Elm
@@ -687,10 +655,16 @@
     :hook
     ((elixir-mode . stackcats/elixir-mode-setup)
      (elixir-mode . eglot-ensure)))
+#+end_src
 
-  (use-package flycheck-credo
-    :after (elixir-mode flycheck-mode)
-    :hook (flycheck-mode . flycheck-credo-setup))
+*** GDScript
+#+begin_src emacs-lisp
+  (use-package gdscript-mode
+    :hook
+    (gdscript-mode . eglot-ensure)
+    :custom
+    (gdscript-eglot-version 3)
+    (gdscript-godot-executable "/Applications/Godot.app/Contents/MacOS/Godot"))
 #+end_src
 
 *** Golang
@@ -774,24 +748,23 @@
     :config
     (add-to-list 'company-backends 'company-anaconda))
 
-  (use-package pyvenv
-    :after python-mode
+  ;; (use-package pyvenv
+  ;;   :after python-mode
+  ;;   :config
+  ;;   (pyvenv-mode t)
+  ;;   (setq pyvenv-post-activate-hooks
+  ;;         (list (lambda ()
+  ;;                 (setq python-shell-interpreter (concat pyvenv-virtual-env "bin/python3")))))
+  ;;   (setq pyvenv-post-deactivate-hooks
+  ;;         (list (lambda ()
+  ;;                 (setq python-shell-interpreter "python3")))))
+  (use-package auto-virtualenv
+    :init
+    (use-package pyvenv)
     :config
-    (pyvenv-mode t)
-    (setq pyvenv-post-activate-hooks
-          (list (lambda ()
-                  (setq python-shell-interpreter (concat pyvenv-virtual-env "bin/python3")))))
-    (setq pyvenv-post-deactivate-hooks
-          (list (lambda ()
-                  (setq python-shell-interpreter "python3")))))
+    (add-hook 'python-mode-hook 'auto-virtualenv-set-virtualenv)
+    (add-hook 'projectile-after-switch-project-hook 'auto-virtualenv-set-virtualenv))
 
-#+end_src
-
-**** Jupyter
-#+begin_src emacs-lisp
-  (use-package ein
-    :custom
-    (ein:jupyter-server-use-subcommand "server"))
 #+end_src
 
 *** Racket
@@ -812,9 +785,8 @@
 #+begin_src emacs-lisp
   (use-package rustic
     :mode ("\\.rs\\'" . rustic-mode)
-    :config
-    (setq rustic-lsp-client 'eglot)
-    (push 'rustic-clippy flycheck-checkers))
+    :custom
+    (rustic-lsp-client 'eglot))
 #+end_src
 ** Web
 
