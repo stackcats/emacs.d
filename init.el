@@ -110,20 +110,19 @@
   :config
   (dashboard-setup-startup-hook))
 
-(use-package modus-themes)
-
 (use-package doom-themes)
 
-(load-theme 'doom-feather-dark)
+(load-theme 'doom-feather-light)
 
 (use-package doom-modeline
-  :init (doom-modeline-mode 1)
   :custom
   (doom-modeline-buffer-file-name-style 'relative-to-project)
-  (doom-modeline-height 16))
+  (doom-modeline-height 16)
+  :config
+  (doom-modeline-mode 1))
 
 ;; change mode-line to the top
-;; (setq-default header-line-format mode-line-format)
+;; (setq-default header-line-format (doom-modeline-set-main-modeline))  
 ;; (setq-default mode-line-format nil)
 
 (use-package mini-frame
@@ -368,7 +367,8 @@
   (add-to-list 'eglot-server-programs '((c++-mode c-mode) "clangd"))
   (add-to-list 'eglot-server-programs '(rust-mode "rust-analyzer"))
   (add-to-list 'eglot-server-programs '(lua-mode "lua-language-server"))
-  (add-to-list 'eglot-server-programs '(elixir-mode "~/.emacs.d/vendor/elixir-ls/language_server.sh")))
+  (add-to-list 'eglot-server-programs
+               '((elixir-mode elixir-ts-mode) "~/.emacs.d/vendor/elixir-ls/language_server.sh")))
 
 (use-package company
   :config
@@ -402,6 +402,12 @@
   :config
   (global-tree-sitter-mode)
   (add-hook 'tree-sitter-after-on-hook #'tree-sitter-hl-mode))
+
+(use-package treesit-auto
+  :custom
+  (treesit-auto-install 'prompt)
+  :config
+  (global-treesit-auto-mode))
 
 (defun stackcats/c-mode-setup ()
   (c-toggle-comment-style -1)
@@ -446,20 +452,22 @@
   (elm-mode . eglot-ensure))
 
 (defun stackcats/elixir-mode-setup ()
+  (format-all-mode -1)
   (add-hook 'before-save-hook 'elixir-format nil t))
 
 (use-package elixir-mode
   :mode "\\.ex[s]?\\'"
+  :init
+  (use-package elixir-ts-mode)
   :hook
-  ((elixir-mode . stackcats/elixir-mode-setup)
-   (elixir-mode . eglot-ensure)))
+  ((elixir-mode elixir-ts-mode) . stackcats/elixir-mode-setup)
+  ((elixir-mode elixir-ts-mode) . eglot-ensure))
 
 (use-package gdscript-mode
   :hook
   (gdscript-mode . eglot-ensure)
   :custom
-  (gdscript-eglot-version 3)
-  (gdscript-godot-executable "/Applications/Godot.app/Contents/MacOS/Godot"))
+  (gdscript-eglot-version 3))
 
 (defun stackcats/go-mode-setup ()
   (setq tab-width 4)
@@ -468,10 +476,10 @@
 (use-package go-mode
   :mode "\\.go\\'"
   :hook
-  ((go-mode . stackcats/go-mode-setup)
-   (go-mode . eglot-ensure))
-  :config
-  (setq gofmt-command "goimports"))
+  (go-mode . stackcats/go-mode-setup)
+  ((go-mode go-ts-mode) . eglot-ensure)
+  :custom
+  (gofmt-command "goimports"))
 
 (use-package json-mode
   :mode "\\.json\\'")
@@ -510,7 +518,7 @@
 
 (use-package python-mode
   :hook
-  (python-mode . eglot-ensure)
+  ((python-mode python-ts-mode) . eglot-ensure)
   :mode "\\.py\\'")
 
 (use-package anaconda-mode
@@ -520,7 +528,7 @@
    (python-mode . anaconda-eldoc-mode)))
 
 (use-package company-anaconda
-  :after company
+  :after (company anaconda-mode)
   :config
   (add-to-list 'company-backends 'company-anaconda))
 
@@ -602,14 +610,6 @@
 (global-set-key (kbd "C-=") 'er/expand-region)
 (global-set-key (kbd "C-c SPC") 'ace-jump-mode)
 (global-set-key (kbd "C-c w") 'ace-window)
-
-(unless (string= "" (getenv "OPENAI_API_KEY"))
-  (use-package gptel
-    :custom
-    (gptel-api-key (getenv "OPENAI_API_KEY"))
-    (gptel-mode "gpt-4")
-    :config
-    (setq gptel-default-mode 'org-mode)))
 
 (defun close-all-parentheses ()
   (interactive "*")
