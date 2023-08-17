@@ -25,15 +25,6 @@
 
 (setq use-package-verbose t)
 
-(use-package auto-package-update
-  :custom
-  (auto-package-update-interval 7)
-  (auto-package-update-prompt-before-update t)
-  (auto-package-update-hide-results t)
-  :config
-  (auto-package-update-maybe)
-  (auto-package-update-at-time "09:00"))
-
 (setq exec-path (append exec-path '("/usr/local/bin" "~/.cargo/bin" "~/.asdf/shims")))
 
 (when (memq window-system '(mac ns))
@@ -112,7 +103,7 @@
 
 (use-package doom-themes)
 
-(load-theme 'doom-feather-light)
+(load-theme 'doom-opera-light)
 
 (use-package doom-modeline
   :custom
@@ -367,24 +358,41 @@
   (add-to-list 'eglot-server-programs '((c++-mode c-mode) "clangd"))
   (add-to-list 'eglot-server-programs '(rust-mode "rust-analyzer"))
   (add-to-list 'eglot-server-programs '(lua-mode "lua-language-server"))
+  (add-to-list 'eglot-server-programs '(gdscript-mode ("127.0.0.1" 6008)))
   (add-to-list 'eglot-server-programs
                '((elixir-mode elixir-ts-mode) "~/.emacs.d/vendor/elixir-ls/language_server.sh")))
 
-(use-package company
+(use-package cape)
+
+(use-package corfu
+  :custom
+  (corfu-cycle t)
+  (corfu-auto t)
+  (corfu-popupinfo-delay 0.2)
+  (corfu-echo-documentation t)
+  :bind (:map corfu-map
+            ("C-d" . corfu-info-documentation)
+            ("M-." . corfu-info-location))
+  :init
+  (global-corfu-mode)
+  (corfu-popupinfo-mode))
+
+;; Use corfu with eglot
+(with-eval-after-load 'eglot
+  (setq completion-category-defaults nil))
+
+;; Enable cache busting, depending on if your server returns
+;; sufficiently many candidates in the first place.
+(advice-add 'eglot-completion-at-point :around #'cape-wrap-buster)
+
+(use-package kind-icon
+  :after corfu
+  :custom
+  (kind-icon-default-face 'corfu-default) ; to compute blended backgrounds correctly
+  (kind-icon-default-style ; fix the last candidate be cut off
+   '(:padding 0 :stroke 0 :margin 0 :radius 0 :height 0.9 :scale 1.0))
   :config
-  (defvar company-flx-mode +1)
-  (setq company-idle-delay 0)
-  (defvar company-dabbrev-downcase nil)
-  ;; key
-  :bind
-  (:map company-active-map
-        ("C-n" . company-select-next)
-        ("C-p" . company-select-previous)))
-
-(add-hook 'after-init-hook 'global-company-mode)
-
-(use-package company-box
-  :hook (company-mode . company-box-mode))
+  (add-to-list 'corfu-margin-formatters #'kind-icon-margin-formatter))
 
 (use-package format-all
   :hook
@@ -403,11 +411,11 @@
   (global-tree-sitter-mode)
   (add-hook 'tree-sitter-after-on-hook #'tree-sitter-hl-mode))
 
-(use-package treesit-auto
-  :custom
-  (treesit-auto-install 'prompt)
-  :config
-  (global-treesit-auto-mode))
+;; (use-package treesit-auto
+;;   :custom
+;;   (treesit-auto-install 'prompt)
+;;   :config
+;;   (global-treesit-auto-mode))
 
 (defun stackcats/c-mode-setup ()
   (c-toggle-comment-style -1)
