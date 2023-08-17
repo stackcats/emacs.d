@@ -371,8 +371,8 @@
   (corfu-popupinfo-delay 0.2)
   (corfu-echo-documentation t)
   :bind (:map corfu-map
-            ("C-d" . corfu-info-documentation)
-            ("M-." . corfu-info-location))
+              ("C-d" . corfu-info-documentation)
+              ("M-." . corfu-info-location))
   :init
   (global-corfu-mode)
   (corfu-popupinfo-mode))
@@ -514,11 +514,6 @@
   (setq lua-indent-level 4)
   (setq lua-indent-nested-block-content-align nil))
 
-(use-package company-lua
-  :after (lua-mode company)
-  :config
-  (add-to-list 'company-backends 'company-lua))
-
 (use-package cperl-mode
   :mode "\\.\\(p\\([lm]\\)\\)\\'"
   :config
@@ -535,21 +530,6 @@
   ((python-mode . anaconda-mode)
    (python-mode . anaconda-eldoc-mode)))
 
-(use-package company-anaconda
-  :after (company anaconda-mode)
-  :config
-  (add-to-list 'company-backends 'company-anaconda))
-
-;; (use-package pyvenv
-;;   :after python-mode
-;;   :config
-;;   (pyvenv-mode t)
-;;   (setq pyvenv-post-activate-hooks
-;;         (list (lambda ()
-;;                 (setq python-shell-interpreter (concat pyvenv-virtual-env "bin/python3")))))
-;;   (setq pyvenv-post-deactivate-hooks
-;;         (list (lambda ()
-;;                 (setq python-shell-interpreter "python3")))))
 (use-package auto-virtualenv
   :init
   (use-package pyvenv)
