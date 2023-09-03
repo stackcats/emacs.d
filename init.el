@@ -507,6 +507,12 @@
   (setq-default js-indent-align-list-continuation nil)
   (setq js2-mode-show-strict-warnings nil))
 
+(use-package jq-mode
+  :mode "\\.jq\\'")
+
+(use-package jq-format
+  :after jq-mode)
+
 (use-package lua-mode
   :mode "\\.lua\\'"
   :hook (lua-mode . eglot-ensure)

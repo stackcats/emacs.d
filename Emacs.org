@@ -713,6 +713,16 @@
     (setq-default js-indent-align-list-continuation nil)
     (setq js2-mode-show-strict-warnings nil))
 #+end_src
+
+*** JQ
+#+begin_src emacs-lisp
+  (use-package jq-mode
+    :mode "\\.jq\\'")
+
+  (use-package jq-format
+    :after jq-mode)
+#+end_src
+
 *** Lua
 
 #+begin_src emacs-lisp
