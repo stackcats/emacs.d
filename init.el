@@ -1,29 +1,39 @@
 ;;; -*- lexical-binding: t -*-
 ;; NOTE: init.el is now generated from Emacs.org.  Please edit that file 
 ;;       in Emacs and init.el will be generated automatically!
-
 (setq gc-cons-threshold 100000000)
 
-(require 'package)
+(setq package-enable-at-startup nil)
 
-(setq package-archives
-      '(("gnu" . "http://elpa.gnu.org/packages/")
-        ("org" . "https://orgmode.org/elpa/")
-        ("melpa" . "http://melpa.org/packages/")))
+;; Install straight.el
+(defvar bootstrap-version)
+(let ((bootstrap-file
+       (expand-file-name "straight/repos/straight.el/bootstrap.el" user-emacs-directory))
+      (bootstrap-version 6))
+  (unless (file-exists-p bootstrap-file)
+    (with-current-buffer
+        (url-retrieve-synchronously
+         "https://raw.githubusercontent.com/radian-software/straight.el/develop/install.el"
+         'silent 'inhibit-cookies)
+      (goto-char (point-max))
+      (eval-print-last-sexp)))
+  (load bootstrap-file nil 'nomessage))
 
-(package-initialize)
-
-(unless (package-installed-p 'use-package)
-  (package-refresh-contents)
-  (package-install 'use-package))
+(straight-use-package 'use-package)
 
 (require 'use-package)
-(setq use-package-always-ensure t)
+
 (use-package use-package-ensure-system-package
   :after use-package)
+
 (use-package general :after use-package)
 
 (setq use-package-verbose t)
+
+;; Configure use-package to use straight.el by default
+(use-package straight
+  :custom
+  (straight-use-package-by-default t))
 
 (setq exec-path (append exec-path '("/usr/local/bin" "~/.cargo/bin" "~/.asdf/shims")))
 
@@ -393,6 +403,22 @@
    '(:padding 0 :stroke 0 :margin 0 :radius 0 :height 0.9 :scale 1.0))
   :config
   (add-to-list 'corfu-margin-formatters #'kind-icon-margin-formatter))
+
+(straight-use-package '(codeium :type git :host github :repo "Exafunction/codeium.el"))
+
+(use-package codeium
+  :init
+  ;; use globally
+  (add-to-list 'completion-at-point-functions #'codeium-completion-at-point)
+  :custom
+  (use-dialog-box nil) ;; do not use popup boxes
+  (codeium-mode-line-enable
+        (lambda (api) (not (memq api '(CancelRequest Heartbeat AcceptCompletion)))))
+  (codeium-api-enabled
+        (lambda (api)
+          (memq api '(GetCompletions Heartbeat CancelRequest GetAuthToken RegisterUser auth-redirect AcceptCompletion))))
+  :config
+  (add-to-list 'mode-line-format '(:eval (car-safe codeium-mode-line)) t))
 
 (use-package format-all
   :hook
