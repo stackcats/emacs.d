@@ -407,18 +407,26 @@
 (straight-use-package '(codeium :type git :host github :repo "Exafunction/codeium.el"))
 
 (use-package codeium
-  :init
+  ;; :init
   ;; use globally
-  (add-to-list 'completion-at-point-functions #'codeium-completion-at-point)
-  :custom
-  (use-dialog-box nil) ;; do not use popup boxes
-  (codeium-mode-line-enable
-        (lambda (api) (not (memq api '(CancelRequest Heartbeat AcceptCompletion)))))
-  (codeium-api-enabled
-        (lambda (api)
-          (memq api '(GetCompletions Heartbeat CancelRequest GetAuthToken RegisterUser auth-redirect AcceptCompletion))))
+  ;; (add-to-list 'completion-at-point-functions #'codeium-completion-at-point)
+  ;;(setq completion-at-point-functions (list (cape-super-capf #'codeium-completion-at-point #'lsp-completion-at-point)))
+
   :config
-  (add-to-list 'mode-line-format '(:eval (car-safe codeium-mode-line)) t))
+  (add-hook 'eglot-managed-mode-hook
+  	  (lambda ()
+  	    (setq-local completion-at-point-functions
+  			(list (cape-super-capf
+  			       #'codeium-completion-at-point
+  			       #'eglot-completion-at-point
+  			       #'cape-keyword)))))
+  (setq use-dialog-box nil) ;; do not use popup boxes
+  (setq codeium-mode-line-enable
+        (lambda (api) (not (memq api '(CancelRequest Heartbeat AcceptCompletion)))))
+  (add-to-list 'mode-line-format '(:eval (car-safe codeium-mode-line)) t)
+  (setq codeium-api-enabled
+        (lambda (api)
+          (memq api '(GetCompletions Heartbeat CancelRequest GetAuthToken RegisterUser auth-redirect AcceptCompletion)))))
 
 (use-package format-all
   :hook
@@ -480,6 +488,11 @@
   :after clojure-mode
   :config
   (setq cider-repl-display-help-banner nil))
+
+(use-package dart-mode
+  :mode "\\.dart\\'"
+  :hook
+  (dart-mode . eglot-ensure))
 
 (use-package elm-mode
   :hook
