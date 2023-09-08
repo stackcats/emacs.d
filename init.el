@@ -119,12 +119,13 @@
   :custom
   (doom-modeline-buffer-file-name-style 'relative-to-project)
   (doom-modeline-height 16)
+  (doom-modeline-lsp t)
   :config
   (doom-modeline-mode 1))
 
 ;; change mode-line to the top
-;; (setq-default header-line-format (doom-modeline-set-main-modeline))  
-;; (setq-default mode-line-format nil)
+(setq-default header-line-format (doom-modeline-set-main-modeline))  
+(setq-default mode-line-format nil)
 
 (use-package mini-frame
   :custom
@@ -206,8 +207,7 @@
    ("M-g g" . consult-goto-line)
    ("C-c o" . consult-outline)
    ("C-c h" . consult-org-heading)
-   ("C-c p" . consult-projectile)
-   ("C-c f" . consult-flymake)))
+   ("C-c p" . consult-projectile)))
 
 (use-package consult-projectile)
 
@@ -360,73 +360,22 @@
   (define-fringe-bitmap 'git-gutter-fr:modified [224] nil nil '(center repeated))
   (define-fringe-bitmap 'git-gutter-fr:deleted [128 192 224 240] nil nil 'bottom))
 
-(cl-defmethod project-root ((project (head eglot-project)))
-  (cdr project))
-
-(use-package eglot
-  :config
-  (add-to-list 'eglot-server-programs '((c++-mode c-mode) "clangd"))
-  (add-to-list 'eglot-server-programs '(rust-mode "rust-analyzer"))
-  (add-to-list 'eglot-server-programs '(lua-mode "lua-language-server"))
-  (add-to-list 'eglot-server-programs '(gdscript-mode ("127.0.0.1" 6008)))
-  (add-to-list 'eglot-server-programs
-               '((elixir-mode elixir-ts-mode) "~/.emacs.d/vendor/elixir-ls/language_server.sh")))
-
-(use-package cape)
-
-(use-package corfu
+(use-package lsp-bridge
+  :straight '(lsp-bridge :type git :host github :repo "manateelazycat/lsp-bridge"
+  		       :files (:defaults "*.el" "*.py" "acm" "core" "langserver" "multiserver" "resources")
+  		       :build (:not compile))
   :custom
-  (corfu-cycle t)
-  (corfu-auto t)
-  (corfu-popupinfo-delay 0.2)
-  (corfu-echo-documentation t)
-  :bind (:map corfu-map
-              ("C-d" . corfu-info-documentation)
-              ("M-." . corfu-info-location))
+  (acm-enable-codeium t)
+  (acm-enable-icon t)
+  :bind (:map lsp-bridge-mode-map
+  	    ("M-n" . lsp-bridge-diagnostic-jump-next)
+  	    ("M-p" . lsp-bridge-diagnostic-jump-prev)
+  	    ("C-c f" . lsp-bridge-diagnostic-list)
+  	    ("C-c r" . lsp-bridge-find-references)
+  	    ("M-." . lsp-bridge-find-def)
+  	    ("M-," . lsp-bridge-find-def-return))
   :init
-  (global-corfu-mode)
-  (corfu-popupinfo-mode))
-
-;; Use corfu with eglot
-(with-eval-after-load 'eglot
-  (setq completion-category-defaults nil))
-
-;; Enable cache busting, depending on if your server returns
-;; sufficiently many candidates in the first place.
-(advice-add 'eglot-completion-at-point :around #'cape-wrap-buster)
-
-(use-package kind-icon
-  :after corfu
-  :custom
-  (kind-icon-default-face 'corfu-default) ; to compute blended backgrounds correctly
-  (kind-icon-default-style ; fix the last candidate be cut off
-   '(:padding 0 :stroke 0 :margin 0 :radius 0 :height 0.9 :scale 1.0))
-  :config
-  (add-to-list 'corfu-margin-formatters #'kind-icon-margin-formatter))
-
-(straight-use-package '(codeium :type git :host github :repo "Exafunction/codeium.el"))
-
-(use-package codeium
-  ;; :init
-  ;; use globally
-  ;; (add-to-list 'completion-at-point-functions #'codeium-completion-at-point)
-  ;;(setq completion-at-point-functions (list (cape-super-capf #'codeium-completion-at-point #'lsp-completion-at-point)))
-
-  :config
-  (add-hook 'eglot-managed-mode-hook
-  	  (lambda ()
-  	    (setq-local completion-at-point-functions
-  			(list (cape-super-capf
-  			       #'codeium-completion-at-point
-  			       #'eglot-completion-at-point
-  			       #'cape-keyword)))))
-  (setq use-dialog-box nil) ;; do not use popup boxes
-  (setq codeium-mode-line-enable
-        (lambda (api) (not (memq api '(CancelRequest Heartbeat AcceptCompletion)))))
-  (add-to-list 'mode-line-format '(:eval (car-safe codeium-mode-line)) t)
-  (setq codeium-api-enabled
-        (lambda (api)
-          (memq api '(GetCompletions Heartbeat CancelRequest GetAuthToken RegisterUser auth-redirect AcceptCompletion)))))
+  (global-lsp-bridge-mode))
 
 (use-package format-all
   :hook
@@ -456,7 +405,6 @@
   (setq indent-tabs-mode t))
 
 (add-hook 'c-mode-hook 'stackcats/c-mode-setup)
-(add-hook 'c-mode-hook 'eglot-ensure)
 
 (defun stackcats/kill-buffer-when-compile-success (process)
   "Close current PROCESS when `shell-command' exit."
@@ -490,13 +438,16 @@
   (setq cider-repl-display-help-banner nil))
 
 (use-package dart-mode
-  :mode "\\.dart\\'"
-  :hook
-  (dart-mode . eglot-ensure))
+  :mode "\\.dart\\'")
 
-(use-package elm-mode
-  :hook
-  (elm-mode . eglot-ensure))
+(use-package flutter
+  :after dart-mode
+  :bind (:map dart-mode-map
+              ("C-M-x" . #'flutter-run-or-hot-reload))
+  :custom
+  (flutter-sdk-path "~/flutter/"))
+
+(use-package elm-mode)
 
 (defun stackcats/elixir-mode-setup ()
   (format-all-mode -1)
@@ -507,14 +458,9 @@
   :init
   (use-package elixir-ts-mode)
   :hook
-  ((elixir-mode elixir-ts-mode) . stackcats/elixir-mode-setup)
-  ((elixir-mode elixir-ts-mode) . eglot-ensure))
+  ((elixir-mode elixir-ts-mode) . stackcats/elixir-mode-setup))
 
-(use-package gdscript-mode
-  :hook
-  (gdscript-mode . eglot-ensure)
-  :custom
-  (gdscript-eglot-version 3))
+(use-package gdscript-mode)
 
 (defun stackcats/go-mode-setup ()
   (setq tab-width 4)
@@ -524,7 +470,6 @@
   :mode "\\.go\\'"
   :hook
   (go-mode . stackcats/go-mode-setup)
-  ((go-mode go-ts-mode) . eglot-ensure)
   :custom
   (gofmt-command "goimports"))
 
@@ -536,8 +481,8 @@
 
 (use-package js2-mode
   :mode "\\.js\\'"
-  :hook ((js2-mode . js2-imenu-extras-mode)
-         (js2-mode . eglot-ensure))
+  :hook
+  (js2-mode . js2-imenu-extras-mode)
   :config
   (setq js2-idle-timer-delay 2)
   (setq js2-basic-offset 2)
@@ -554,7 +499,6 @@
 
 (use-package lua-mode
   :mode "\\.lua\\'"
-  :hook (lua-mode . eglot-ensure)
   :config
   (setq lua-indent-level 4)
   (setq lua-indent-nested-block-content-align nil))
@@ -565,8 +509,6 @@
   (defalias 'perl-mode 'cperl-mode))
 
 (use-package python-mode
-  :hook
-  ((python-mode python-ts-mode) . eglot-ensure)
   :mode "\\.py\\'")
 
 (use-package anaconda-mode
@@ -586,16 +528,13 @@
   :mode "\\.rkt\\'"
   :hook ((racket-mode . (lambda() (set (make-local-variable 'smartparens-mode) nil)))
          (racket-mode . racket-xp-mode)
-         (racket-mode . racket-smart-open-bracket-mode)
-         (racket-mode . eglot-ensure))
+         (racket-mode . racket-smart-open-bracket-mode))
   :bind
   (:map racket-mode-map
         ("C-]" . close-all-parentheses)))
 
 (use-package rustic
-  :mode ("\\.rs\\'" . rustic-mode)
-  :custom
-  (rustic-lsp-client 'eglot))
+  :mode ("\\.rs\\'" . rustic-mode))
 
 (use-package web-mode
   :mode (("\\.html\\'" . web-mode)
