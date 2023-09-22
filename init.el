@@ -359,6 +359,20 @@
   (define-fringe-bitmap 'git-gutter-fr:modified [224] nil nil '(center repeated))
   (define-fringe-bitmap 'git-gutter-fr:deleted [128 192 224 240] nil nil 'bottom))
 
+(use-package blamer
+  :straight (:host github :repo "artawower/blamer.el")
+  :bind (("C-c b" . blamer-show-commit-info))
+  :custom
+  (blamer-idle-time 0.3)
+  (blamer-min-offset 70)
+  :custom-face
+  (blamer-face ((t :foreground "#7a88cf"
+                   :background nil
+                   :height 140
+                   :italic t)))
+  :config
+  (global-blamer-mode 1))
+
 (use-package lsp-bridge
   :straight '(lsp-bridge :type git :host github :repo "manateelazycat/lsp-bridge"
   		       :files (:defaults "*.el" "*.py" "acm" "core" "langserver" "multiserver" "resources")
@@ -532,8 +546,8 @@
   (:map racket-mode-map
         ("C-]" . close-all-parentheses)))
 
-(use-package rustic
-  :mode ("\\.rs\\'" . rustic-mode))
+(use-package rust-mode
+  :mode ("\\.rs\\'" . rust-mode))
 
 (use-package web-mode
   :mode (("\\.html\\'" . web-mode)

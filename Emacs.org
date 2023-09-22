@@ -455,7 +455,9 @@
     (setq projectile-switch-project-action #'projectile-dired))
 #+end_src
 
-** Magit
+** Git
+
+*** Magit
 
 #+begin_src emacs-lisp
   (use-package magit
@@ -479,6 +481,26 @@
     (define-fringe-bitmap 'git-gutter-fr:added [224] nil nil '(center repeated))
     (define-fringe-bitmap 'git-gutter-fr:modified [224] nil nil '(center repeated))
     (define-fringe-bitmap 'git-gutter-fr:deleted [128 192 224 240] nil nil 'bottom))
+#+end_src
+
+*** Blamer
+
+A git blame plugin for emacs inspired by VS Code’s GitLens plugin
+
+#+begin_src emacs-lisp
+  (use-package blamer
+    :straight (:host github :repo "artawower/blamer.el")
+    :bind (("C-c b" . blamer-show-commit-info))
+    :custom
+    (blamer-idle-time 0.3)
+    (blamer-min-offset 70)
+    :custom-face
+    (blamer-face ((t :foreground "#7a88cf"
+                     :background nil
+                     :height 140
+                     :italic t)))
+    :config
+    (global-blamer-mode 1))
 #+end_src
 
 ** LSP Brige
@@ -772,9 +794,10 @@ Dart is a client-optimized language for fast apps on any platform
 *** Rust
 
 #+begin_src emacs-lisp
-  (use-package rustic
-    :mode ("\\.rs\\'" . rustic-mode))
+  (use-package rust-mode
+    :mode ("\\.rs\\'" . rust-mode))
 #+end_src
+
 ** Web
 
 #+begin_src emacs-lisp
